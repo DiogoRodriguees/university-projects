@@ -14,9 +14,7 @@
 <br>
 
 <img src="./img/IMG_ULA_DISPLAY.png" alt="" >
-<div styled={"align-iten: center"}>
-    <img src="./img/IMG_ULA_AND_COMAND_CENTER.png" alt="" align-iten="center">
-</div>
+<img src="./img/IMG_ULA_AND_COMAND_CENTER.png" alt="" align="center">
 <img src="./img/IMG_ULA_UPLOAD_FOR_MEMORY.png" alt="" align-iten="center">
 
 <h2>💼 Autores</h2>
