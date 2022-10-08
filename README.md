@@ -13,9 +13,9 @@
 </p>
 <br>
 
-<img src="./img/IMG_ULA_DISPLAY.png" alt="">
-<img src="./img/IMG_ULA_AND_COMAND_CENTER.png" alt="">
-<img src="./img/IMG_ULA_UPLOAD_FOR_MEMORY.png" alt="">
+<img src="./img/IMG_ULA_DISPLAY.png" alt="" >
+<img src="./img/IMG_ULA_AND_COMAND_CENTER.png" alt="" align-iten="center">
+<img src="./img/IMG_ULA_UPLOAD_FOR_MEMORY.png" alt="" align-iten="center">
 
 <h2>💼 Autores</h2>
 
