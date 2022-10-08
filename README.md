@@ -14,7 +14,10 @@
 <br>
 
 <img src="./img/IMG_ULA_DISPLAY.png" alt="" >
+<p align="center">
 <img src="./img/IMG_ULA_AND_COMAND_CENTER.png" alt="" align="center">
+</p>
+
 <img src="./img/IMG_ULA_UPLOAD_FOR_MEMORY.png" alt="" align-iten="center">
 
 <h2>💼 Autores</h2>
