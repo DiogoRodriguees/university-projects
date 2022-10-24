@@ -9,7 +9,7 @@
 
 <h2>🔖 Sobre</h2>
 <p align="left">
-    A unidade lógica aritmética, em inglês Arithmetic Logic Unit, é um circuito digital que realiza operações de adição e booleana AND. A ULA é uma peça fundamental da unidade central de processamento, e até dos mais simples microprocessadores.
+    A unidade lógica aritmética(ULA), em inglês Arithmetic Logic Unit, é um circuito digital que realiza operações lógicas e aritiméticas. A ULA é uma peça fundamental da unidade central de processamento, e até, dos mais simples microprocessadores.
 </p>
 <br>
 
