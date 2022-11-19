@@ -1,0 +1,73 @@
+*{
+    text-decoration: none;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+:root{
+    --green1 :#45C09C;
+    --green2 :#0CC08B;
+    --green3 :#328B71;
+    --green4 :#077454;
+    --green5 :#04412F;
+
+    --blue :#000424;
+
+    --white:#f2f2f7;   
+}
+
+.header{
+    height: 720px;
+    /* background: url(equipe-desenvolvedores.jpg); */
+    color: var(--blue);
+}
+
+.img-equipe-desenvolvedores{
+    position: absolute;
+    height: 100%;
+    z-index: -1;
+    width: 100%;
+}
+
+
+.header-menu{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    height: 80px;
+    background-color: var(--white);
+}
+
+.header-menu-navegacao{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: baseline;
+    gap: 20px;
+}
+
+.header-resumo{
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+    height: 60%;
+    padding: 10px;
+    gap: 40px;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    color: var(--white);
+    font-size: ;
+}
+
+.header-resumo-leiamais{
+    color: var(--white);
+    background-color: #0CC08B;
+    border: none;
+    height: 40px;
+    width: 150px;
+    border-radius: 40px;
+    font-size: 16px;
+}
