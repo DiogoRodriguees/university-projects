@@ -21,10 +21,106 @@
 
 /* Sessao 1 */
 .header{
+    color: var(--white);
+    display: flex;
+    flex-direction: column;
+    background: linear-gradient(122.19deg, rgba(84, 108, 165, 0.58) -84.43%, #546CA5 -17.84%, rgba(0, 4, 36, 0.92) 76.27%, #000424 116.5%);
+    height: 620px;
+}
+
+.menu{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    height: 100px;
+    padding: 0px 80px 0px 50px;
+    user-select: none;
+}
+
+.menu nav {
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+    margin-right: 120px;
+    gap: 2;
+
+}
+.menu a{
+    color: var(--white);
+    margin: 0px 20px 0px 20px;
+}
+
+.conteudo{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    user-select: none;
+}
+
+.container1{
+    width: 50%;
+    height: 70%;
+    padding: 0px 50px;
+}
+
+.container1 h1{
+    font-size: 30px;
+}
+
+.container1 h2{
+    font-size: 20px;
+    width: 70%;
+    margin-top: 20px;
+}
+
+.button-cotainer1{
+    background-color: var(--white);
+    height: 60px;
+    width: 70%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    /* justify-content: space-between; */
+    border-radius: 50px;
+    margin-top: 40px;
+}
+.button-cotainer1 img{
+    height: 50px;
+    width: 50px;
+    margin-left: 5px;
+}
+.button-cotainer1 h2{
+    padding: 10px;
+    width: 80%;
+    color: var(--blue);
+    text-align: center;
+    margin-left: 90px;
+    height: 100%;
+    margin: auto;
+    font-size: 30px;
+}
+
+.container2{
+    width: 50%;
+    height: 70%;
+
+    padding: 50px;
+
+}
+
+.container2 img{
+    height: 300px;
+    width: 300px;
+    margin-left: 60px;
+}
+/* .header{
     color: var(--blue);
     height: 650px;
-    background-color: #0d0d0d81;
-}
+
+     background: linear-gradient(144.05deg, #077454 6.06%, #077454 34.01%, #0CC08B 59.8%, #45C09C 88.61%);
+
+} */
 
 .img-equipe-desenvolvedores{
     width: 100%;
@@ -41,7 +137,7 @@
     justify-content: space-around;
     
     height: 80px;
-    background-color: var(--white);
+    /* background-color: var(--white); */
 }
 
 .header-menu-titulo{
