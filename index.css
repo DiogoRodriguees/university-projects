@@ -23,6 +23,7 @@
 .header{
     color: var(--blue);
     height: 650px;
+    background-color: #0d0d0d81;
 }
 
 .img-equipe-desenvolvedores{
@@ -72,19 +73,28 @@
     font-size: 20px;
     text-align: center;
 }
+.header-resumo img{
+    height: 35px;
+    width: 35px;
+}
 
 .header-resumo-leiamais{
     border: none;
     border-radius: 40px;
-    background-color: #0CC08B;
+    background: linear-gradient(144.05deg, #077454 6.06%, #077454 34.01%, #0CC08B 59.8%, #45C09C 88.61%);
 
-    width: 150px;
-    height: 40px;
-    
+    width: 250px;
+    height: 50px;
+    padding: 8px;
     color: var(--white);
     font-size: 18px;
     font-family: Montserrat;
     font-weight: 600;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
 }
 
 /* Sessao 2 */
