@@ -91,7 +91,9 @@
 /* Sessao 2 */
 .s2{
     background: linear-gradient(144.05deg, #077454 6.06%, #077454 34.01%, #0CC08B 59.8%, #45C09C 88.61%);
+
     height: 500px;
+    
     display: flex;
     justify-content: space-around;
     flex-direction: column;
@@ -100,30 +102,35 @@
 
 .s2-titulo{
     color: var(--white);
+    font-size: 40px;
     text-align: center;
     font-family: Roboto;
-    font-size: 40px;
+
     height: 80px;
     margin-top: auto;
 }
 
 .s2-container{
-    background-color: var(--white);
     display: flex;
     flex-direction: row;
     gap: 10px;
+    
     width: 90%;
     height: 80%;
+    
     border-radius: 50px 50px 0px 0px;
+    background-color: var(--white);
 }
 
 .s2-container-topico{
     display: flex;
-    flex-direction: column;
     justify-content: center;
+    flex-direction: column;
     align-items: center;
-    width: 25%;
+
     margin: auto;
+    
+    width: 25%;
     height: 80%;
 }
 
@@ -133,11 +140,14 @@
 }
 
 .s2-container-img{
-   background: linear-gradient(301.63deg, #45C09C 1.15%, #0CC08B 49.13%, #328B71 125.64%);
+    background: linear-gradient(301.63deg, #45C09C 1.15%, #0CC08B 49.13%, #328B71 125.64%);
     backdrop-filter: blur(50px);;
+    border-radius: 50%;
+    
     height: 100px;
     width: 100px;
-    border-radius: 50%;
+    
     align-items: center;
 }
 
+/* Sessao 3 */
