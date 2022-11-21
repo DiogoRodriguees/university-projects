@@ -22,13 +22,12 @@
 /* Sessao 1 */
 .header{
     color: var(--blue);
-    height: 660px;
+    height: 650px;
 }
 
 .img-equipe-desenvolvedores{
     width: 100%;
     height: 100%;
-    
     position: absolute;
     z-index: -1;
 }
@@ -232,14 +231,35 @@
     
 }
 .s4-topico{
-    width: 25%;
-    height: 80%;
-    border-radius: ;
+    width: 20%;
+    height: 70%;
+    border-radius: 40px;
     background-color: var(--white);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    margin: auto;
+
 }
 
-.s4-topico-img{}
+.s4-topico-img{
+    background: linear-gradient(300deg, #45C09C 0.79%, #0CC08B 40.76%, #076F74 104.48%);
+backdrop-filter: blur(50px);
+    height: 100px;
+    width: 100px;
+    border-radius: 50%;
+}
 
 .s4-topico-conteudo{}
-.s4-topico-conteudo h1{}
-.s4-topico-conteudo p{}
+.s4-topico-conteudo h1{
+    text-align: center;
+    color: var(--blue);
+}
+.s4-topico-conteudo p{
+    text-align: center;
+    color: var(--blue);
+    width: 80%;
+    margin: auto;
+    padding-top: 10px;
+}
