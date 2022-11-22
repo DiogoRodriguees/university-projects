@@ -22,12 +22,12 @@
 /* Sessao 1 */
 .header{
     color: var(--white);
-    display: flex;
-    flex-direction: column;
-    /* background: linear-gradient(122.19deg, rgba(84, 108, 165, 0.58) -84.43%, #546CA5 -17.84%, rgba(0, 4, 36, 0.92) 76.27%, #000424 116.5%); */
-    height: 660px;
     font-family: Montserrat;
 
+    display: flex;
+    flex-direction: column;
+    
+    height: 660px;
     /* background: rgba(20, 39, 207, 0.726);
     box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
     backdrop-filter: blur( 13.5px );
@@ -35,65 +35,67 @@
     border: 1px solid rgba( 255, 255, 255, 0.18 ); */
 }
 
-.header-img{
-    position: absolute;
+.header-img {
     z-index: -1;
-    height: 720px;
+    position: absolute;
+
     width: 100%;
     margin: 0;
+    height: 720px;
 
 }
 
-.menu{
+.menu {
     display: flex;
-    flex-direction: row;
     align-items: center;
+    flex-direction: row;
     justify-content: space-between;
+
     height: 100px;
     padding: 0px 50px 0px 50px;
     user-select: none;
 }
 
-.menu h1{
+.menu h1 {
     font-size: 30px;
     font-weight: 300;
 }
 
 .menu nav {
     display: flex;
-    flex-direction: row;
     align-items: baseline;
-    margin-right: 120px;
-    gap: 2;
+    flex-direction: row;
 
+    margin-right: 120px;
 }
-.menu a{
-    color: var(--white);
-    margin: 0px 20px 0px 20px;
+.menu a {
     font-size: 20px;
     font-weight: 400;
+    color: var(--white);
+
+    margin: 0px 20px 0px 20px;
 }
 
-.menu a:hover{
+.menu a:hover {
     text-decoration: underline;
     scale: 1.05;
 }
 
-.header-container{
+.header-container {
     display: flex;
-    flex-direction: row;
     align-items: center;
+    flex-direction: row;
+    
     user-select: none;
-
 }
 
-.resumo{
+.resumo {
     width: 50%;
     height: 70%;
     padding: 20px 50px;
 }
 
-.resumo h1{
+.resumo h1 {
     font-size: 35px;
     font-weight: 400;
 }
@@ -101,120 +103,133 @@
 .resumo h2{
     font-size: 20px;
     font-weight: 300;
+
     width: 85%;
     margin-top: 20px;
     margin-bottom: 60px;
 }
 
-.botao-para-repositorio{
-    background: linear-gradient(180deg, rgba(242, 242, 247, 0.17) -48.73%, #F2F2F2 43.19%, rgba(242, 242, 247, 0.46) 131.36%);
-    border-radius: 70px;
-    border-radius: 70px;
-    height: 60px;
-    width: 50%;
+.botao-para-repositorio {
     display: flex;
-    flex-direction: row;
     align-items: center;
-    border-radius: 50px;
-    margin-top: 10px;
+    flex-direction: row;
 
+    width: 50%;
+    height: 60px;
+    margin-top: 10px;
+    
+    border-radius: 50px;
+    background: linear-gradient(180deg, rgba(242, 242, 247, 0.17) -48.73%, #F2F2F2 43.19%, rgba(242, 242, 247, 0.46) 131.36%);
 }
 
-.botao-para-repositorio:hover{
+.botao-para-repositorio:hover {
     box-shadow: 2px 2px 60px #f2f2f783;
 }
-.botao-para-repositorio img{
-    height: 50px;
+
+.botao-para-repositorio img {
     width: 50px;
+    height: 50px;
     margin-left: 5px;
 }
 
-.botao-para-repositorio h2{
-    padding: 10px;
-    width: 90%;
-    color: var(--blue);
+.botao-para-repositorio h2 {
     text-align: center;
-    margin-left: 90px;
+    color: var(--blue);
+    
+    width: 90%;
     height: 100%;
+
     margin: auto;
+    padding: 10px;
+    margin-left: 10px;
+    
     font-size: 32px;
     font-weight: 500;
 }
 
-.ilustracao-header{
+.ilustracao-header {
     width: 50%;
     height: 70%;
 
     padding: 50px;
-
 }
 
-.ilustracao-header img{
-    height: 300px;
+.ilustracao-header img {
     width: 300px;
+    height: 300px;
     margin-left: 60px;
+    
     user-select: none;
     cursor: default;
 }
 
-.linguagens{
-    height: 680px;
+
+/* SESSÃO 2 - Linguagens e Frameworks */
+.linguagens {
     display: flex;
+    align-items: center;
     flex-direction: column;
     justify-content: space-evenly;
-    align-items: center;
+
     font-family: Montserrat;
+
+    height: 680px;
     background-color: var(--white);
-    /* background: linear-gradient(181.28deg, #111111 3.59%, #111111 60.16%, rgba(67, 67, 67, 0.751825) 113.13%, rgba(217, 217, 217, 0) 143.8%); */
 }
-.linguagens h2{
-    font-family: Montserrat;
+
+.linguagens h2 {
     font-size: 40px;
     font-weight: 400;
-    text-decoration: underline;
+
     color: var(--blue);
     text-align: center;
+    text-decoration: underline;
+
     margin-top: 60px;
 }
 
-.linguagens-container{
-    height: 80%;
-    width: 100%;
+.linguagens-container {
     display: flex;
-    flex-direction: roww;
+    flex-direction: row;
     align-items: center;
+
+    width: 100%;
+    height: 80%;
     padding: 0px 40px;
 }
 
-.linguagens-topicos{
-    width: 25%;
-    background-color: var(--white);
-    text-align: center;
+.linguagens-topicos {
     display: flex;
-    flex-direction: column;
+    text-align: center;
     align-items: center;
-    /* justify-content: space-around; */
-    margin: auto;
+    flex-direction: column;
+    
+    width: 25%;
     height: 75%;
-    border-radius: 40px;
-    background: #F2F2F7;
-box-shadow: 2px 2px 100px rgba(0, 0, 0, 0.1);
-border-radius: 50px;
+    margin: auto;
+    
+    background: var(--white);
+    box-shadow: 2px 2px 100px rgba(0, 0, 0, 0.1);
+    border-radius: 50px;
 }
-.linguagens-topicos img{
-    height: 100px;
+
+.linguagens-topicos img {
     width: 100px;
+    height: 100px;
+
     margin: 20px;
     margin-top: 40px;
 }
-.linguagens-topicos h2{
+
+.linguagens-topicos h2 {
+    font-size: 30px;
     font-weight: 400;
-    user-select: none;
-    margin-top: 20px;
+    
     color: var(--blue);
     text-decoration: none;
-    font-size: 30px;
 
+    margin-top: 20px;
+    user-select: none;
 }
 
 .linguagens-topicos p{
