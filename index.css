@@ -157,6 +157,83 @@
     cursor: default;
 }
 
+.linguagens{
+    height: 680px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    font-family: Montserrat;
+    background-color: var(--white);
+    /* background: linear-gradient(181.28deg, #111111 3.59%, #111111 60.16%, rgba(67, 67, 67, 0.751825) 113.13%, rgba(217, 217, 217, 0) 143.8%); */
+}
+.linguagens h2{
+    font-family: Montserrat;
+    font-size: 40px;
+    font-weight: 400;
+    text-decoration: underline;
+    color: var(--blue);
+    text-align: center;
+    margin-top: 60px;
+}
+
+.linguagens-container{
+    height: 80%;
+    width: 100%;
+    display: flex;
+    flex-direction: roww;
+    align-items: center;
+    padding: 0px 40px;
+}
+
+.linguagens-topicos{
+    width: 25%;
+    background-color: var(--white);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* justify-content: space-around; */
+    margin: auto;
+    height: 75%;
+    border-radius: 40px;
+    background: #F2F2F7;
+box-shadow: 2px 2px 100px rgba(0, 0, 0, 0.1);
+border-radius: 50px;
+}
+.linguagens-topicos img{
+    height: 100px;
+    width: 100px;
+    margin: 20px;
+    margin-top: 40px;
+}
+.linguagens-topicos h2{
+    font-weight: 400;
+    user-select: none;
+    margin-top: 20px;
+    color: var(--blue);
+    text-decoration: none;
+    font-size: 30px;
+
+}
+
+.linguagens-topicos p{
+    width: 60%;
+    height: 30%;
+    margin-top: 20px;
+    user-select: none;
+}
+
+.linguagens-topicos a{
+    color: #0CC08B;
+    font-size: 18px;
+    text-decoration: underline;
+}
+
+.linguagens-topicos a:hover{
+    scale: 1.05;;
+}
+
 @media screen and (max-width: 800px) {
     .menu a {
         display: none;
@@ -210,4 +287,4 @@
         font-size: 32px;
         font-weight: 500;
     }
-  }
+}
