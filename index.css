@@ -77,7 +77,6 @@
 .menu a:hover{
     text-decoration: underline;
     scale: 1.05;
-    transition: 400ms;
 }
 
 .header-container{
@@ -122,7 +121,7 @@
 }
 
 .botao-para-repositorio:hover{
-    box-shadow: 5px 5px 40px #f2f2f783;
+    box-shadow: 2px 2px 60px #f2f2f783;
 }
 .botao-para-repositorio img{
     height: 50px;
