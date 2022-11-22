@@ -229,6 +229,7 @@
     text-decoration: none;
 
     margin-top: 20px;
+    margin-bottom: 0px;
     user-select: none;
 }
 
@@ -252,24 +253,20 @@
 @media screen and (max-width: 800px) {
     .menu a {
         display: none;
-
     }
     .menu{
         flex-direction: column;
         text-align: center;
         justify-content: center;
-
     }
     .menu h1{
         text-align: center;
         padding: auto;
         margin: auto;
-
     }
     .resumo{
         width: 100%;
         padding: 10px 50px;
-
     }
     .resumo h1{
         font-size: 25px;
@@ -284,9 +281,7 @@
     }
     .ilustracao-header{
         display: none;
-    
     }
-    
     .botao-para-repositorio{
         width: 100%;
 
@@ -301,5 +296,27 @@
         margin: auto;
         font-size: 32px;
         font-weight: 500;
+    }
+
+    /* SESSÃO 2 - Linguagens e Frameworks */
+    .linguagens{
+        height: auto;
+    }
+    .linguagens-container{
+        flex-direction: column;
+        gap: 20px;
+    }
+    .linguagens-topicos{
+        width: 100%;
+        padding: 20px 0px;
+    }
+    .linguagens-topicos img {
+        margin-top: 0px;
+    }
+    .linguagens h2{
+        margin-bottom: 30px;
+    }
+    .linguagens-topicos h2 {
+        margin-bottom: 0px;
     }
 }
