@@ -16,7 +16,7 @@
 
     --blue :#000424;
 
-    --white:#f2f2f7;   
+    --white:#f2f2f2;   
 }
 
 /* Sessao 1 */
@@ -24,9 +24,24 @@
     color: var(--white);
     display: flex;
     flex-direction: column;
-    background: linear-gradient(122.19deg, rgba(84, 108, 165, 0.58) -84.43%, #546CA5 -17.84%, rgba(0, 4, 36, 0.92) 76.27%, #000424 116.5%);
+    /* background: linear-gradient(122.19deg, rgba(84, 108, 165, 0.58) -84.43%, #546CA5 -17.84%, rgba(0, 4, 36, 0.92) 76.27%, #000424 116.5%); */
     height: 660px;
     font-family: Montserrat;
+
+    /* background: rgba(20, 39, 207, 0.726);
+    box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+    backdrop-filter: blur( 13.5px );
+    -webkit-backdrop-filter: blur( 13.5px );
+    border: 1px solid rgba( 255, 255, 255, 0.18 ); */
+}
+
+.header-img{
+    position: absolute;
+    z-index: -1;
+    height: 720px;
+    width: 100%;
+    margin: 0;
+
 }
 
 .menu{
@@ -59,6 +74,12 @@
     font-weight: 400;
 }
 
+.menu a:hover{
+    text-decoration: underline;
+    scale: 1.05;
+    transition: 400ms;
+}
+
 .header-container{
     display: flex;
     flex-direction: row;
@@ -83,6 +104,7 @@
     font-weight: 400;
     width: 85%;
     margin-top: 20px;
+    margin-bottom: 60px;
 }
 
 .botao-para-repositorio{
@@ -95,8 +117,12 @@
     align-items: center;
     /* justify-content: space-between; */
     border-radius: 50px;
-    margin-top: 60px;
+    margin-top: 10px;
 
+}
+
+.botao-para-repositorio:hover{
+    box-shadow: 5px 5px 40px #f2f2f783;
 }
 .botao-para-repositorio img{
     height: 50px;
@@ -128,4 +154,6 @@
     height: 300px;
     width: 300px;
     margin-left: 60px;
+    user-select: none;
+    cursor: default;
 }
