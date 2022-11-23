@@ -324,4 +324,6 @@
     .linguagens-topicos h2 {
         margin-bottom: 0px;
     }
+    
+    .linguagens-topicos:hover{}
 }
