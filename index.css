@@ -24,19 +24,17 @@
     display: flex;
     justify-content: space-between;
     width: 40vw;
-    height: 50vh;
-    /* background-color: black; */
+    height: 45vh;
     margin: 20vh auto;
     border-radius: 10px;
     box-shadow: 0 20px 30px black;
-    /* border: 5px solid black; */
 }
 
 .conteiner-itens {
     position: absolute;
     display: flex;
     width: 40vw;
-    height: 50vh;
+    height: 45vh;
     border-radius: 10px 0px 0px 10px;
     overflow: hidden;
 }
@@ -44,15 +42,17 @@
 
 .item {
     width: 40vw;
-    height: 50vh;
+    height: 45vh;
     transition: all 1s;
 }
+
 .item:first-child{
     margin-left: -100%;
 }
+
 .item img {
     width: 40vw;
-    height: 50vh;
+    height: 45vh;
     border-radius: 10px;
 }
 
@@ -62,18 +62,19 @@
     justify-content: center;
     align-items: center;
     width: 50px;
-    color: #f2f2f283;
+    color: transparent;
     user-select: none;
     z-index: 1;
 }
+
 .action-button:hover {
-    color: rgba(255, 255, 255, 0.425);
-    background-color: #00000055;
+    color: rgba(255, 255, 255, 0.815);
+    background-color: #f2f2f28c;
     border-radius: 10px;
     cursor: pointer;
     transition:  all 1s;
-
 }
+
 .slides{
     width: 50%;
 }
@@ -87,7 +88,7 @@
     flex-direction: column;
     
     height: 720px;
-    width: 100vw;
+    width: 100%;
 }
 
 .header-img {
@@ -106,7 +107,7 @@
     justify-content: space-between;
 
     height: 100px;
-    padding: 20px 0px;
+    padding: 20px 40px;
 }
 
 .menu h1 {
@@ -147,23 +148,28 @@
     display: flex;
     flex-direction: column;
     text-align: left;
-    justify-content:center;
+    /* justify-content:center; */
     font-family: Montserrat;
     width: 50%;
     height: 100%;
+    padding: 20px 40px;
 }
 
 .resumo-titulo{
     font-size: 25px;
     font-weight: 400;
+    margin-top: 40px;
 }
 
 .resumo-texto{
     font-size: 16px;
-    width: 40vw;
-    padding: 20px 0px;
-    font-weight: 100;
+    width: 30vw;
+    padding: 30px 0px;
+    font-weight: 200;
     height: 150px;
+    font-family: Poppins;
+    margin-bottom: 20px;
+    line-height: 25px;
 }
 
 .resumo-botoes{
@@ -182,12 +188,11 @@
     background-color: var(--white);
     padding: 5px;
     border-radius: 40px;
-    margin: 5px;
+    margin: 50px 20px 0px 0px;
 }
 
 .resumo-botao-repositorio:hover{
     scale: 1.1;
-
 }
 
 .resumo-botao-repositorio img{
