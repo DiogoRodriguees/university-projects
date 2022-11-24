@@ -8,22 +8,31 @@
     padding: 0;
 }
 
+:root{
+    --green1 :#45C09C;
+    --green2 :#0CC08B;
+    --green3 :#328B71;
+    --green4 :#077454;
+    --green5 :#04412F;
+
+    --blue :#000424;
+
+    --white:#f2f2f7;   
+}
 
 .conteiner-slide{
     display: flex;
     justify-content: space-between;
     width: 100%;
-    height: 305px;
-    margin: 20vh auto;
+    height: 245px;
     border-radius: 10px;
-    border: 2px solid #ffffff;
+    border: 1px solid #ffffff;
 }
 
 .conteiner-itens {
     position: absolute;
     display: flex;
     width: 100%;
-    height: 300px;
     border-radius: 10px 0px 0px 10px;
     overflow: hidden;
 }
@@ -60,19 +69,10 @@
     flex-direction: column;
     align-items: center;
     height: 100%;
+    border-radius: 10px;
+    justify-content: flex-start;
 }
 
-:root{
-    --green1 :#45C09C;
-    --green2 :#0CC08B;
-    --green3 :#328B71;
-    --green4 :#077454;
-    --green5 :#04412F;
-
-    --blue :#000424;
-
-    --white:#f2f2f7;   
-}
 
 /* Sessao 1 */
 .header{
@@ -143,16 +143,17 @@
     align-items: center;
     flex-direction: row;
     
-    padding: 0px 40px;
+    padding: 40px 40px;
 }
 
 .resumo{
     display: flex;
     flex-direction: column;
     text-align: left;
+    justify-content: flex-start;
     font-family: Montserrat;
     width: 50%;
-
+    height: 100%;
 }
 
 .resumo-titulo{
@@ -163,10 +164,9 @@
 .resumo-texto{
     font-size: 16px;
     width: 40vw;
-    /* padding: 20px 0px; */
+    padding: 20px 0px;
     font-weight: 100;
     height: 150px;
-    margin: 0px 0px 20px 0px;
 }
 
 .resumo-botoes{
@@ -174,6 +174,7 @@
     flex-direction: row;
     align-items: center;
 }
+
 .resumo-botao-repositorio{
     height: 40px;
     display: flex;

@@ -1,8 +1,8 @@
 
-// const imgs = [
-//     {'id' : '1', 'url': './img/IMG_CALCULATOR_IPHONE.png'},
-//     {'id' : '4', 'url': './img/colorido.jpg'},
-// ]
+const imgs = [
+    {'id' : '1', 'url': './img/calculadora_com_react.jpg'},
+    {'id' : '4', 'url': './img/todolista_com_javascript.png'},
+]
 
 const conteinerItens = document.querySelector('#conteiner')
 
