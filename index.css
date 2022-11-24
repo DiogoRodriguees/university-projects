@@ -127,6 +127,11 @@
     margin: 5px;
 }
 
+.resumo-botao-repositorio:hover{
+    scale: 1.1;
+
+}
+
 .resumo-botao-repositorio img{
     height: 30px;
     width: 30px;
