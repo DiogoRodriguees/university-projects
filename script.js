@@ -18,12 +18,12 @@ loadImgs( imgs, conteinerItens);
 
 let listaDeItens = document.querySelectorAll('.item')
 
-const slideAnterior = () =>{
+const proximoSlide = () =>{
     conteinerItens.appendChild( listaDeItens[0])
     listaDeItens = document.querySelectorAll('.item')
 }
 
-const proximoSlide = () =>{
+const slideAnterior = () =>{
     const lastItem = listaDeItens[listaDeItens.length -1]
     conteinerItens.insertBefore( lastItem, listaDeItens[0])
     listaDeItens = document.querySelectorAll('.item')
