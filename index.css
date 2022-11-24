@@ -206,6 +206,7 @@
     font-size: 18px;
     font-weight: 500;
     text-align: center;
+    background-color: #04412F;
 }
 
 /* SESSÃO 2 - Linguagens e Frameworks */
@@ -252,7 +253,8 @@
     height: 400px;
     margin: auto;
     
-    background: var(--white);
+    /* background: var(--white); */
+    background: #f7f7f7;
     box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.1);
     border-radius: 30px;
 }
@@ -301,24 +303,63 @@
 }
 
 @media screen and (max-width: 800px) {
-    /* .header{
+    .header{
         flex-direction: column;
         padding: 0px;
         margin: 0px;
+        height: 1080px;
     }
 
     .header-container{
         flex-direction: column;
         align-items: center;
     }
+    .slides{
+        /* display: none; */
+        width: 100%;
+    }
 
-    .btn-repos{
+    .conteiner-slide{
+        display: flex;
+        justify-content: space-between;
+        width: 80vw;
+        height: 45vh;
+        margin: 20vh auto;
+        border-radius: 10px;
+        box-shadow: 0 20px 30px black;
+    }
+
+    .conteiner-itens {
+        position: absolute;
+        display: flex;
+        width: 80vw;
+        height: 45vh;
+        border-radius: 10px 0px 0px 10px;
+        overflow: hidden;
+    }
+
+
+    .item {
+        width: 80vw;
+        height: 45vh;
+        transition: all 1s;
+    }
+
+    .item:first-child{
+        margin-left: -100%;
+    }
+
+    .item img {
+        width: 80vw;
+
+    }
+    .resumo-botoes{
         display: flex;
         flex-direction: column;
         align-items: center;
         margin: 0;
         
-    } */
+    }
     .menu a {
         display: none;
     }
@@ -351,23 +392,14 @@
     .ilustracao-header{
         display: none;
     }
-    .botao-para-repositorio{
-        width: 100%;
-        /* margin: auto; */
-
-    }
-    .botao-para-repositorio h2{
-        padding: 10px;
-        width: 90%;
-        color: var(--blue);
+    .resumo-botao-repositorio{
+        width: 200px;
         text-align: center;
-        margin-left: 90px;
-        height: 100%;
-        margin: auto;
-        font-size: 32px;
-        font-weight: 500;
     }
-
+    .resumo-botao-repositorio h2{
+        /* text-align: center; */
+        background-color: #04412F;
+    }
     /* SESSÃO 2 - Linguagens e Frameworks */
     .linguagens{
         height: auto;
