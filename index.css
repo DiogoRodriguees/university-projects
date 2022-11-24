@@ -27,7 +27,8 @@
     display: flex;
     flex-direction: column;
     
-    height: 660px;
+    height: 535px;
+    /* background-color: #000424; */
     /* background: rgba(20, 39, 207, 0.726);
     box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
     backdrop-filter: blur( 13.5px );
@@ -41,7 +42,7 @@
 
     width: 100%;
     margin: 0;
-    height: 720px;
+    /* height: 720px; */
 
 }
 
@@ -52,25 +53,25 @@
     justify-content: space-between;
 
     height: 100px;
-    padding: 0px 50px 0px 50px;
     user-select: none;
 }
 
 .menu h1 {
-    font-size: 30px;
+    font-size: 25px;
     font-weight: 300;
+    margin-left: 40px;
 }
 
 .menu nav {
     display: flex;
     align-items: baseline;
-    flex-direction: row;
+    flex-direction: row;    
 
-    margin-right: 120px;
+    margin-right: 40px;
 }
 .menu a {
-    font-size: 20px;
-    font-weight: 400;
+    font-size: 18px;
+    font-weight: 300;
     color: var(--white);
 
     margin: 0px 20px 0px 20px;
@@ -84,85 +85,64 @@
 .header-container {
     display: flex;
     align-items: center;
-    flex-direction: row;
+    flex-direction: column;
     
     user-select: none;
+    padding: 20px;
 }
 
-.resumo {
-    width: 50%;
-    height: 70%;
-    padding: 20px 50px;
-}
-
-.resumo h1 {
-    font-size: 35px;
-    font-weight: 400;
-}
-
-.resumo h2{
-    font-size: 20px;
-    font-weight: 300;
-
-    width: 85%;
-    margin-top: 20px;
-    margin-bottom: 60px;
-}
-
-.botao-para-repositorio {
+.resumo{
     display: flex;
+    flex-direction: column;
     align-items: center;
-    flex-direction: row;
-
-    width: 50%;
-    height: 60px;
-    margin-top: 10px;
-    
-    border-radius: 50px;
-    background: linear-gradient(180deg, rgba(242, 242, 247, 0.17) -48.73%, #F2F2F2 43.19%, rgba(242, 242, 247, 0.46) 131.36%);
-}
-
-.botao-para-repositorio:hover {
-    box-shadow: 2px 2px 60px #f2f2f783;
-}
-
-.botao-para-repositorio img {
-    width: 50px;
-    height: 50px;
-    margin-left: 5px;
-}
-
-.botao-para-repositorio h2 {
     text-align: center;
+    font-family: Montserrat;
+    justify-content: space-between;
+
+}
+
+.resumo-titulo{
+    font-size: 30px;
+    font-weight: 300;
+}
+
+.resumo-texto{
+    font-size: 18px;
+    width: 50vw;
+    padding: 20px;
+    font-weight: 100;
+    height: 150px;
+}
+
+.resumo-botoes{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.resumo-botao-repositorio{
+    height: 40px;
+    display: flex;
+    flex-direction: row;
+    align-items:center ;
+    gap: 10px;
+    width: 15vw;
+    background-color: var(--white);
+    padding: 5px;
+    border-radius: 50px;
+    margin: 5px;
+}
+
+.resumo-botao-repositorio img{
+    height: 30px;
+    width: 30px;
+}
+
+.resumo-botao-repositorio h2{
     color: var(--blue);
-    
-    width: 90%;
-    height: 100%;
-
-    margin: auto;
-    padding: 10px;
-    margin-left: 10px;
-    
-    font-size: 32px;
+    font-size: 18px;
     font-weight: 500;
+    text-align: center;
 }
-
-.ilustracao-header {
-    width: 50%;
-    height: 70%;
-
-    padding: 50px;
-}
-
-.ilustracao-header img {
-    width: 300px;
-    height: 300px;
-    margin-left: 60px;
-    
-    user-select: none;
-    cursor: default;
-}
-
 
 /* SESSÃO 2 - Linguagens e Frameworks */
 .linguagens {
@@ -227,12 +207,13 @@
 }
 
 .linguagens-topicos h2 {
-    font-size: 30px;
+    font-size: 25px;
     font-weight: 400;
     
     color: var(--blue);
     text-decoration: none;
 
+    width: 100%;
     margin-top: 20px;
     margin-bottom: 0px;
     user-select: none;
@@ -256,6 +237,24 @@
 }
 
 @media screen and (max-width: 800px) {
+    /* .header{
+        flex-direction: column;
+        padding: 0px;
+        margin: 0px;
+    }
+
+    .header-container{
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .btn-repos{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: 0;
+        
+    } */
     .menu a {
         display: none;
     }
@@ -272,6 +271,7 @@
     .resumo{
         width: 100%;
         padding: 10px 50px;
+        /* align-items: center; */
     }
     .resumo h1{
         font-size: 25px;
@@ -289,6 +289,7 @@
     }
     .botao-para-repositorio{
         width: 100%;
+        /* margin: auto; */
 
     }
     .botao-para-repositorio h2{
