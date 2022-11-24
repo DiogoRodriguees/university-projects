@@ -20,67 +20,8 @@
     --white:#f2f2f7;   
 }
 
-.conteiner-slide{
-    display: flex;
-    justify-content: space-between;
-    width: 40vw;
-    height: 45vh;
-    margin: 20vh auto;
-    border-radius: 10px;
-    box-shadow: 0 20px 30px black;
-}
-
-.conteiner-itens {
-    position: absolute;
-    display: flex;
-    width: 40vw;
-    height: 45vh;
-    border-radius: 10px 0px 0px 10px;
-    overflow: hidden;
-}
-
-
-.item {
-    width: 40vw;
-    height: 45vh;
-    transition: all 1s;
-}
-
-.item:first-child{
-    margin-left: -100%;
-}
-
-.item img {
-    width: 40vw;
-    height: 45vh;
-    border-radius: 10px;
-}
-
-.action-button{
-    font: bold 30px sans-serif;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 50px;
-    color: transparent;
-    user-select: none;
-    z-index: 1;
-}
-
-.action-button:hover {
-    color: rgba(255, 255, 255, 0.815);
-    background-color: #f2f2f28c;
-    border-radius: 10px;
-    cursor: pointer;
-    transition:  all 1s;
-}
-
-.slides{
-    width: 50%;
-}
-
-/* Sessao 1 */
-.header{
+/* Sessao 1  - Cabeçalho*/
+.cabecalho{
     color: var(--white);
     font-family: Montserrat;
 
@@ -92,16 +33,16 @@
     background: linear-gradient(122.19deg, rgba(84, 108, 165, 0.58) -84.43%, #546CA5 -17.84%, rgba(0, 4, 36, 0.92) 76.27%, #000424 116.5%);
 }
 
-.header-img {
+.cabacelho-img {
     z-index: -1;
     position: absolute;
 
     width: 100%;
     margin: 0;
     height: 720px;
-
 }
- .menu {
+
+.menu {
     display: flex;
     align-items: center;
     flex-direction: row;
@@ -137,7 +78,8 @@
     scale: 1.05;
 } 
 
-.header-container {
+/* Sessão 1 - Resumo */
+.cabecalho-container {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -207,6 +149,67 @@
     font-weight: 500;
     text-align: center;
 }
+
+/* Sessão 1 - Slide Show */
+.conteiner-slide{
+    display: flex;
+    justify-content: space-between;
+    width: 40vw;
+    height: 45vh;
+    margin: 20vh auto;
+    border-radius: 10px;
+    box-shadow: 0 20px 30px black;
+}
+
+.conteiner-itens {
+    position: absolute;
+    display: flex;
+    width: 40vw;
+    height: 45vh;
+    border-radius: 10px 0px 0px 10px;
+    overflow: hidden;
+}
+
+
+.item {
+    width: 40vw;
+    height: 45vh;
+    transition: all 1s;
+}
+
+.item:first-child{
+    margin-left: -100%;
+}
+
+.item img {
+    width: 40vw;
+    height: 45vh;
+    border-radius: 10px;
+}
+
+.botao-mover{
+    font: bold 30px sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50px;
+    color: transparent;
+    user-select: none;
+    z-index: 1;
+}
+
+.botao-mover:hover {
+    color: rgba(255, 255, 255, 0.815);
+    background-color: #f2f2f28c;
+    border-radius: 10px;
+    cursor: pointer;
+    transition:  all 1s;
+}
+
+.slides{
+    width: 50%;
+}
+
 
 /* SESSÃO 2 - Linguagens e Frameworks */
 .linguagens {
@@ -301,15 +304,17 @@
     scale: 1.05;;
 }
 
+
+
 @media screen and (max-width: 800px) {
-    .header{
+    .cabecalho{
         flex-direction: column;
         padding: 0px;
         margin: 0px;
         height: 1080px;
     }
 
-    .header-container{
+    .cabecalho-container{
         flex-direction: column;
         align-items: center;
     }
@@ -387,9 +392,6 @@
        text-align: center;
         margin-top: 20px;
         margin-bottom: 60px;
-    }
-    .ilustracao-header{
-        display: none;
     }
     .resumo-botao-repositorio{
         width: 200px;
