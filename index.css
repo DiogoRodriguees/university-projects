@@ -74,8 +74,8 @@
 }
 
 .menu a:hover {
-    text-decoration: underline;
-    scale: 1.1;
+    /* text-decoration: underline;
+    scale: 1.1; */
 } 
 
 /* Sessão 1 - Resumo */
@@ -135,7 +135,13 @@
 }
 
 .resumo-botao-repositorio:hover{
-    scale: 1.1;
+    scale: 1.08;
+    transition: 400ms;
+    border: 1px solid #f7f7f7;
+    background-color: transparent;
+    color: var(--white);
+    font-size: 18px;
+    font-weight: 500;
 }
 
 .resumo-botao-repositorio img{
@@ -143,8 +149,9 @@
     width: 30px;
 }
 
+
 .resumo-botao-repositorio h2{
-    color: var(--blue);
+    /* color: var(--blue); */
     font-size: 18px;
     font-weight: 500;
     text-align: center;
@@ -193,7 +200,7 @@
     justify-content: center;
     align-items: center;
     width: 50px;
-    color: transparent;
+    color: #f7f7f78a;
     user-select: none;
     z-index: 1;
 }
