@@ -41,19 +41,7 @@
     height: 720px;
 
 }
-
-.menu{
-    background-color: #04412F;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-}
-
-.menu h1{
-    font-size: 20px;
-    font-weight: 300;
-}
-/* .menu {
+ .menu {
     display: flex;
     align-items: center;
     flex-direction: row;
@@ -87,7 +75,7 @@
 .menu a:hover {
     text-decoration: underline;
     scale: 1.05;
-} */
+} 
 
 .header-container {
     display: flex;
