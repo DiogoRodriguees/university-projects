@@ -40,6 +40,7 @@
     width: 100%;
     margin: 0;
     height: 720px;
+    /* background: black; */
 }
 
 .menu {
@@ -58,14 +59,14 @@
     margin-left: 40px;
 }
 
-.menu nav {
+.menu-navegacao {
     display: flex;
     align-items: baseline;
     flex-direction: row;    
 
     margin-right: 40px;
 }
-.menu a {
+.menu-navegacao-link{
     font-size: 18px;
     font-weight: 300;
     color: var(--white);
@@ -73,9 +74,9 @@
     margin: 0px 20px 0px 20px;
 }
 
-.menu a:hover {
+.menu-navegacao-link:hover {
     text-decoration: underline;
-    scale: 1.1;
+    scale: 1.05;
 } 
 
 /* Sessão 1 - Resumo */
@@ -129,16 +130,20 @@
     gap: 10px;
     width: 15vw;
     background-color: var(--white);
-    padding: 5px;
+    padding: 4px;
     border-radius: 40px;
     margin: 55px 20px 0px 0px;
+    box-shadow: 3px 3px 20px black;
+    /* background: linear-gradient(180deg, #1E1E1E -91.03%, #F7F7F7 48.13%, #1E1E1E 178.85%);
+    mix-blend-mode: normal; */
+    /* border-radius: 70px; */
 }
 
 .resumo-botao-repositorio:hover{
     scale: 1.08;
     transition: 400ms;
     border: 1px solid #f7f7f7;
-    background-color: transparent;
+    background: transparent;
     color: var(--white);
     font-size: 18px;
     font-weight: 500;
