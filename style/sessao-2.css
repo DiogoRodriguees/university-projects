@@ -1,0 +1,217 @@
+/* SESSÃO 2 - Linguagens e Frameworks */
+.linguagens {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: space-evenly;
+
+    font-family: Montserrat;
+
+    height: 680px;
+    background-color: var(--white);
+}
+
+.linguagens h2 {
+    font-size: 40px;
+    font-weight: 400;
+
+    color: var(--blue);
+    text-align: center;
+    text-decoration: underline;
+
+    margin-top: 60px;
+}
+
+.linguagens-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    width: 100%;
+    height: 80%;
+    padding: 0px 40px;
+}
+
+.linguagens-topicos {
+    display: flex;
+    text-align: center;
+    align-items: center;
+    flex-direction: column;
+    
+    width: 300px;
+    height: 400px;
+    margin: auto;
+    
+    background: var(--white);
+    box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 30px;
+    transition: 400ms;
+}
+
+.linguagens-topicos:hover{
+    scale: 1.1;
+    transition: 400ms;
+}
+
+.linguagens-topicos img {
+    width: 100px;
+    height: 100px;
+
+    margin: 20px;
+    margin-top: 20px;
+}
+
+.linguagens-topicos h2 {
+    font-size: 25px;
+    font-weight: 400;
+    
+    color: var(--blue);
+    text-decoration: none;
+
+    width: 100%;
+    margin-top: 20px;
+    margin-bottom: 0px;
+
+    user-select: none;
+}
+
+.linguagens-topicos p{
+    width: 80%;
+    height: 30%;
+    margin-top: 20px;
+    user-select: none;
+}
+
+.linguagens-topicos a{
+    color: var(--white);
+    background-color: var(--green4);
+    
+    border-radius: 3px;
+    padding: 10px 15px;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.linguagens-topicos a:hover{
+    color: var(--green4);
+    border: 1px solid var(--green4);
+    background-color: transparent;
+}
+
+@media screen and (max-width: 800px) {
+    .cabecalho{
+        /* height: 1080px; */
+        width: 100vw;
+
+        padding: 0px;
+        margin: 0px;
+        flex-direction: column;
+    }
+
+    .cabecalho-container{
+        align-items: center;
+        flex-direction: column;
+        width: 100%;
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+    .slides{
+        display: none;
+    }
+
+    .resumo-botoes{
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+
+        margin: 0;
+    }
+
+    .menu a {
+        display: none;
+    }
+
+    .menu{
+        text-align: center;
+        flex-direction: column;
+        justify-content: center;
+        height: 100px;
+    }
+
+    .menu h1{
+        margin: auto;
+        padding: auto;
+        text-align: center;
+    }
+
+    .resumo{
+        width: 100%;
+        padding: 10px 0px;
+        align-items: center;
+    }
+
+    .resumo h1{
+        font-size: 25px;
+        text-align: center;
+    }
+
+    .resumo-texto{
+        font-size: 15px;
+        text-align: center;
+        
+        width: 90%;
+        height: 80%;
+        margin-bottom: 40px;
+    }
+
+    .resumo-botao-repositorio{
+        width: 200px;
+        margin: 0px 0px 20px 0px;
+    }
+
+    .resumo-botao-repositorio:hover{
+        background-color: var(--white);
+        color: var(--blue);
+        scale: 1;
+    }
+
+    .resumo-botao-repositorio h2{
+        margin: 0;
+    }
+    
+
+    /* SESSÃO 2 - Linguagens e Frameworks */
+    .linguagens{     
+        height: auto;
+        padding-bottom: 30px;
+    }
+    .linguagens h2{     
+        margin: 20px;
+    }
+
+    .linguagens-container{
+        gap: 20px;
+        flex-direction: column;
+    }
+
+
+    .linguagens-topicos{
+        width: 100%;
+        padding: 20px 0px;
+    }
+    .linguagens-topicos:hover{
+        scale: 1;
+    }
+
+    .linguagens-topicos img {
+        margin-top: 0px;
+    }
+
+    .linguagens h2{
+        margin-bottom: 30px;
+    }
+
+    .linguagens-topicos h2 {
+        margin-bottom: 0px;
+    }
+}

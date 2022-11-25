@@ -1,0 +1,84 @@
+
+/* Sessao 1  - Cabeçalho*/
+.cabecalho{
+    color: var(--white);
+    font-family: Montserrat;
+
+    display: flex;
+    flex-direction: column;
+    
+    height: 100px;
+    width: 100%;
+}
+
+.menu {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: space-between;
+
+    height: 100px;
+    padding: 20px 40px;
+}
+
+.menu h1 {
+    font-size: 25px;
+    font-weight: 300;
+    margin-left: 40px;
+}
+
+.menu-navegacao {
+    display: flex;
+    align-items: baseline;
+    flex-direction: row;    
+
+    margin-right: 40px;
+}
+
+.menu-navegacao-link{
+    color: var(--white);
+    font-size: 18px;
+    font-weight: 300;
+    
+    margin: 0px 20px 0px 20px;
+    transition: 200ms;
+
+}
+
+.menu-navegacao-link:hover {
+    scale: 1.05;
+    transition: 200ms;
+    text-decoration: underline;
+} 
+
+
+@media screen and (max-width: 800px) {
+    .cabecalho{
+        /* height: 1080px; */
+        width: 100vw;
+
+        padding: 0px;
+        margin: 0px;
+        flex-direction: column;
+    }
+
+
+
+    .menu a {
+        display: none;
+    }
+
+    .menu{
+        text-align: center;
+        flex-direction: column;
+        justify-content: center;
+        height: 100px;
+    }
+
+    .menu h1{
+        margin: auto;
+        padding: auto;
+        text-align: center;
+    }
+    
+}
