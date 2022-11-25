@@ -140,7 +140,7 @@
 }
 
 .resumo-botao-repositorio:hover{
-    scale: 1.08;
+    scale: 1.05;
     transition: 400ms;
     border: 1px solid #f7f7f7;
     background: transparent;
@@ -316,6 +316,49 @@
     scale: 1.05;;
 }
 
+/* Sessão 3 - Rodapé */
+.rodape{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    /* background-color: #696767; */
+    background: linear-gradient(122.19deg, rgba(84, 108, 165, 0.58) -84.43%, #546CA5 -17.84%, rgba(0, 4, 36, 0.92) 76.27%, #000424 116.5%);
+
+    padding: 20px 50px;
+    gap: 100px;
+}
+
+.rodape-container{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    font-family: Montserrat;
+    color: var(--white);
+    width: 50vw;
+    height: 200px;
+    margin: 20px auto;
+}
+
+.rodape-titulo{
+    padding: 10px 0px;
+    font-weight: 400;
+}
+
+.rodape-links-container{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 15px;
+    padding: 10px 0px;
+}
+
+.rodape-icone{
+    height: 30px;
+    width: 30px;
+}
+.rodape-links-container a{
+    font-weight: 500;
+}
 
 
 @media screen and (max-width: 800px) {
