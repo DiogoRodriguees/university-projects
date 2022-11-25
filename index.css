@@ -30,7 +30,8 @@
     
     height: 680px;
     width: 100%;
-    background: linear-gradient(122.19deg, rgba(84, 108, 165, 0.58) -84.43%, #546CA5 -17.84%, rgba(0, 4, 36, 0.92) 76.27%, #000424 116.5%);
+    /* background: linear-gradient(122.19deg, rgba(84, 108, 165, 0.58) -84.43%, #546CA5 -17.84%, rgba(0, 4, 36, 0.92) 76.27%, #000424 116.5%); */
+    background: linear-gradient(122.19deg, rgba(84, 108, 165, 0.58) -84.43%, #546CA5 -15.36%, #000424 88.24%, #000424 116.5%);
 }
 
 .cabacelho-img {
@@ -66,17 +67,21 @@
 
     margin-right: 40px;
 }
+
 .menu-navegacao-link{
     font-size: 18px;
     font-weight: 300;
     color: var(--white);
 
     margin: 0px 20px 0px 20px;
+    transition: 200ms;
+
 }
 
 .menu-navegacao-link:hover {
     text-decoration: underline;
     scale: 1.05;
+    transition: 200ms;
 } 
 
 /* Sessão 1 - Resumo */
@@ -134,9 +139,8 @@
     border-radius: 40px;
     margin: 55px 20px 0px 0px;
     box-shadow: 3px 3px 20px black;
-    /* background: linear-gradient(180deg, #1E1E1E -91.03%, #F7F7F7 48.13%, #1E1E1E 178.85%);
-    mix-blend-mode: normal; */
-    /* border-radius: 70px; */
+    transition: 400ms;
+
 }
 
 .resumo-botao-repositorio:hover{
@@ -221,6 +225,11 @@
 
 .slides{
     width: 50%;
+    height: 80%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
 }
 
 
@@ -271,11 +280,13 @@
     background: var(--white);
     box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.1);
     border-radius: 30px;
+    transition: 400ms;
 }
 
 .linguagens-topicos:hover{
     scale: 1.1;
     transition: 400ms;
+    /* transition-delay: 400ms; */
 }
 
 .linguagens-topicos img {
@@ -309,11 +320,12 @@
 .linguagens-topicos a{
     color: #0CC08B;
     font-size: 18px;
-    text-decoration: underline;
+    font-weight: 500;
 }
 
 .linguagens-topicos a:hover{
-    scale: 1.05;;
+    text-decoration: underline;
+    /* scale: 1.05; */
 }
 
 /* Sessão 3 - Rodapé */
@@ -322,8 +334,7 @@
     flex-direction: row;
     align-items: center;
     /* background-color: #696767; */
-    background: linear-gradient(122.19deg, rgba(84, 108, 165, 0.58) -84.43%, #546CA5 -17.84%, rgba(0, 4, 36, 0.92) 76.27%, #000424 116.5%);
-
+    background: linear-gradient(122.19deg, rgba(84, 108, 165, 0.58) -84.43%, #546CA5 -15.36%, #000424 88.24%, #000424 116.5%);
     padding: 20px 50px;
     gap: 100px;
 }
@@ -359,7 +370,10 @@
 .rodape-links-container a{
     font-weight: 500;
 }
-
+.rodape-links-container a:hover{
+    text-decoration: underline;
+    cursor: pointer;
+}
 
 @media screen and (max-width: 800px) {
     .cabecalho{
