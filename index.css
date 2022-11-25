@@ -349,7 +349,8 @@
     align-items: center;
     flex-direction: row;
     
-    padding: 20px 50px;
+    height: 200px;
+    padding: 20px 50px 0px 50px;
     background: linear-gradient(122.19deg, rgba(84, 108, 165, 0.58) -84.43%, #546CA5 -15.36%, #000424 88.24%, #000424 116.5%);
 }
 
