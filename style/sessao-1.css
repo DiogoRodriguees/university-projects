@@ -24,8 +24,8 @@
 }
 
 .resumo-titulo{
-    font-size: 25px;
-    font-weight: 500;
+    font-size: 28px;
+    font-weight: 400;
 }
 
 .resumo-texto{
@@ -49,7 +49,7 @@
 
 .resumo-botao-repositorio{
     width: 12vw;
-    height: 40px;
+    height: 36px;
 
     margin: 55px 20px 0px 0px;
     padding: 4px;
@@ -60,7 +60,7 @@
     align-items:center ;
 
     border-radius: 40px;
-    box-shadow: 3px 3px 15px black;
+    box-shadow: 10px 10px 10px rgb(0, 0, 0);
     background-color: var(--white);
     color: var(--blue);
 
@@ -72,7 +72,7 @@
 }
 
 .resumo-botao-repositorio:hover{
-    scale: 1.05;
+    /* scale: 1.05; */
     color: var(--white);
     border: 1px solid #f7f7f7;
     background: transparent;
