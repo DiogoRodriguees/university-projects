@@ -9,9 +9,11 @@
 }
 
 body{
-    background: linear-gradient(122.19deg, rgba(84, 108, 165, 0.58) -84.43%, #546CA5 -15.36%, #000424 88.24%, #000424 116.5%);
-    /* z-index: -1; */
-    /* position: absolute; */
+    /* background: linear-gradient(122.19deg, rgba(84, 108, 165, 0.58) -84.43%, #546CA5 -15.36%, #000424 88.24%, #000424 116.5%); */
+    /* background: linear-gradient(107.83deg, #0CC08B 0.01%, rgba(7, 116, 84, 0.88) 30.33%, #077454 103.96%); */
+    /* background: linear-gradient(107.83deg, #0CC08B 0.01%, rgba(7, 116, 84, 0.88) 43.32%, #04412F 103.96%); */
+    background: url(./img/allblabk.jpg) no-repeat center center fixed;
+    background-size: cover;
 }
 :root{
     --green1 :#45C09C;
@@ -21,6 +23,9 @@ body{
     --green5 :#04412F;
 
     --blue :#000424;
+    --blue1 :#546CA5;
+    --blue2 :#869ED7;
+    --blue3 :#B4C7F0;
 
     --white:#f2f2f7;   
 }
@@ -37,13 +42,9 @@ body{
     width: 100%;
 }
 
-.cabacelho-img {
-    z-index: -1;
-    position: absolute;
+.background-img {
 
-    width: 100%;
-    margin: 0;
-    height: 720px;
+    
 }
 
 .menu {
@@ -148,7 +149,7 @@ body{
     align-items:center ;
 
     border-radius: 40px;
-    box-shadow: 3px 3px 20px black;
+    box-shadow: 3px 3px 15px black;
     background-color: var(--white);
     color: var(--blue);
 
@@ -183,8 +184,6 @@ body{
 .conteiner-slide{
     width: 40vw;
     height: 45vh;
-    /* margin: 40vh auto; */
-    margin: ;
 
     display: flex;
     justify-content: space-between;
@@ -342,17 +341,25 @@ body{
 .linguagens-topicos a{
     color: var(--white);
     background-color: var(--green4);
+    
     border-radius: 3px;
     padding: 10px 15px;
     font-size: 18px;
     font-weight: 500;
+
+    /* color: var(--blue2);
+    border: 1px solid var(--blue2);
+    background-color: transparent; */
 }
 
 .linguagens-topicos a:hover{
     color: var(--green4);
-    font-weight: 600;
     border: 1px solid var(--green4);
     background-color: transparent;
+    /* font-weight: 600; */
+    /* color: var(--white);
+    border: none;
+    background-color: var(--blue2); */
 
 }
 
