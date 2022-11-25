@@ -392,61 +392,46 @@
     text-decoration: underline;
 }
 
+@media screen and (max-width: 1050px) {
+    .slides{
+        display: none;
+    }
+    .resumo {
+        width: 100%;
+    }
+    .resumo-texto {
+        width: 70%;
+        background-color: #04412F;
+    }
+    .resumo-botoes{
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .resumo-botao-repositorio{
+        width: 200px;
+    margin: 20px 20px 0px 0px;
+
+    }
+}
 @media screen and (max-width: 800px) {
     .cabecalho{
-        height: 1080px;
+        /* height: 1080px; */
+        width: 100vw;
 
         padding: 0px;
         margin: 0px;
-
         flex-direction: column;
     }
 
     .cabecalho-container{
         align-items: center;
         flex-direction: column;
+        width: 100%;
+        padding-left: 0px;
+        padding-right: 0px;
     }
     .slides{
-        /* display: none; */
-        width: 100%;
-    }
-
-    .conteiner-slide{
-        display: flex;
-        justify-content: space-between;
-
-        width: 80vw;
-        height: 45vh;
-        margin: 20vh auto;
-
-        box-shadow: 0 20px 30px black;
-        border-radius: 10px;
-    }
-
-    .conteiner-itens {
-        width: 80vw;
-        height: 45vh;
-
-        display: flex;
-        position: absolute;
-        overflow: hidden;
-        border-radius: 10px 0px 0px 10px;
-    }
-
-
-    .item {
-        width: 80vw;
-        height: 45vh;
-        transition: all 1s;
-    }
-
-    .item:first-child{
-        margin-left: -100%;
-    }
-
-    .item img {
-        width: 80vw;
-
+        display: none;
     }
 
     .resumo-botoes{
@@ -465,6 +450,7 @@
         text-align: center;
         flex-direction: column;
         justify-content: center;
+        height: 100px;
     }
 
     .menu h1{
@@ -475,7 +461,8 @@
 
     .resumo{
         width: 100%;
-        padding: 10px 50px;
+        padding: 10px 0px;
+        align-items: center;
     }
 
     .resumo h1{
@@ -483,37 +470,52 @@
         text-align: center;
     }
 
-    .resumo h2{
+    .resumo-texto{
         font-size: 15px;
         text-align: center;
         
-        width: 100%;
-        margin-top: 20px;
-        margin-bottom: 60px;
+        width: 90%;
+        height: 80%;
+        margin-bottom: 40px;
     }
 
     .resumo-botao-repositorio{
         width: 200px;
-        text-align: center;
+        margin: 0px 0px 20px 0px;
+    }
+
+    .resumo-botao-repositorio:hover{
+        background-color: var(--white);
+        color: var(--blue);
+        scale: 1;
     }
 
     .resumo-botao-repositorio h2{
-        background-color: #04412F;
+        margin: 0;
     }
+    
 
     /* SESSÃO 2 - Linguagens e Frameworks */
     .linguagens{     
         height: auto;
+        padding-bottom: 30px;
     }
-    
+    .linguagens h2{     
+        margin: 20px;
+    }
+
     .linguagens-container{
         gap: 20px;
         flex-direction: column;
     }
 
+
     .linguagens-topicos{
         width: 100%;
         padding: 20px 0px;
+    }
+    .linguagens-topicos:hover{
+        scale: 1;
     }
 
     .linguagens-topicos img {
@@ -526,5 +528,23 @@
 
     .linguagens-topicos h2 {
         margin-bottom: 0px;
+    }
+
+    .rodape{
+        flex-direction: column;
+        align-items: center;
+        padding: 0px;
+        gap: 0px;
+    }
+
+    .rodape-container{
+        margin: 0px;
+        width: 100%;
+        padding: 0px 50px;
+    }
+
+    .rodape-titulo{
+        text-align: center;
+        width: 100%;
     }
 }
