@@ -41,7 +41,6 @@
     width: 100%;
     margin: 0;
     height: 720px;
-    /* background: black; */
 }
 
 .menu {
@@ -69,36 +68,38 @@
 }
 
 .menu-navegacao-link{
+    color: var(--white);
     font-size: 18px;
     font-weight: 300;
-    color: var(--white);
-
+    
     margin: 0px 20px 0px 20px;
     transition: 200ms;
 
 }
 
 .menu-navegacao-link:hover {
-    text-decoration: underline;
     scale: 1.05;
     transition: 200ms;
+    text-decoration: underline;
 } 
 
 /* Sessão 1 - Resumo */
 .cabecalho-container {
     display: flex;
-    flex-direction: row;
     align-items: center;
-    padding: 0px 40px;
+    flex-direction: row;
+
     height: 60%;
+    padding: 0px 40px;
 }
 
 .resumo{
     display: flex;
     flex-direction: column;
+
     text-align: left;
-    /* justify-content:center; */
     font-family: Montserrat;
+    
     width: 50%;
     height: 100%;
     padding: 20px 40px;
@@ -107,84 +108,93 @@
 .resumo-titulo{
     font-size: 25px;
     font-weight: 500;
+
     margin-top: 40px;
 }
 
 .resumo-texto{
     font-size: 16px;
-    width: 30vw;
-    padding: 30px 0px;
     font-weight: 200;
-    height: 150px;
     font-family: Poppins;
+
+    width: 30vw;
+    height: 150px;
+
+    padding: 30px 0px;
     margin-bottom: 20px;
     line-height: 25px;
 }
 
 .resumo-botoes{
     display: flex;
-    flex-direction: row;
     align-items: center;
+    flex-direction: row;
 }
 
 .resumo-botao-repositorio{
+    width: 15vw;
     height: 40px;
+
+    margin: 55px 20px 0px 0px;
+    padding: 4px;
+
+    gap: 10px;
     display: flex;
     flex-direction: row;
     align-items:center ;
-    gap: 10px;
-    width: 15vw;
-    background-color: var(--white);
-    padding: 4px;
-    border-radius: 40px;
-    margin: 55px 20px 0px 0px;
-    box-shadow: 3px 3px 20px black;
-    transition: 400ms;
 
+    border-radius: 40px;
+    box-shadow: 3px 3px 20px black;
+    background-color: var(--white);
+
+    font-size: 18px;
+    font-weight: 500;
+    font-family: Montserrat;
+    
+    transition: 400ms;
 }
 
 .resumo-botao-repositorio:hover{
     scale: 1.05;
-    transition: 400ms;
+    color: var(--white);
     border: 1px solid #f7f7f7;
     background: transparent;
-    color: var(--white);
-    font-size: 18px;
-    font-weight: 500;
-    font-family: Montserrat;
+    transition: 400ms;
 }
 
 .resumo-botao-repositorio img{
-    height: 30px;
     width: 30px;
+    height: 30px;
 }
 
 
 .resumo-botao-repositorio h2{
-    /* color: var(--blue); */
     font-size: 18px;
-    font-weight: 500;
     text-align: center;
+    font-weight: 500;
 }
 
 /* Sessão 1 - Slide Show */
 .conteiner-slide{
-    display: flex;
-    justify-content: space-between;
     width: 40vw;
     height: 45vh;
     margin: 20vh auto;
-    border-radius: 10px;
+
+    display: flex;
+    justify-content: space-between;
+
     box-shadow: 0 20px 30px black;
+    border-radius: 10px;
 }
 
 .conteiner-itens {
-    position: absolute;
-    display: flex;
     width: 40vw;
     height: 45vh;
-    border-radius: 10px 0px 0px 10px;
+
+    display: flex;
+    position: absolute;
     overflow: hidden;
+    border-radius: 10px 0px 0px 10px;
 }
 
 
@@ -205,31 +215,35 @@
 }
 
 .botao-mover{
+    width: 50px;
+
     font: bold 30px sans-serif;
+    color: #f7f7f78a;
+    align-items: center;
+
     display: flex;
     justify-content: center;
-    align-items: center;
-    width: 50px;
-    color: #f7f7f78a;
+
     user-select: none;
     z-index: 1;
 }
 
 .botao-mover:hover {
     color: rgba(255, 255, 255, 0.815);
-    background-color: #f2f2f28c;
-    border-radius: 10px;
     cursor: pointer;
     transition:  all 1s;
+
+    border-radius: 10px;
+    background-color: #f2f2f28c;
 }
 
 .slides{
     width: 50%;
     height: 80%;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
 
+    display: flex;
+    align-items: center;
+    flex-direction: row;
 }
 
 
@@ -307,6 +321,7 @@
     width: 100%;
     margin-top: 20px;
     margin-bottom: 0px;
+
     user-select: none;
 }
 
@@ -325,26 +340,27 @@
 
 .linguagens-topicos a:hover{
     text-decoration: underline;
-    /* scale: 1.05; */
 }
 
 /* Sessão 3 - Rodapé */
 .rodape{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    /* background-color: #696767; */
-    background: linear-gradient(122.19deg, rgba(84, 108, 165, 0.58) -84.43%, #546CA5 -15.36%, #000424 88.24%, #000424 116.5%);
-    padding: 20px 50px;
     gap: 100px;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    
+    padding: 20px 50px;
+    background: linear-gradient(122.19deg, rgba(84, 108, 165, 0.58) -84.43%, #546CA5 -15.36%, #000424 88.24%, #000424 116.5%);
 }
 
 .rodape-container{
     display: flex;
-    flex-direction: column;
     align-items: flex-start;
-    font-family: Montserrat;
+    flex-direction: column;
+
     color: var(--white);
+    font-family: Montserrat;
+    
     width: 50vw;
     height: 200px;
     margin: 20px auto;
@@ -356,36 +372,39 @@
 }
 
 .rodape-links-container{
+    gap: 15px;
     display: flex;
     flex-direction: row;
     align-items: center;
-    gap: 15px;
+
     padding: 10px 0px;
 }
 
 .rodape-icone{
-    height: 30px;
     width: 30px;
+    height: 30px;
 }
 .rodape-links-container a{
     font-weight: 500;
 }
 .rodape-links-container a:hover{
-    text-decoration: underline;
     cursor: pointer;
+    text-decoration: underline;
 }
 
 @media screen and (max-width: 800px) {
     .cabecalho{
-        flex-direction: column;
+        height: 1080px;
+
         padding: 0px;
         margin: 0px;
-        height: 1080px;
+
+        flex-direction: column;
     }
 
     .cabecalho-container{
-        flex-direction: column;
         align-items: center;
+        flex-direction: column;
     }
     .slides{
         /* display: none; */
@@ -395,20 +414,23 @@
     .conteiner-slide{
         display: flex;
         justify-content: space-between;
+
         width: 80vw;
         height: 45vh;
         margin: 20vh auto;
-        border-radius: 10px;
+
         box-shadow: 0 20px 30px black;
+        border-radius: 10px;
     }
 
     .conteiner-itens {
-        position: absolute;
-        display: flex;
         width: 80vw;
         height: 45vh;
-        border-radius: 10px 0px 0px 10px;
+
+        display: flex;
+        position: absolute;
         overflow: hidden;
+        border-radius: 10px 0px 0px 10px;
     }
 
 
@@ -426,70 +448,83 @@
         width: 80vw;
 
     }
+
     .resumo-botoes{
         display: flex;
-        flex-direction: column;
         align-items: center;
+        flex-direction: column;
+
         margin: 0;
-        
     }
+
     .menu a {
         display: none;
     }
+
     .menu{
-        flex-direction: column;
         text-align: center;
+        flex-direction: column;
         justify-content: center;
     }
+
     .menu h1{
-        text-align: center;
-        padding: auto;
         margin: auto;
+        padding: auto;
+        text-align: center;
     }
+
     .resumo{
         width: 100%;
         padding: 10px 50px;
-        /* align-items: center; */
     }
+
     .resumo h1{
         font-size: 25px;
         text-align: center;
     }
+
     .resumo h2{
         font-size: 15px;
+        text-align: center;
+        
         width: 100%;
-       text-align: center;
         margin-top: 20px;
         margin-bottom: 60px;
     }
+
     .resumo-botao-repositorio{
         width: 200px;
         text-align: center;
     }
+
     .resumo-botao-repositorio h2{
-        /* text-align: center; */
         background-color: #04412F;
     }
+
     /* SESSÃO 2 - Linguagens e Frameworks */
-    .linguagens{
+    .linguagens{     
         height: auto;
     }
+    
     .linguagens-container{
-        flex-direction: column;
         gap: 20px;
+        flex-direction: column;
     }
+
     .linguagens-topicos{
         width: 100%;
         padding: 20px 0px;
     }
+
     .linguagens-topicos img {
         margin-top: 0px;
     }
+
     .linguagens h2{
         margin-bottom: 30px;
     }
+
     .linguagens-topicos h2 {
         margin-bottom: 0px;
     }
-    
 }
