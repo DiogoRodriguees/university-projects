@@ -8,6 +8,11 @@
     padding: 0;
 }
 
+body{
+    background: linear-gradient(122.19deg, rgba(84, 108, 165, 0.58) -84.43%, #546CA5 -15.36%, #000424 88.24%, #000424 116.5%);
+    /* z-index: -1; */
+    /* position: absolute; */
+}
 :root{
     --green1 :#45C09C;
     --green2 :#0CC08B;
@@ -28,10 +33,8 @@
     display: flex;
     flex-direction: column;
     
-    height: 680px;
+    height: 100px;
     width: 100%;
-    /* background: linear-gradient(122.19deg, rgba(84, 108, 165, 0.58) -84.43%, #546CA5 -17.84%, rgba(0, 4, 36, 0.92) 76.27%, #000424 116.5%); */
-    background: linear-gradient(122.19deg, rgba(84, 108, 165, 0.58) -84.43%, #546CA5 -15.36%, #000424 88.24%, #000424 116.5%);
 }
 
 .cabacelho-img {
@@ -84,13 +87,15 @@
 } 
 
 /* Sessão 1 - Resumo */
-.cabecalho-container {
+.resumo-container {
     display: flex;
-    align-items: center;
     flex-direction: row;
 
-    height: 60%;
-    padding: 0px 40px;
+    height:600px;
+    width: 100%;
+    padding: 60px 40px;
+    color: var(--white);
+
 }
 
 .resumo{
@@ -101,15 +106,14 @@
     font-family: Montserrat;
     
     width: 50%;
-    height: 100%;
+    height: 100vh;
+
     padding: 20px 40px;
 }
 
 .resumo-titulo{
     font-size: 25px;
     font-weight: 500;
-
-    margin-top: 40px;
 }
 
 .resumo-texto{
@@ -132,7 +136,7 @@
 }
 
 .resumo-botao-repositorio{
-    width: 15vw;
+    width: 12vw;
     height: 40px;
 
     margin: 55px 20px 0px 0px;
@@ -146,6 +150,7 @@
     border-radius: 40px;
     box-shadow: 3px 3px 20px black;
     background-color: var(--white);
+    color: var(--blue);
 
     font-size: 18px;
     font-weight: 500;
@@ -178,7 +183,8 @@
 .conteiner-slide{
     width: 40vw;
     height: 45vh;
-    margin: 20vh auto;
+    /* margin: 40vh auto; */
+    margin: ;
 
     display: flex;
     justify-content: space-between;
@@ -239,11 +245,12 @@
 
 .slides{
     width: 50%;
-    height: 80%;
+    height: 100vh;
 
     display: flex;
     align-items: center;
-    flex-direction: row;
+    flex-direction: column;
+    padding: 20px 0px 0px 0px;
 }
 
 
@@ -333,13 +340,20 @@
 }
 
 .linguagens-topicos a{
-    color: #0CC08B;
+    color: var(--white);
+    background-color: var(--green4);
+    border-radius: 3px;
+    padding: 10px 15px;
     font-size: 18px;
     font-weight: 500;
 }
 
 .linguagens-topicos a:hover{
-    text-decoration: underline;
+    color: var(--green4);
+    font-weight: 600;
+    border: 1px solid var(--green4);
+    background-color: transparent;
+
 }
 
 /* Sessão 3 - Rodapé */
@@ -351,7 +365,6 @@
     
     height: 200px;
     padding: 30px 50px 0px 50px;
-    background: linear-gradient(122.19deg, rgba(84, 108, 165, 0.58) -84.43%, #546CA5 -15.36%, #000424 88.24%, #000424 116.5%);
 }
 
 .rodape-container{
