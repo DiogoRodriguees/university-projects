@@ -1,4 +1,20 @@
 
+:root{
+    --green1 :#45C09C;
+    --green2 :#0CC08B;
+    --green3 :#328B71;
+    --green4 :#077454;
+    --green5 :#04412F;
+
+    --blue  :#000424;
+    --blue1 :#546CA5;
+    --blue2 :#869ED7;
+    --blue3 :#B4C7F0;
+
+    --white:#f2f2f7;   
+}
+
+
 /* Sessão 1 - Resumo */
 .resumo-container {
     display: flex;
@@ -72,7 +88,6 @@
 }
 
 .resumo-botao-repositorio:hover{
-    /* scale: 1.05; */
     color: var(--white);
     border: 1px solid #f7f7f7;
     background: transparent;
