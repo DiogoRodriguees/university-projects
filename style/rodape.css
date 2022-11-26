@@ -1,3 +1,18 @@
+:root{
+    --green1 :#45C09C;
+    --green2 :#0CC08B;
+    --green3 :#328B71;
+    --green4 :#077454;
+    --green5 :#04412F;
+
+    --blue  :#000424;
+    --blue1 :#546CA5;
+    --blue2 :#869ED7;
+    --blue3 :#B4C7F0;
+
+    --white:#f2f2f7;   
+}
+
 /* Sessão 3 - Rodapé */
 .rodape{
     gap: 100px;
@@ -49,6 +64,7 @@
 .rodape-links-container a:hover{
     cursor: pointer;
     text-decoration: underline;
+    color: var(--green1);
 }
 
 @media screen and (max-width: 800px) {
