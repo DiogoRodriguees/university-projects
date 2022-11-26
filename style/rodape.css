@@ -39,6 +39,8 @@
 .rodape-icone{
     width: 30px;
     height: 30px;
+    /* color: aliceblue; */
+    /* background-color: aqua; */
 }
 .rodape-links-container a{
     font-weight: 500;
