@@ -52,14 +52,6 @@
     
     background: var(--white);
     box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.1);
-    /*
-    transition: 400ms;
-
-    background: rgba(82, 82, 82, 0.082);
-    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
-    backdrop-filter: blur( 1.5px );
-    -webkit-backdrop-filter: blur( 85.5px );
-    border: 1px solid rgba( 255, 255, 255, 0.18 ); */
     border-radius: 20px;
 }
 
@@ -74,6 +66,7 @@
     margin: 20px;
     margin-top: 20px;
 }
+
 
 .linguagens-topicos h2 {
     font-size: 25px;
