@@ -70,7 +70,6 @@
     margin: 55px 20px 0px 0px;
     padding: 4px;
 
-    gap: 10px;
     display: flex;
     flex-direction: row;
     align-items:center ;
@@ -104,6 +103,7 @@
     font-size: 18px;
     text-align: center;
     font-weight: 500;
+    margin: auto;
 }
 
 /* Sessão 1 - Slide Show */
