@@ -102,9 +102,11 @@
         align-items: left;
 
     }
-
+    .rodape-links-container{
+        align-items: center;
+    }
     .rodape-titulo{
-        text-align: left;
+        text-align: center;
         width: 100%;
     }
     .rodape-background{
