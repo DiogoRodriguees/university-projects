@@ -17,18 +17,18 @@
 .rodape{
     gap: 100px;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
     height:45vh;
     /* height:60vh; */
     margin-top: 80px;
+    padding: 0px 25px;
 }
 
 .rodape-background{
     background-color: var(--white);
     height: 70%;
-    /* width: 85%; */
-    width: 90%;
+    width: 40%;
 
     display: flex;
     align-items: center;
@@ -47,9 +47,9 @@
     color: var(--blue);
     font-family: Montserrat;
     
-    width: 40%;
+    width: 80%;
     height: 80%;
-    margin: auto;
+    margin-left: 40px;
 }
 
 .rodape-titulo{
@@ -88,6 +88,10 @@
         align-items: center;
         padding: 0px;
         gap: 0px;
+        height:75vh;
+        width: 100%;
+        margin: auto;
+
     }
 
     .rodape-container{
@@ -104,8 +108,5 @@
         flex-direction: column;
         height: 90%;
         width: 90%;
-    }
-    .rodape{
-        height:75vh;
     }
 }

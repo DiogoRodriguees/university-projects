@@ -114,94 +114,18 @@
 }
 
 @media screen and (max-width: 800px) {
-    .cabecalho{
-        /* height: 1080px; */
-        width: 100vw;
-
-        padding: 0px;
-        margin: 0px;
-        flex-direction: column;
-    }
-
-    .cabecalho-container{
-        align-items: center;
-        flex-direction: column;
-        width: 100%;
-        padding-left: 0px;
-        padding-right: 0px;
-    }
-    .slides{
-        display: none;
-    }
-
-    .resumo-botoes{
-        display: flex;
-        align-items: center;
-        flex-direction: column;
-
-        margin: 0;
-    }
-
-    .menu a {
-        display: none;
-    }
-
-    .menu{
-        text-align: center;
-        flex-direction: column;
-        justify-content: center;
-        height: 100px;
-    }
-
-    .menu h1{
-        margin: auto;
-        padding: auto;
-        text-align: center;
-    }
-
-    .resumo{
-        width: 100%;
-        padding: 10px 0px;
-        align-items: center;
-    }
-
-    .resumo h1{
-        font-size: 25px;
-        text-align: center;
-    }
-
-    .resumo-texto{
-        font-size: 15px;
-        text-align: center;
-        
-        width: 90%;
-        height: 80%;
-        margin-bottom: 40px;
-    }
-
-    .resumo-botao-repositorio{
-        width: 200px;
-        margin: 0px 0px 20px 0px;
-    }
-
-    .resumo-botao-repositorio:hover{
-        background-color: var(--white);
-        color: var(--blue);
-        scale: 1;
-    }
-
-    .resumo-botao-repositorio h2{
-        margin: 0;
-    }
-    
 
     /* SESSÃO 2 - Linguagens e Frameworks */
     .linguagens{     
         height: auto;
         padding-bottom: 30px;
+        background-color: transparent;
     }
     .linguagens h2{     
         margin: 20px;
+        color: var(--white);
+        margin-bottom: 30px;
+
     }
 
     .linguagens-container{
@@ -211,22 +135,25 @@
 
 
     .linguagens-topicos{
-        width: 100%;
+        width: 90%;
         padding: 20px 0px;
     }
     .linguagens-topicos:hover{
         scale: 1;
+    }
+    .linguagens-topicos p{
+        height: 20%;
+        margin-bottom: 20px;
+        margin-top: 0px;
+
+      
     }
 
     .linguagens-topicos img {
         margin-top: 0px;
     }
 
-    .linguagens h2{
-        margin-bottom: 30px;
-    }
-
     .linguagens-topicos h2 {
-        margin-bottom: 0px;
+        color: var(--blue);
     }
 }
