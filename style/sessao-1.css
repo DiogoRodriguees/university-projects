@@ -67,7 +67,7 @@
     width: 12vw;
     height: 36px;
 
-    margin: 55px 20px 0px 0px;
+    margin: 25px 20px 0px 0px;
     padding: 4px;
 
     display: flex;
@@ -130,9 +130,16 @@
 
 
 .item {
-    width: 40vw;
-    height: 45vh;
-    transition: all 1s;
+    font-size: 16px;
+    font-weight: 200;
+    font-family: Poppins;
+
+    width: 30vw;
+    height: 150px;
+
+    padding: 30px 0px;
+    margin-bottom: 20px;
+    line-height: 25px;
 }
 
 .item:first-child{
@@ -187,6 +194,8 @@
     }
     .resumo-texto {
         width: 70%;
+
+
     }
     .resumo-botoes{
         flex-direction: column;
@@ -223,8 +232,10 @@
         text-align: center;
         
         width: 90%;
-        height: 80%;
-        margin-bottom: 40px;
+        height: 15%;
+    
+        padding: 20px 0px;
+        line-height: 25px;
     }
 
     .resumo-botao-repositorio{
