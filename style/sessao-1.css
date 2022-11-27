@@ -219,7 +219,6 @@
     .resumo h1{
         font-size: 25px;
         text-align: center;
-
     }
 
     .resumo-texto{
@@ -227,8 +226,7 @@
         text-align: center;
         
         width: 90%;
-        height: 50%;
-        /* margin-bottom: 40px; */
+        height: 60%;
     }
 
     .resumo-botao-repositorio{
