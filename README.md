@@ -2,7 +2,7 @@
 Repositório criado para o processo seletivo da Haken( Empresa junior de ciencia da computação ). <br>
 
 ## Descrição
-- O projeto precisa ser desenvolvido de forma individual, deve ser uma landing page responsiva(adaptado para mobile) e com dark mode(modo escuro).
+- O projeto precisa ser desenvolvido de forma individual, deve ser uma landing page responsiva(adaptado para mobile) e com dark mode(modo escuro).<br>
 Exemplo de Landing Page: <a href="https://wonderfullandingpage.github.io/mylandingpage/">EXEMPLO</a>
 - O tema fica por sua conta, você pode fazer sobre alguma empresa, anime, bot ou qualquer outra coisa fictícia (dúvidas entrar em contato).
 - Utilize o git/github sempre que fizer modificações, não deixe para última hora nem faça o deploy do projeto inteiro de uma vez!!!
