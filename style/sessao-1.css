@@ -36,7 +36,7 @@
     width: 50%;
     height: 100vh;
 
-    padding: 20px 40px;
+    padding: 10px 40px;
 }
 
 .resumo-titulo{
@@ -67,7 +67,7 @@
     width: 12vw;
     height: 36px;
 
-    margin: 55px 20px 0px 0px;
+    margin: 45px 20px 0px 0px;
     padding: 4px;
 
     display: flex;
@@ -232,24 +232,18 @@
     }
 
     .resumo-botao-repositorio{
-        width: 200px;
-        margin: 0px 0px 20px 0px;
-    }
-
-    .resumo-botao-repositorio:hover{
-        background-color: var(--white);
-        color: var(--blue);
-        scale: 1;
+        width: 150px;
+        margin: 20px 0px 20px 0px;
     }
 
     .resumo-botao-repositorio h2{
-        margin: 0;
+        margin: auto;
     }
     .resumo-botoes{
         display: flex;
         align-items: center;
-        flex-direction: column;
-
+        flex-direction: row;
+        gap: 15px;
         margin: 0;
     }
 
