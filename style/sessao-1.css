@@ -36,7 +36,7 @@
     width: 50%;
     height: 100vh;
 
-    padding: 10px 40px;
+    padding: 18px 40px;
 }
 
 .resumo-titulo{
@@ -63,21 +63,32 @@
     flex-direction: row;
 }
 
+#figma{
+    background-color: #8B50D5;
+    color: var(--white);
+}
+
+#github{
+    
+    background-color: #38669F;
+    color: var(--white);
+}
 .resumo-botao-repositorio{
     width: 12vw;
     height: 36px;
 
-    margin: 45px 20px 0px 0px;
+    margin: 55px 20px 0px 0px;
     padding: 4px;
 
     display: flex;
     flex-direction: row;
     align-items:center ;
 
-    border-radius: 40px;
+    border-radius: 3px;
     box-shadow: 10px 10px 10px rgb(0, 0, 0);
-    background-color: var(--white);
-    color: var(--blue);
+
+    /* background-color: var(--white);
+    color: var(--blue); */
 
     font-size: 18px;
     font-weight: 500;
@@ -88,9 +99,10 @@
 
 .resumo-botao-repositorio:hover{
     color: var(--white);
-    border: 1px solid #f7f7f7;
+    /* border: 1px solid #f7f7f7; */
+    scale: 1.1;
     background: transparent;
-    transition: 400ms;
+    transition: 300ms;
 }
 
 .resumo-botao-repositorio img{
