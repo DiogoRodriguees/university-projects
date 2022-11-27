@@ -45,11 +45,12 @@
     background: var(--white);
     box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.1);
     border-radius: 20px;
+
+    transition: transform 0.3s ;
 }
 
 .linguagens-container-topicos:hover{
-    scale: 1.05;
-    transition  :all 300ms ease-in-out;
+    transform:  scale(1.05);
 }
 
 .linguagens-container-topicos img {
