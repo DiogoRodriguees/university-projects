@@ -29,7 +29,7 @@ Fim - 04/12/22
 - Javascript(ES6)
 
 ## WEB View
-<img href="img/README/versão 1.png">
+<img src="img/README/versão 1.png">
 
 ## Mobile View
 'adicionar imagens'
