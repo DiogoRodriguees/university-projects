@@ -14,18 +14,17 @@
     --white:#f2f2f7;   
 }
 
-
-/* Sessão 1 - Resumo */
-.resumo-container {
+.container-resumo-slides {
     display: flex;
     flex-direction: row;
 
-    height:600px;
-    width: 100%;
-    padding: 60px 40px;
     color: var(--white);
+    width: 100%;
+    height:600px;
+    padding: 60px 40px;
 }
 
+/* resumo e botoes para repositorio */
 .resumo{
     display: flex;
     flex-direction: column;
@@ -35,13 +34,18 @@
     
     width: 50%;
     height: 100vh;
-
     padding: 18px 40px;
 }
 
 .resumo-titulo{
     font-size: 28px;
     font-weight: 400;
+}
+
+.resumo-botoes{
+    display: flex;
+    align-items: center;
+    flex-direction: row;
 }
 
 .resumo-texto{
@@ -57,22 +61,16 @@
     line-height: 25px;
 }
 
-.resumo-botoes{
-    display: flex;
-    align-items: center;
-    flex-direction: row;
-}
-
 #figma{
     background-color: #8B50D5;
     color: var(--white);
 }
 
 #github{
-    
     background-color: #38669F;
     color: var(--white);
 }
+
 .resumo-botao-repositorio{
     width: 12vw;
     height: 36px;
@@ -87,9 +85,6 @@
     border-radius: 3px;
     box-shadow: 10px 10px 10px rgb(0, 0, 0);
 
-    /* background-color: var(--white);
-    color: var(--blue); */
-
     font-size: 18px;
     font-weight: 500;
     font-family: Montserrat;
@@ -99,7 +94,6 @@
 
 .resumo-botao-repositorio:hover{
     color: var(--white);
-    /* border: 1px solid #f7f7f7; */
     scale: 1.1;
     background: transparent;
     transition: 300ms;
@@ -112,14 +106,25 @@
 
 
 .resumo-botao-repositorio h2{
+    margin: auto;   
     font-size: 18px;
     text-align: center;
     font-weight: 500;
-    margin: auto;   
 }
 
-/* Sessão 1 - Slide Show */
-.conteiner-slide{
+/* Slide Show */
+.slides{
+    width: 50%;
+    height: 100vh;
+
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+
+    padding: 20px 0px 0px 0px;
+}
+
+.container-slide{
     width: 40vw;
     height: 45vh;
 
@@ -130,7 +135,7 @@
     border-radius: 10px;
 }
 
-.conteiner-itens {
+.container-itens {
     width: 40vw;
     height: 45vh;
 
@@ -139,7 +144,6 @@
     overflow: hidden;
     border-radius: 10px 0px 0px 10px;
 }
-
 
 .item {
     width: 40vw;
@@ -167,8 +171,8 @@
     display: flex;
     justify-content: center;
 
-    user-select: none;
     z-index: 1;
+    user-select: none;
 }
 
 .botao-mover:hover {
@@ -180,67 +184,63 @@
     background-color: #f2f2f28c;
 }
 
-.slides{
-    width: 50%;
-    height: 100vh;
-
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    padding: 20px 0px 0px 0px;
-}
 
 @media screen and (max-width: 1050px) {
-    .slides{
-        display: none;
-    }
+
     .resumo {
         width: 100%;
         padding: 0px 0px;
-
     }
+    
     .resumo-texto {
         width: 70%;
     }
+
     .resumo-botoes{
         flex-direction: column;
         align-items: flex-start;
     }
+
     .resumo-botao-repositorio{
         width: 200px;
-    margin: 20px 20px 0px 0px;
-
+        margin: 20px 20px 0px 0px;
+    }
+    
+    .slides{
+        display: none;
     }
 }
 
 @media screen and (max-width: 800px) {
-    .resumo-container{
+    .container-resumo-slides{
+        width: 100%;
+        height: 500px;
+
         align-items: center;
         flex-direction: column;
-        width: 100%;
-        padding-left: 0px;
-        padding-right: 0px;
+        
         padding: 25px 0px 0px 0px;
-        height: 500px;
-    }
-    .resumo{
-        width: 100%;
-        padding: 10px 0px;
-        align-items: center;
-        height: 65%;
     }
 
-    .resumo h1{
+    .resumo{
+        width: 100%;
+        height: 65%;
+
+        padding: 10px 0px;
+        align-items: center;
+    }
+
+    .resumo-titulo{
         font-size: 25px;
         text-align: center;
     }
 
     .resumo-texto{
-        font-size: 15px;
-        text-align: center;
-        
         width: 90%;
         height: 60%;
+
+        font-size: 15px;
+        text-align: center;
     }
 
     .resumo-botao-repositorio{
@@ -251,15 +251,16 @@
     .resumo-botao-repositorio h2{
         margin: auto;
     }
+
     .resumo-botoes{
         display: flex;
         align-items: center;
         flex-direction: row;
+
         gap: 15px;
         margin: 0;
     }
 
-    
     .slides{
         display: none;
     } 
