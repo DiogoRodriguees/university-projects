@@ -8,7 +8,7 @@
     height: 90vh;
     margin: auto;
 
-    background-color: var(--white);
+    /* background-color: var(--white); */
     border-radius: 30px;
 
     font-family: Montserrat;
@@ -18,7 +18,7 @@
     font-size: 40px;
     font-weight: 400;
 
-    color: var(--blue);
+    color: var(--white);
     text-align: center;
 }
 

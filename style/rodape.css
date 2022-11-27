@@ -18,14 +18,16 @@
     flex-direction: row;
     align-items: center;
 
-    height:45vh;
+    height:30vh;
     padding: 0px 25px;
     margin-top: 80px;
+
+    background-color: var(--white);
 }
 
 .rodape-background{
     width: 30%;
-    height: 70%;
+    height: 90%;
     
     display: flex;
     align-items: center;
