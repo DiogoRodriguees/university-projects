@@ -9,11 +9,6 @@ Exemplo de Landing Page: <a href="https://wonderfullandingpage.github.io/mylandi
 Essa é uma parte crucial da avaliação.
 - Seja criativo!!!!
 
-
-## Prazo
-Inicio - 19/11/22 <br>
-Fim - 04/12/22
-
 ## Especificações
 O projeto deve:<br>
 - Ser feito em HTML, CSS e Javascript. <br>
@@ -23,6 +18,10 @@ O projeto deve:<br>
 - Indentação Padronizada. <br>
 - Comentários apenas quando necessário. <br>
 - (opcional) Posuir darkmode.
+
+## Prazo
+Inicio - 19/11/22 <br>
+Fim - 04/12/22
 
 ## Tecnologias
 - HTML5
