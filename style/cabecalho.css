@@ -13,35 +13,29 @@
     --white:#f2f2f7;   
 }
 
-/* Sessao 1  - Cabeçalho*/
-.cabecalho{
+.cabecalho-container{
+    width: 100%;
+
     color: var(--white);
     font-family: Montserrat;
 
-    display: flex;
-    flex-direction: column;
-    
-    height: 100px;
-    width: 100%;
-}
-
-.menu {
     display: flex;
     align-items: center;
     flex-direction: row;
     justify-content: space-between;
 
     height: 80px;
-    padding: 0px 40px;
+    padding: 20px 40px;
 }
 
-.menu h1 {
+.cabecalho-container h1 {
     font-size: 25px;
     font-weight: 300;
     margin-left: 40px;
 }
 
-.menu-navegacao {
+
+.cabecalho-nav {
     display: flex;
     align-items: baseline;
     flex-direction: row;    
@@ -49,7 +43,7 @@
     margin-right: 40px;
 }
 
-.menu-navegacao-link{
+.cabecalho-nav-link{
     color: var(--white);
     font-size: 18px;
     font-weight: 400;
@@ -58,37 +52,35 @@
     transition: 200ms;
 }
 
-.menu-navegacao-link:hover {
+.cabecalho-nav-link:hover {
     transition: 200ms;
     color: var(--green1);
 } 
 
 
 @media screen and (max-width: 800px) {
-    .cabecalho{
-        /* height: 1080px; */
+    .cabecalho-container{
         width: 100vw;
-
-        padding: 0px;
         margin: 0px;
+        padding: 0px;
         flex-direction: column;
     }
 
-    .menu a {
-        display: none;
-    }
-
-    .menu{
+    .cabecalho-nav{
+        height: 100px;
         text-align: center;
         flex-direction: column;
         justify-content: center;
-        height: 100px;
     }
-
-    .menu h1{
+    
+    .cabecalho-container h1{
         margin: auto;
         padding: auto;
         text-align: center;
+    }
+
+    .cabecalho-nav-link {
+        display: none;
     }
     
 }
