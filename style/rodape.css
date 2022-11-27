@@ -100,4 +100,12 @@
         text-align: center;
         width: 100%;
     }
+    .rodape-background{
+        flex-direction: column;
+        height: 90%;
+        width: 90%;
+    }
+    .rodape{
+        height:75vh;
+    }
 }
