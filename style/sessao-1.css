@@ -52,7 +52,7 @@
     width: 30vw;
     height: 150px;
 
-    padding: 30px 0px;
+    padding: 20px 0px;
     margin-bottom: 20px;
     line-height: 25px;
 }
@@ -184,6 +184,8 @@
     }
     .resumo {
         width: 100%;
+        padding: 0px 0px;
+
     }
     .resumo-texto {
         width: 70%;
@@ -211,11 +213,13 @@
         width: 100%;
         padding: 10px 0px;
         align-items: center;
+        height: 65%;
     }
 
     .resumo h1{
         font-size: 25px;
         text-align: center;
+
     }
 
     .resumo-texto{
@@ -223,8 +227,8 @@
         text-align: center;
         
         width: 90%;
-        height: 80%;
-        margin-bottom: 40px;
+        height: 50%;
+        /* margin-bottom: 40px; */
     }
 
     .resumo-botao-repositorio{

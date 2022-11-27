@@ -119,12 +119,12 @@
     .linguagens{     
         height: auto;
         padding-bottom: 30px;
-        background-color: transparent;
+        /* background-color: transparent; */
     }
     .linguagens h2{     
-        margin: 20px;
-        color: var(--white);
+        /* color: var(--white); */
         margin-bottom: 30px;
+        margin-top: 30px;
 
     }
 
@@ -137,6 +137,7 @@
 
 
     .linguagens-topicos{
+        padding: 20px 40px;
         width: 90%;
         height: 450px;
         padding: 20px 0px;
