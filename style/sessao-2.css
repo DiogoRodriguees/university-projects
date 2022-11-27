@@ -131,12 +131,16 @@
     .linguagens-container{
         gap: 20px;
         flex-direction: column;
+        width: 100%;
+        padding: 0px;
     }
 
 
     .linguagens-topicos{
         width: 90%;
+        height: 450px;
         padding: 20px 0px;
+        padding: auto;
     }
     .linguagens-topicos:hover{
         scale: 1;
@@ -150,7 +154,7 @@
     }
 
     .linguagens-topicos img {
-        margin-top: 0px;
+        margin-top: 30px;
     }
 
     .linguagens-topicos h2 {
