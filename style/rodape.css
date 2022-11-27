@@ -1,0 +1,103 @@
+:root{
+    --green1 :#45C09C;
+    --green2 :#0CC08B;
+    --green3 :#328B71;
+    --green4 :#077454;
+    --green5 :#04412F;
+
+    --blue  :#000424;
+    --blue1 :#546CA5;
+    --blue2 :#869ED7;
+    --blue3 :#B4C7F0;
+
+    --white:#f2f2f7;   
+}
+
+/* Sessão 3 - Rodapé */
+.rodape{
+    gap: 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height:45vh;
+    /* height:60vh; */
+    margin-top: 80px;
+}
+
+.rodape-background{
+    background-color: var(--white);
+    height: 70%;
+    /* width: 85%; */
+    width: 90%;
+
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    
+    margin: auto;
+    padding: 0px 40px;
+    border-radius: 25px;
+}
+
+.rodape-container{
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+
+    color: var(--blue);
+    font-family: Montserrat;
+    
+    width: 40%;
+    height: 80%;
+    margin: auto;
+}
+
+.rodape-titulo{
+    padding: 10px 0px;
+    font-weight: 400;
+}
+
+.rodape-links-container{
+    gap: 15px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    padding: 10px 0px;
+}
+
+.rodape-icone{
+    width: 30px;
+    height: 30px;
+    /* color: aliceblue; */
+    /* background-color: aqua; */
+}
+.rodape-links-container a{
+    font-weight: 500;
+    color: var(--blue);
+}
+.rodape-links-container a:hover{
+    cursor: pointer;
+    text-decoration: underline;
+    color: var(--green1);
+}
+
+@media screen and (max-width: 800px) {
+    .rodape{
+        flex-direction: column;
+        align-items: center;
+        padding: 0px;
+        gap: 0px;
+    }
+
+    .rodape-container{
+        margin: 0px;
+        width: 100%;
+        padding: 0px 50px;
+    }
+
+    .rodape-titulo{
+        text-align: center;
+        width: 100%;
+    }
+}

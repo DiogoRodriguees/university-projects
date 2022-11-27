@@ -1,0 +1,94 @@
+:root{
+    --green1 :#45C09C;
+    --green2 :#0CC08B;
+    --green3 :#328B71;
+    --green4 :#077454;
+    --green5 :#04412F;
+
+    --blue  :#000424;
+    --blue1 :#546CA5;
+    --blue2 :#869ED7;
+    --blue3 :#B4C7F0;
+
+    --white:#f2f2f7;   
+}
+
+/* Sessao 1  - Cabeçalho*/
+.cabecalho{
+    color: var(--white);
+    font-family: Montserrat;
+
+    display: flex;
+    flex-direction: column;
+    
+    height: 100px;
+    width: 100%;
+}
+
+.menu {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: space-between;
+
+    height: 80px;
+    padding: 0px 40px;
+}
+
+.menu h1 {
+    font-size: 25px;
+    font-weight: 300;
+    margin-left: 40px;
+}
+
+.menu-navegacao {
+    display: flex;
+    align-items: baseline;
+    flex-direction: row;    
+
+    margin-right: 40px;
+}
+
+.menu-navegacao-link{
+    color: var(--white);
+    font-size: 18px;
+    font-weight: 400;
+    
+    margin: 0px 20px 0px 20px;
+    transition: 200ms;
+}
+
+.menu-navegacao-link:hover {
+    transition: 200ms;
+    color: var(--green1);
+} 
+
+
+@media screen and (max-width: 800px) {
+    .cabecalho{
+        /* height: 1080px; */
+        width: 100vw;
+
+        padding: 0px;
+        margin: 0px;
+        flex-direction: column;
+    }
+
+    .menu a {
+        display: none;
+    }
+
+    .menu{
+        text-align: center;
+        flex-direction: column;
+        justify-content: center;
+        height: 100px;
+    }
+
+    .menu h1{
+        margin: auto;
+        padding: auto;
+        text-align: center;
+    }
+    
+}

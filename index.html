@@ -5,68 +5,110 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ProcessoSeletivo</title>
+    <link rel="shortcut icon" href="img/favicon/favicon.png" type="image/x-icon">
+    <title>Landing Page Diogo Rodrigues</title>
     <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="/style/sessao-1.css">
+    <link rel="stylesheet" href="/style/sessao-2.css">
+    <link rel="stylesheet" href="/style/rodape.css">
+    <link rel="stylesheet" href="/style/cabecalho.css">
 </head>
 <body>
 
-   <header class="header">
-        <img class="header-img" src="img/allblabk.jpg" alt="">
+    <!-- <img class="background-img" src="img/allblabk.jpg" alt=""> -->
+   <header class="cabecalho">
         <div class="menu">
             <h1 >DIOGO RODRIGUES</h1>
-            <nav>
-                <a href="#linguagensId">Linguagens</a>
-                <a target="_blank" href="https://github.com/DiogoRodriguees">GitHub</a>
-                <a href="">Sobre</a>
+            <nav class="menu-navegacao">
+                <a class="menu-navegacao-link" href="#linguagensId">Linguagens</a>
+                <a class="menu-navegacao-link" target="_blank" href="https://github.com/">GitHub</a>
+                <a class="menu-navegacao-link" href="#rodapeId">Contato</a>
             </nav>
-
-        </div>
-        <div class="header-container">
-            <div class="resumo">
-                <h1 class="resumo-titulo">Processo Seletivo Haken</h1>
-                <h2 class="resumo-texto">Esta landing page foi criada específicamente para o processo seletivo da <strong>HAKEN</strong>(Empresa Junior da UTFPR de Campo Mourão). As informções contidas nessa pagina dizem respeito ao projeto e seu criador.</h2>
-                <div class="resumo-botoes">
-                    <a class="resumo-botao-repositorio" target="_blank" href="https://github.com/DiogoRodriguees/ProcessoSeletivoHaken" >
-                        <img src="/img/Ellipse 9.svg" alt="">
-                        <h2>Repositório</h2>
-                    </a>
-                    <a class="resumo-botao-repositorio" target="_blank" href="https://www.figma.com/file/JA3mYFRQX5w7ekMTf4rrT7/Untitled?node-id=27%3A3&t=NEI5WwonCfUtv6Jy-1n">
-                        <img src="/img/figma.png" alt="">
-                        <h2>Design</h2>
-                    </a>
-                </div>
-
-
-            </div>
         </div>
     </header>
 
-    <section id="linguagensId" class="linguagens">
-        <h2>Linguagens e Frameworks</h2>
-        <div class="linguagens-container">
-            <div class="linguagens-topicos">
-                <img src="img/logo-react-icon.png" alt="">
-                <h2>React</h2>
-                <p>Esse é um dos frameworks que utilizo no desenvolvimento frontend</p>
-                <a target="_blank" href="https://github.com/DiogoRodriguees/WEB_DEV/tree/main/REACT_JS/YOUTUBE/sistema_de_financas">Projeto exemplo</a>
+    <section class="resumo-container">
+        <div class="resumo">
+            <h1 class="resumo-titulo">Processo Seletivo Haken</h1>
+            <h2 class="resumo-texto">Esta landing page foi criada específicamente para o processo seletivo da <strong>HAKEN</strong>(Empresa Junior da UTFPR de Campo Mourão). As informções contidas nessa pagina dizem respeito ao projeto e seu criador. </h2>
+            <div class="resumo-botoes">
+                <a class="resumo-botao-repositorio" target="_blank" href="https://github.com/DiogoRodriguees/ProcessoSeletivoHaken" >
+                    <img src="/img/botoesParaRepositorios/Ellipse 9.svg" alt="">
+                    <h2>Repositório</h2>
+                </a>
+                <a class="resumo-botao-repositorio" target="_blank" href="https://www.figma.com/file/JA3mYFRQX5w7ekMTf4rrT7/Untitled?node-id=27%3A3&t=NEI5WwonCfUtv6Jy-1n">
+                    <img src="/img/botoesParaRepositorios/figma.png" alt="">
+                    <h2>Design</h2>
+                </a>
             </div>
-            <div class="linguagens-topicos">
-                <img src="img/logo-node-js.png" alt="">
-                <h2>Node JS</h2>
-                <p>Esse é um dos frameworks que utilizo no desenvolvimento backend</p>
-                <a target="_blank" href="">Projeto exemplo</a>
-            </div>
-            <div class="linguagens-topicos">
-                <img src="img/logo-javascript-512.png" alt="">
-                <h2>JavaScript Vanilla</h2>
-                <p>Por fm, javascript puro, onde comecei meu primeiro pojeto</p>
-                <a target="_blank" href="https://github.com/DiogoRodriguees/CALCULATOR_IN_JAVASCRIPT">Projeto exemplo</a>
+            
+        </div>
+        <div class="slides">
+            <div class="conteiner-slide">
+                <div class="botao-mover" id="previous">&laquo</div>
+                <div class="conteiner-itens" id="conteiner"></div>
+                <div class="botao-mover" id="next">&raquo</div>
             </div>
         </div>
+    </section>
 
+    <section id="linguagensId" class="linguagens">
+    
+            <h2>Linguagens e Frameworks</h2>
+            <div class="linguagens-container">
+                <div class="linguagens-topicos">
+                    <img src="img/topicos/logo-react-icon.png" alt="">
+                    <h2>React</h2>
+                    <p>Essa é uma das bibliotecas javascript que utilizo no desenvolvimento frontend</p>
+                    <a target="_blank" href="https://github.com/DiogoRodriguees/SISTEMA_DE_FINANCAS_REACJS">Projeto exemplo</a>
+                </div>
+                <div class="linguagens-topicos">
+                    <img src="img/topicos/logo-node-js.png" alt="">
+                    <h2>Node JS</h2>
+                    <p>Esse é um dos frameworks que utilizo no desenvolvimento backend</p>
+                    <a target="_blank" href="https://github.com/DiogoRodriguees/API_WITH_NODEJS">Projeto exemplo</a>
+                </div>
+                <div class="linguagens-topicos">
+                    <img src="img/topicos/logo-javascript-512.png" alt="">
+                    <h2>JavaScript Vanilla</h2>
+                    <p>Por fm, javascript puro, onde comecei meu primeiro pojeto</p>
+                    <a target="_blank" href="https://github.com/DiogoRodriguees/CALCULATOR_WITH_JAVASCRIPT">Projeto exemplo</a>
+                </div>
+            </div>
+
+        
     </section>
     
-    <script src="script.js"></script>
+    <footer class="rodape" id="rodapeId">
+        <div class="rodape-background">
+
+            <div class="rodape-container">
+                <h2 class="rodape-titulo">CONTATO</h2>
+                <div class="rodape-links-container">
+                    <img src="img/rodape/whatsapp_black_slim.png" alt="icone do whatsapp" class="rodape-icone">
+                    <a target="_blank">44 99721-4954</a>
+                </div>
+                <div class="rodape-links-container">
+                    <img src="img/rodape/gmail_black.png" alt="icone do gmail" class="rodape-icone">
+                    <a target="_blank" href="mailto:diogorodrigueslife@gmail.com">contato@diogorodrigues.com</a>
+                </div>
+            </div>
     
+            <div class="rodape-container">
+                <h2 class="rodape-titulo">SOCIAL MIDIA</h2>
+                <div class="rodape-links-container">
+                    <img src="img/rodape/instagram_black_slim.png" alt="icone do instagram" class="rodape-icone">
+                    <a target="_blank" href="https://www.instagram.com/di0go_rodrigues/">@di0go_rodrigues</a>
+                </div>
+                <div class="rodape-links-container">
+                    <img src="img/rodape/linkedin_black_slim.png" alt="icone do linkedin" class="rodape-icone">
+                    <a target="_blank" href="https://www.linkedin.com/in/diogorodriguees/">/diogorodriguees</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    <script src="script.js"></script>
+
 </body>
 </html>

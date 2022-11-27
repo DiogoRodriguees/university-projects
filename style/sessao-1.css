@@ -1,0 +1,256 @@
+
+:root{
+    --green1 :#45C09C;
+    --green2 :#0CC08B;
+    --green3 :#328B71;
+    --green4 :#077454;
+    --green5 :#04412F;
+
+    --blue  :#000424;
+    --blue1 :#546CA5;
+    --blue2 :#869ED7;
+    --blue3 :#B4C7F0;
+
+    --white:#f2f2f7;   
+}
+
+
+/* Sessão 1 - Resumo */
+.resumo-container {
+    display: flex;
+    flex-direction: row;
+
+    height:600px;
+    width: 100%;
+    padding: 60px 40px;
+    color: var(--white);
+}
+
+.resumo{
+    display: flex;
+    flex-direction: column;
+
+    text-align: left;
+    font-family: Montserrat;
+    
+    width: 50%;
+    height: 100vh;
+
+    padding: 20px 40px;
+}
+
+.resumo-titulo{
+    font-size: 28px;
+    font-weight: 400;
+}
+
+.resumo-texto{
+    font-size: 16px;
+    font-weight: 200;
+    font-family: Poppins;
+
+    width: 30vw;
+    height: 150px;
+
+    padding: 30px 0px;
+    margin-bottom: 20px;
+    line-height: 25px;
+}
+
+.resumo-botoes{
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+}
+
+.resumo-botao-repositorio{
+    width: 12vw;
+    height: 36px;
+
+    margin: 55px 20px 0px 0px;
+    padding: 4px;
+
+    display: flex;
+    flex-direction: row;
+    align-items:center ;
+
+    border-radius: 40px;
+    box-shadow: 10px 10px 10px rgb(0, 0, 0);
+    background-color: var(--white);
+    color: var(--blue);
+
+    font-size: 18px;
+    font-weight: 500;
+    font-family: Montserrat;
+    
+    transition: 400ms;
+}
+
+.resumo-botao-repositorio:hover{
+    color: var(--white);
+    border: 1px solid #f7f7f7;
+    background: transparent;
+    transition: 400ms;
+}
+
+.resumo-botao-repositorio img{
+    width: 30px;
+    height: 30px;
+}
+
+
+.resumo-botao-repositorio h2{
+    font-size: 18px;
+    text-align: center;
+    font-weight: 500;
+    margin: auto;   
+}
+
+/* Sessão 1 - Slide Show */
+.conteiner-slide{
+    width: 40vw;
+    height: 45vh;
+
+    display: flex;
+    justify-content: space-between;
+
+    box-shadow: 0 20px 30px black;
+    border-radius: 10px;
+}
+
+.conteiner-itens {
+    width: 40vw;
+    height: 45vh;
+
+    display: flex;
+    position: absolute;
+    overflow: hidden;
+    border-radius: 10px 0px 0px 10px;
+}
+
+
+.item {
+    width: 40vw;
+    height: 45vh;
+    transition: all 1s;
+}
+
+.item:first-child{
+    margin-left: -100%;
+}
+
+.item img {
+    width: 40vw;
+    height: 45vh;
+    border-radius: 10px;
+}
+
+.botao-mover{
+    width: 50px;
+
+    font: bold 30px sans-serif;
+    color: #f7f7f78a;
+    align-items: center;
+
+    display: flex;
+    justify-content: center;
+
+    user-select: none;
+    z-index: 1;
+}
+
+.botao-mover:hover {
+    color: rgba(255, 255, 255, 0.815);
+    cursor: pointer;
+    transition:  all 1s;
+
+    border-radius: 10px;
+    background-color: #f2f2f28c;
+}
+
+.slides{
+    width: 50%;
+    height: 100vh;
+
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding: 20px 0px 0px 0px;
+}
+
+@media screen and (max-width: 1050px) {
+    .slides{
+        display: none;
+    }
+    .resumo {
+        width: 100%;
+    }
+    .resumo-texto {
+        width: 70%;
+    }
+    .resumo-botoes{
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .resumo-botao-repositorio{
+        width: 200px;
+    margin: 20px 20px 0px 0px;
+
+    }
+}
+
+@media screen and (max-width: 800px) {
+    .resumo-container{
+        align-items: center;
+        flex-direction: column;
+        width: 100%;
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+    .resumo{
+        width: 100%;
+        padding: 10px 0px;
+        align-items: center;
+    }
+
+    .resumo h1{
+        font-size: 25px;
+        text-align: center;
+    }
+
+    .resumo-texto{
+        font-size: 15px;
+        text-align: center;
+        
+        width: 90%;
+        height: 80%;
+        margin-bottom: 40px;
+    }
+
+    .resumo-botao-repositorio{
+        width: 200px;
+        margin: 0px 0px 20px 0px;
+    }
+
+    .resumo-botao-repositorio:hover{
+        background-color: var(--white);
+        color: var(--blue);
+        scale: 1;
+    }
+
+    .resumo-botao-repositorio h2{
+        margin: 0;
+    }
+    .resumo-botoes{
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+
+        margin: 0;
+    }
+
+    
+    .slides{
+        display: none;
+    } 
+}
