@@ -8,16 +8,19 @@
     font-family: Montserrat;
 
     height: 680px;
-    background-color: var(--white);
+    /* background-color: var(--white); */
+    /* bac/kground-color: transparent; */
+
 }
 
 .linguagens h2 {
     font-size: 40px;
     font-weight: 400;
 
-    color: var(--blue);
+    /* color: var(--blue); */
+    color: var(--white);
     text-align: center;
-    text-decoration: underline;
+    /* text-decoration: underline; */
 
     margin-top: 60px;
 }
@@ -42,10 +45,17 @@
     height: 400px;
     margin: auto;
     
-    background: var(--white);
+    /* background: var(--white); */
     box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.1);
     border-radius: 30px;
     transition: 400ms;
+
+    background: rgba(82, 82, 82, 0.082);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    backdrop-filter: blur( 1.5px );
+    -webkit-backdrop-filter: blur( 85.5px );
+    border-radius: 20px;
+    border: 1px solid rgba( 255, 255, 255, 0.18 );
 }
 
 .linguagens-topicos:hover{
@@ -56,7 +66,6 @@
 .linguagens-topicos img {
     width: 100px;
     height: 100px;
-
     margin: 20px;
     margin-top: 20px;
 }
@@ -65,7 +74,8 @@
     font-size: 25px;
     font-weight: 400;
     
-    color: var(--blue);
+    /* color: var(--blue); */
+    color: var(--white);
     text-decoration: none;
 
     width: 100%;
@@ -79,7 +89,7 @@
     width: 80%;
     height: 30%;
     margin-top: 20px;
-    user-select: none;
+    color: var(--white);
 }
 
 .linguagens-topicos a{
