@@ -42,11 +42,9 @@
     height: 400px;
     margin: auto;
     
-    /* background: var(--white); */
     box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.822);
     background: rgba(30, 30, 30, 0.19);
     backdrop-filter: blur(2px);
-    /* Note: backdrop-filter has minimal browser support */
 
     border-radius: 20px;
 
@@ -98,12 +96,13 @@
     font-weight: 500;
     
     border-radius: 3px;
-    background-color: var(--green4);
+    background-color: #546CA5;
+    /* background-color: var(--green4); */
 }
 
 .linguagens-container-topicos a:hover{
-    color: var(--green4);
-    border: 1px solid var(--green4);
+    color: #546CA5;
+    border: 1px solid #546CA5;
     background-color: transparent;
 }
 

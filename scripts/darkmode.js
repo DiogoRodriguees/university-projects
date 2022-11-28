@@ -56,10 +56,11 @@ const ativaDarkMode = () =>{
     
     linguagensTitulo.classList.remove('.linguagens-titulo-light')
     linguagensTitulo.style.color = 'white'
+    linguagensContainer.classList.remove("linguagens-container-light")
 
     topicos.forEach((topico) => topico.classList.remove('topicos-light'))
     topicosTexto.forEach((texto) => texto.style.color = 'white')
-    topicosTitulo.forEach((titulo) => titulo.classList.remove('topicos-titulo-light'))
+    topicosTitulo.forEach((titulo) => titulo.style.color = 'white')
 
     projetos.classList.remove('projetos-light')
     projetosTitulo.classList.remove('projetos-titulo-light')
