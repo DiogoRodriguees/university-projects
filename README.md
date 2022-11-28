@@ -28,12 +28,14 @@ Fim - 04/12/22
 - CSS3
 - Javascript(ES6)
 
+<<<<<<< HEAD
 ## WEB View - Dark Mode
 <!-- <img src="img/README/versão 1.png"> -->
 <img src="img/README/img1.png">
 <img src="img/README/img2.png">
 <img src="img/README/img3.png">
 <img src="img/README/img4.png">
+=======760d24271d2c5642c54d91c80fc9d42
 
 ## WEB View - Light Mode
 <img src="img/README/img1_light.png">
