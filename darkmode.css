@@ -1,0 +1,54 @@
+.body-light{
+    /* background:linear-gradient(119.66deg, rgba(84, 132, 165, 0.58) -82.41%, #546CA5 9.32%, #26335E 43.38%, #131C41 67.55%, #000424 101.96%)
+    no-repeat center center fixed; */
+    background: #546CA5;
+    /* background: linear-gradient(122.19deg, rgba(84, 108, 165, 0.58) -84.43%, #546CA5 -15.36%, #000424 88.24%, #000424 116.5%)
+    no-repeat center center fixed; */
+    /* background-size: cover; */
+}
+.resumo-light{
+    height: 700px;
+    margin-top: -100px;
+    padding-top: 160px;
+    /* background: linear-gradient(122.19deg, rgba(84, 108, 165, 0.58) -84.43%, #546CA5 -15.36%, #000424 88.24%, #000424 116.5%); */
+    
+}
+
+.linguagens-titulo-light{
+    color: #000424;
+}
+.linguagens-container-light{
+    background-color: #f2f2f2;
+    width: 100%;
+    border-radius: 0;
+
+}
+.topicos-light{
+    background-color: #f2f2f2;
+    box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.1);
+    border: none;
+}
+
+.topicos-light:hover{
+    border: none;
+}
+
+.projetos-light{
+    box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.295);
+}
+
+.projetos-titulo-light{
+    color: #000424;
+}
+
+.rodape-light{
+    background-color: #f2f2f2;
+    margin-top: 0;
+}
+.rodape-light h2{
+    color: #000424;
+}
+.rodape-light a{
+    color: #000424;
+}
+
