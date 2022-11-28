@@ -10,7 +10,7 @@ Essa é uma parte crucial da avaliação.
 - Seja criativo!!!!
 
 ## Como acessar?
-- Acesse o site: <a href="diogorodrigues.com">diogorodrigues.com</a>
+- Acesse o site: <a href="https://diogorodrigues.com/">diogorodrigues.com</a>
 - Ou clone o repositorio e abra o html com live server.
 
 ## Especificações Para o Processo Seletivo
