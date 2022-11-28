@@ -9,7 +9,11 @@ Exemplo de Landing Page: <a href="https://wonderfullandingpage.github.io/mylandi
 Essa é uma parte crucial da avaliação.
 - Seja criativo!!!!
 
-## Especificações
+## Como acessar?
+- Acesse o site: <a href="diogorodrigues.com">diogorodrigues.com</a>
+- Ou clone o repositorio e abra o html com live server.
+
+## Especificações Para o Processo Seletivo
 O projeto deve:<br>
 - Ser feito em HTML, CSS e Javascript. <br>
 - Possuir responsividade. <br>
