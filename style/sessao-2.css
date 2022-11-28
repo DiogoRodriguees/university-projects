@@ -51,11 +51,13 @@
     border-radius: 20px;
 
     transition: transform 0.3s ;
+    border: 1px solid #55555563;
+
 }
 
 .linguagens-container-topicos:hover{
-    transform:  scale(1.05);
-    border: 1px solid #F7F7F7;
+    /* transform:  scale(1.05); */
+    border: 1px solid #f7f7f78c;
 }
 
 .linguagens-container-topicos img {

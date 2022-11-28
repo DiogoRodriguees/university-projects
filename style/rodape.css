@@ -23,8 +23,8 @@
     margin-top: 80px;
 
     /* background-color: var(--white); */
-    background: rgba(30, 30, 30, 0.19);
-    backdrop-filter: blur(5px);
+    background: rgba(30, 30, 30, 0.11);
+    backdrop-filter: blur(2px);
 }
 
 .rodape-background{
