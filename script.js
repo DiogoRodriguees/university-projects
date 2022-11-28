@@ -3,27 +3,38 @@ const imgs = [
     {'id' : '5', 'url': './img/meusprojetos/Captura de Tela (31).png'},
     {'id' : '3', 'url': './img/meusprojetos/Captura de Tela (31).png'},
     {'id' : '4', 'url': './img/meusprojetos/Captura de Tela (32).png'},
-    // {'id' : '1', 'url': './img/meusprojetos/Captura de Tela (34).png'},
+    {'id' : '1', 'url': './img/meusprojetos/Captura de Tela (34).png'},
+]
+const imgs2 = [
+    {'id' : '2', 'url': './img/meusprojetos/sessao_1_light.png'},
+    {'id' : '5', 'url': './img/meusprojetos/sessao_2_light.png'},
+    {'id' : '3', 'url': './img/meusprojetos/sessao_3_light.png'},
+    {'id' : '1', 'url': './img/meusprojetos/sessao_1_light.png'},
 ]
 
 const conteinerItens = document.querySelector('#conteiner')
 
-const  loadImgs = (imgs, conteiner)=>{
-    imgs.forEach(img => {
 
-        if(img.id === '5'){
-            conteiner.innerHTML +=
-            `<div class='item'>
-                <p>Arraste para o lado para conferir as imagens do projeto</p>
+const  loadImgs = (imgs,  conteiner)=>{
+
+        imgs.forEach(img => {
+
+            if(img.id === '5'){
+                conteiner.innerHTML +=
+                `<div class='item'>
+                    <p>Arraste para o lado para conferir as imagens do projeto</p>
+                    <img src='${img.url}'>
+                </div>`
+            }else{
+                conteiner.innerHTML +=
+                `<div class='item'>
                 <img src='${img.url}'>
-            </div>`
-        }else{
-            conteiner.innerHTML +=
-            `<div class='item'>
-            <img src='${img.url}'>
-            </div>`
-        }
-    });
+                </div>`
+            }
+        });
+    
+   
+
 }
 
 loadImgs( imgs, conteinerItens);

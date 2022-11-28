@@ -1,5 +1,5 @@
 const btnDarkMode = document.getElementById('darkmode')
-const corpo = document.querySelector('body')
+const body = document.querySelector('body')
 const resumo = document.getElementById('resumo')
 const linguagensTitulo = document.querySelector('#linguangensTitulo')
 const topicos = document.querySelectorAll('[id*=linguagensTopicos]')
@@ -14,49 +14,74 @@ const imgGmail = document.getElementById("imgGmail")
 const imgInstagram = document.getElementById("imgInstagram")
 const imgLinkedin = document.getElementById("imgLinkedin")
 const IdNodeJS = document.getElementById("IdNodeJS")
-var statuDarkMode = true
+const darkmode = document.getElementById("darkmode")
+const github = document.getElementById("github")
+const figma = document.getElementById("figma")
 
+
+var statuDarkMode = true
 const ativaLightMode = () =>{
-    corpo.style.background.url = ''
-    corpo.classList.add('body-light')
+    body.style.background.url = ''
+    body.classList.add('body-light')
+
     resumo.classList.add('resumo-light')
     linguagensTitulo.style.color = 'black'
-    topicos.forEach((topico) => topico.classList.add('topicos-light'))
-    topicosTitulo.forEach((titulo) => titulo.style.color = 'black')
-    topicosTexto.forEach((texto) => texto.style.color = 'black')
-    projetos.classList.add('projetos-light')
     linguagensContainer.classList.add("linguagens-container-light")
+
+    topicos.forEach((topico) => topico.classList.add('topicos-light'))
+    topicosTexto.forEach((texto) => texto.style.color = 'black')
+    topicosTitulo.forEach((titulo) => titulo.style.color = 'black')
+    
+    projetos.classList.add('projetos-light')
     rodape.classList.add("rodape-light")
-
-
-    imgGmail.src = 'img/rodape/gmail_black.png'
-    imgInstagram.src = 'img/rodape/instagram_black_slim.png'
-    imgLinkedin.src = 'img/rodape/linkedin_black_slim.png'
-    imgWhatsapp.src = 'img/rodape/whatsapp_black_slim.png'
+    
+    
     IdNodeJS.src = 'img/topicos/logo-node-js.png'
+    imgGmail.src = 'img/rodape/gmail_black.png'
+    imgWhatsapp.src = 'img/rodape/whatsapp_black_slim.png'
+    imgLinkedin.src = 'img/rodape/linkedin_black_slim.png'
+    imgInstagram.src = 'img/rodape/instagram_black_slim.png'
+    
+    github.classList.add('botoes-repositorio-light')
+    figma.classList.add('botoes-repositorio-light')
+    
+    darkmode.innerHTML = 'Dark Mode'
+
     return false
 }
 
 const ativaDarkMode = () =>{
-    corpo.classList.remove('body-light')
+    body.classList.remove('body-light')
     resumo.classList.remove('resumo-light')
+    
     linguagensTitulo.classList.remove('.linguagens-titulo-light')
-    topicos.forEach((topico) => topico.classList.remove('topicos-light'))
-    topicosTitulo.forEach((titulo) => titulo.classList.remove('topicos-titulo-light'))
-    topicosTexto.forEach((texto) => texto.style.color = 'white')
     linguagensTitulo.style.color = 'white'
+
+    topicos.forEach((topico) => topico.classList.remove('topicos-light'))
+    topicosTexto.forEach((texto) => texto.style.color = 'white')
+    topicosTitulo.forEach((titulo) => titulo.classList.remove('topicos-titulo-light'))
+
     projetos.classList.remove('projetos-light')
     projetosTitulo.classList.remove('projetos-titulo-light')
+
     rodape.classList.remove("rodape-light")
 
-    imgGmail.src = 'img/rodape/gmail.png'
-    imgInstagram.src = 'img/rodape/instagram.png'
-    imgLinkedin.src = 'img/rodape/linkedin.png'
-    imgWhatsapp.src = 'img/rodape/whatsapp.png'
     IdNodeJS.src = 'img/topicos/nodejsl_branca.png'
+    imgGmail.src = 'img/rodape/gmail.png'
+    imgWhatsapp.src = 'img/rodape/whatsapp.png'
+    imgLinkedin.src = 'img/rodape/linkedin.png'
+    imgInstagram.src = 'img/rodape/instagram.png'
     IdNodeJS.style.width = '80px'
+
+    github.classList.remove('botoes-repositorio-light')
+    figma.classList.remove('botoes-repositorio-light')
+
+    darkmode.innerHTML = 'Light Mode'
     return true
 }
+
+
+
 const mudarTema = () =>{
 
     statuDarkMode = statuDarkMode ? ativaLightMode() : ativaDarkMode();

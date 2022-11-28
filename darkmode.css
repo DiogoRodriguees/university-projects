@@ -1,17 +1,26 @@
+.btn-darkmode-ativo{
+    border: none;
+    padding: 5px;
+    border-radius: 3px;
+    font-family: Montserrat;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.botoes-repositorio-light{
+    box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.521);
+}
+
 .body-light{
     /* background:linear-gradient(119.66deg, rgba(84, 132, 165, 0.58) -82.41%, #546CA5 9.32%, #26335E 43.38%, #131C41 67.55%, #000424 101.96%)
     no-repeat center center fixed; */
     background: #546CA5;
-    /* background: linear-gradient(122.19deg, rgba(84, 108, 165, 0.58) -84.43%, #546CA5 -15.36%, #000424 88.24%, #000424 116.5%)
-    no-repeat center center fixed; */
-    /* background-size: cover; */
 }
 .resumo-light{
     height: 700px;
     margin-top: -100px;
     padding-top: 160px;
-    /* background: linear-gradient(122.19deg, rgba(84, 108, 165, 0.58) -84.43%, #546CA5 -15.36%, #000424 88.24%, #000424 116.5%); */
-    
+    height: 100vh;
 }
 
 .linguagens-titulo-light{
@@ -21,6 +30,7 @@
     background-color: #f2f2f2;
     width: 100%;
     border-radius: 0;
+    height: 100vh;
 
 }
 .topicos-light{
