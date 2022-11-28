@@ -29,7 +29,11 @@ Fim - 04/12/22
 - Javascript(ES6)
 
 ## WEB View
-<img src="img/README/versão 1.png">
+<!-- <img src="img/README/versão 1.png"> -->
+<img src="img/README/img1.png">
+<img src="img/README/img2.png">
+<img src="img/README/img3.png">
+<img src="img/README/img4.png">
 
 ## Mobile View
 'adicionar imagens'
