@@ -16,9 +16,7 @@
 }
 
 .body-light{
-    /* background:linear-gradient(119.66deg, rgba(84, 132, 165, 0.58) -82.41%, #546CA5 9.32%, #26335E 43.38%, #131C41 67.55%, #000424 101.96%)
-    no-repeat center center fixed; */
-    background: #546CA5;
+    background: linear-gradient(119.66deg, #B4C7F0 -82.41%, #546CA5 9.32%, #131C41 101.96%);
 }
 .resumo-light{
     height: 700px;
@@ -34,8 +32,6 @@
     background-color: #f2f2f2;
     width: 100%;
     border-radius: 0;
-    height: 100vh;
-
 }
 .topicos-light{
     background-color: #f2f2f2;

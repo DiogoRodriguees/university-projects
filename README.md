@@ -28,12 +28,18 @@ Fim - 04/12/22
 - CSS3
 - Javascript(ES6)
 
-## WEB View
+## WEB View - Dark Mode
 <!-- <img src="img/README/versão 1.png"> -->
 <img src="img/README/img1.png">
 <img src="img/README/img2.png">
 <img src="img/README/img3.png">
 <img src="img/README/img4.png">
+
+## WEB View - Light Mode
+<img src="img/README/img1_light.png">
+<img src="img/README/img2_light.png">
+<img src="img/README/img3_light.png">
+<img src="img/README/img4_light.png">
 
 ## Mobile View
 'adicionar imagens'

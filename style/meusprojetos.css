@@ -87,3 +87,9 @@
     border-radius: 10px;
     background-color: #f2f2f28c;
 }
+
+@media screen and (max-width: 800px) {
+    .projetos{
+        display: none;
+    }
+}

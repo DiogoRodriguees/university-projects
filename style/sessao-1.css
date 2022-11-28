@@ -191,10 +191,17 @@
 .botao-mover:hover {
     color: rgba(255, 255, 255, 0.815);
     cursor: pointer;
-    transition:  all 1s;
+    transition:  200ms;
 
     border-radius: 10px;
     background-color: #f2f2f28c;
+}
+
+#previous{
+    border-radius: 10px 0px 0px 10px;
+}
+#next{
+    border-radius: 0px 10px 10px 0px;
 }
 
 
