@@ -7,6 +7,10 @@
     font-weight: 500;
 }
 
+.display-none{
+    display:none;
+}
+
 .botoes-repositorio-light{
     box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.521);
 }

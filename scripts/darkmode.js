@@ -17,6 +17,7 @@ const IdNodeJS = document.getElementById("IdNodeJS")
 const darkmode = document.getElementById("darkmode")
 const github = document.getElementById("github")
 const figma = document.getElementById("figma")
+const listaDeitem = document.querySelectorAll("[id*=img]")
 
 
 var statuDarkMode = true
@@ -77,6 +78,7 @@ const ativaDarkMode = () =>{
     github.classList.remove('botoes-repositorio-light')
     figma.classList.remove('botoes-repositorio-light')
 
+    
     darkmode.innerHTML = 'Light Mode'
     return true
 }
