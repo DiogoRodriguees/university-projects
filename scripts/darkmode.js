@@ -17,8 +17,16 @@ const IdNodeJS = document.getElementById("IdNodeJS")
 const darkmode = document.getElementById("darkmode")
 const github = document.getElementById("github")
 const figma = document.getElementById("figma")
-const listaDeitem = document.querySelectorAll("[id*=img]")
+const listaDeitem = document.querySelectorAll("[id*=slides]")
+const item = document.querySelector(".item")
+const slideshow = document.querySelector("#conteinerSlides")
 
+const imgs2 = [
+    {'id' : '2', 'url': './img/meusprojetos/sessao_3_light.png'},
+    {'id' : '1', 'url': './img/meusprojetos/sessao_1_light.png'},
+    {'id' : '3', 'url': './img/meusprojetos/sessao_1_light.png'},
+    {'id' : '4', 'url': './img/meusprojetos/sessao_2_light.png'},
+]
 
 var statuDarkMode = true
 const ativaLightMode = () =>{
@@ -47,6 +55,14 @@ const ativaLightMode = () =>{
     figma.classList.add('botoes-repositorio-light')
     
     darkmode.innerHTML = 'Dark Mode'
+
+    // item.classList.add("item-light")
+    
+    conteinerItens.innerHTML = ''
+    console.log(document.querySelectorAll("[id*=slides"))
+    
+    loadImgs(imgs2, conteinerItens)
+    slideshow.classList.add("slideshow-light")
 
     return false
 }
@@ -80,6 +96,10 @@ const ativaDarkMode = () =>{
 
     
     darkmode.innerHTML = 'Light Mode'
+
+    conteinerItens.innerHTML = ''
+    loadImgs(imgs, conteinerItens)
+
     return true
 }
 

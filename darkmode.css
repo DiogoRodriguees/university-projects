@@ -69,3 +69,11 @@
     color: #000424;
 }
 
+.item-light p{
+    background-color: #546CA5;
+}
+
+.slideshow-light{
+    box-shadow: 2px 4px 20px rgba(0, 0, 0, 0.39);
+
+}
