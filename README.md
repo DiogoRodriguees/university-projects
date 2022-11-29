@@ -24,8 +24,8 @@ O projeto deve:<br>
 - (opcional) Posuir darkmode.
 
 ## Prazo
-Inicio - 19/11/22 <br>
-Fim - 04/12/22
+- Inicio - 19/11/22 <br>
+- Fim - 04/12/22
 
 ## Tecnologias
 - HTML5
