@@ -13,6 +13,13 @@
     --white:#f2f2f7;   
 }
 
+.cabecalho2{
+    width: 40%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
 .cabecalho-container{
     width: 100%;
 
@@ -62,14 +69,15 @@
         width: 100vw;
         margin: 0px;
         padding: 0px;
+        padding-top: 20px;
         flex-direction: column;
+        align-items: center;
+        gap: 20px;
+        height: 100px;
     }
 
     .cabecalho-nav{
-        height: 100px;
-        text-align: center;
-        flex-direction: column;
-        justify-content: center;
+        padding: 0px;
     }
     
     .cabecalho-container h1{

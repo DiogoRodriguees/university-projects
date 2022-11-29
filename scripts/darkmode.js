@@ -64,7 +64,6 @@ const ativaLightMode = () =>{
     conteinerItens.innerHTML = ''
     slideshow.classList.add("slideshow-light")
 
-    console.log(conteinerItens)
     loadImgs(imgs2, conteinerItens)
 
     return false

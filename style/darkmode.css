@@ -1,7 +1,8 @@
 .btn-darkmode-ativo{
     border: none;
+    height: 40px;
     padding: 5px 8px;
-    border-radius: 15px;
+    border-radius: 3px;
     font-family: Montserrat;
     font-size: 14px;
     font-weight: 500;
@@ -77,4 +78,11 @@
 .slideshow-light{
     box-shadow: 2px 4px 20px rgba(0, 0, 0, 0.39);
 
+}
+
+
+@media screen and (max-width: 800px) {
+    .btn-darkmode-ativo{
+        margin: auto;
+    }
 }
