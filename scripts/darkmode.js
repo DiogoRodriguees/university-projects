@@ -1,25 +1,30 @@
-const btnDarkMode = document.getElementById('darkmode')
 const body = document.querySelector('body')
+const figma = document.getElementById("figma")
+const github = document.getElementById("github")
 const resumo = document.getElementById('resumo')
-const linguagensTitulo = document.querySelector('#linguangensTitulo')
-const topicos = document.querySelectorAll('[id*=linguagensTopicos]')
-const topicosTitulo = document.querySelectorAll('[id*=topicosTitulo]')
-const topicosTexto = document.querySelectorAll('[id*=topicosTexto]')
+const rodape = document.getElementById("rodapeId")
+const IdNodeJS = document.getElementById("IdNodeJS")
+const slideshow = document.querySelector("#conteinerSlides")
+const btnDarkMode = document.getElementById('darkmode')
+
+const item = document.querySelector(".item")
+const textoitem = document.querySelector("#textoItem")
+const listaDeitem = document.querySelectorAll("[id*=slides]")
+
 const projetos = document.querySelector('#projetos')
 const projetosTitulo = document.querySelector("#projetosTitulo")
-const linguagensContainer = document.getElementById("linguagensId")
-const rodape = document.getElementById("rodapeId")
-const imgWhatsapp = document.getElementById("imgWhatsapp")
+
 const imgGmail = document.getElementById("imgGmail")
-const imgInstagram = document.getElementById("imgInstagram")
 const imgLinkedin = document.getElementById("imgLinkedin")
-const IdNodeJS = document.getElementById("IdNodeJS")
-const darkmode = document.getElementById("darkmode")
-const github = document.getElementById("github")
-const figma = document.getElementById("figma")
-const listaDeitem = document.querySelectorAll("[id*=slides]")
-const item = document.querySelector(".item")
-const slideshow = document.querySelector("#conteinerSlides")
+const imgWhatsapp = document.getElementById("imgWhatsapp")
+const imgInstagram = document.getElementById("imgInstagram")
+
+const topicos = document.querySelectorAll('[id*=linguagensTopicos]')
+const topicosTexto = document.querySelectorAll('[id*=topicosTexto]')
+const topicosTitulo = document.querySelectorAll('[id*=topicosTitulo]')
+
+const linguagensTitulo = document.querySelector('#linguangensTitulo')
+const linguagensContainer = document.getElementById("linguagensId")
 
 const imgs2 = [
     {'id' : '2', 'url': './img/meusprojetos/sessao_3_light.png'},
@@ -41,8 +46,8 @@ const ativaLightMode = () =>{
     topicosTexto.forEach((texto) => texto.style.color = 'black')
     topicosTitulo.forEach((titulo) => titulo.style.color = 'black')
     
-    projetos.classList.add('projetos-light')
     rodape.classList.add("rodape-light")
+    projetos.classList.add('projetos-light')
     
     
     IdNodeJS.src = 'img/topicos/logo-node-js.png'
@@ -51,18 +56,16 @@ const ativaLightMode = () =>{
     imgLinkedin.src = 'img/rodape/linkedin_black_slim.png'
     imgInstagram.src = 'img/rodape/instagram_black_slim.png'
     
-    github.classList.add('botoes-repositorio-light')
     figma.classList.add('botoes-repositorio-light')
-    
-    darkmode.innerHTML = 'Dark Mode'
+    github.classList.add('botoes-repositorio-light')
 
-    // item.classList.add("item-light")
+    btnDarkMode.innerHTML = 'Dark Mode'
+    textoitem.classList.add('texto-item-light')
     
     conteinerItens.innerHTML = ''
-    console.log(document.querySelectorAll("[id*=slides"))
+    slideshow.classList.add("slideshow-light")
     
     loadImgs(imgs2, conteinerItens)
-    slideshow.classList.add("slideshow-light")
 
     return false
 }
@@ -91,21 +94,17 @@ const ativaDarkMode = () =>{
     imgInstagram.src = 'img/rodape/instagram.png'
     IdNodeJS.style.width = '80px'
 
-    github.classList.remove('botoes-repositorio-light')
     figma.classList.remove('botoes-repositorio-light')
-
+    github.classList.remove('botoes-repositorio-light')
     
     darkmode.innerHTML = 'Light Mode'
-
     conteinerItens.innerHTML = ''
+
     loadImgs(imgs, conteinerItens)
 
     return true
 }
 
-
-
 const mudarTema = () =>{
-
     statuDarkMode = statuDarkMode ? ativaLightMode() : ativaDarkMode();
 }

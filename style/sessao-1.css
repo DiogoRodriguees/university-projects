@@ -37,6 +37,12 @@
     padding: 18px 40px;
 }
 
+.resumo p{
+    font-family: Montserrat;
+    font-size: 16px;
+    font-weight: 200;
+}
+
 .resumo-titulo{
     font-size: 28px;
     font-weight: 400;
@@ -75,7 +81,7 @@
     width: 12vw;
     height: 36px;
 
-    margin: 55px 20px 0px 0px;
+    margin: 35px 20px 0px 0px;
     padding: 4px;
 
     display: flex;

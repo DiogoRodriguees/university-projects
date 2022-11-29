@@ -65,8 +65,9 @@
     color: #000424;
 }
 
-.item-light p{
-    background-color: #546CA5;
+.texto-item-light{
+    /* background-color: #546CA5; */
+    background-color: #941111;
 }
 
 .slideshow-light{
