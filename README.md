@@ -1,6 +1,11 @@
 ## Processo Seletivo Haken 2022/2
 Repositório criado para o processo seletivo da Haken( Empresa junior de ciencia da computação ). <br>
 
+
+## Como acessar?
+- Acesse o site: <a target="_blank" href="https://diogorodrigues.com/">diogorodrigues.com</a>
+- Ou clone o repositorio e abra o html com live server.
+
 ## Descrição
 - O projeto precisa ser desenvolvido de forma individual, deve ser uma landing page responsiva(adaptado para mobile) e com dark mode(modo escuro).<br>
 Exemplo de Landing Page: <a target="_blank" href="https://wonderfullandingpage.github.io/mylandingpage/">EXEMPLO</a>
@@ -18,10 +23,6 @@ O projeto deve:<br>
 - Indentação Padronizada. <br>
 - Comentários apenas quando necessário. <br>
 - (opcional) Posuir darkmode.
-
-## Como acessar?
-- Acesse o site: <a target="_blank" href="https://diogorodrigues.com/">diogorodrigues.com</a>
-- Ou clone o repositorio e abra o html com live server.
 
 ## Prazo
 - Inicio - 19/11/22 <br>
