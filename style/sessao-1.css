@@ -39,8 +39,9 @@
 
 .resumo p{
     font-family: Montserrat;
-    font-size: 16px;
-    font-weight: 200;
+    font-size: 18px;
+    font-weight: 400;
+    margin-top: 20px;
 }
 
 .resumo-titulo{
@@ -81,7 +82,7 @@
     width: 12vw;
     height: 36px;
 
-    margin: 35px 20px 0px 0px;
+    margin: 15px 20px 0px 0px;
     padding: 4px;
 
     display: flex;

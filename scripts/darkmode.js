@@ -27,10 +27,10 @@ const linguagensTitulo = document.querySelector('#linguangensTitulo')
 const linguagensContainer = document.getElementById("linguagensId")
 
 const imgs2 = [
-    {'id' : '2', 'url': './img/meusprojetos/sessao_3_light.png'},
-    {'id' : '1', 'url': './img/meusprojetos/sessao_1_light.png'},
-    {'id' : '3', 'url': './img/meusprojetos/sessao_1_light.png'},
-    {'id' : '4', 'url': './img/meusprojetos/sessao_2_light.png'},
+    {'id' : '2', 'url': './img/meusprojetos/img3_light.png'},
+    {'id' : '1', 'url': './img/meusprojetos/img1_light.png'},
+    {'id' : '3', 'url': './img/meusprojetos/img1_light.png'},
+    {'id' : '4', 'url': './img/meusprojetos/img2_light.png'},
 ]
 
 var statuDarkMode = true
@@ -64,7 +64,8 @@ const ativaLightMode = () =>{
     
     conteinerItens.innerHTML = ''
     slideshow.classList.add("slideshow-light")
-    
+
+    console.log(conteinerItens)
     loadImgs(imgs2, conteinerItens)
 
     return false

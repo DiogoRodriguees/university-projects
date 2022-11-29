@@ -1,10 +1,18 @@
 .btn-darkmode-ativo{
     border: none;
     padding: 5px 8px;
-    border-radius: 3px;
+    border-radius: 15px;
     font-family: Montserrat;
     font-size: 14px;
     font-weight: 500;
+    cursor: pointer;
+    transition: 300ms;
+}
+
+.btn-darkmode-ativo:hover{
+    background-color: var(--blue2);
+    color: var(--white);
+    transition: 300ms;
 }
 
 .display-none{
@@ -36,14 +44,11 @@
 .topicos-light{
     background-color: #f2f2f2;
     box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.1);
-    border: 1px solid rgba(197, 197, 197, 0.397);
-
-
+    border: 1px solid #f2f2f2;
 }
 
 .topicos-light:hover{
     border: 1px solid #546ca549;
-    /* border: 1px solid rgba(158, 158, 158, 0.397); */
 }
 
 .projetos-light{
@@ -66,7 +71,6 @@
 }
 
 .texto-item-light{
-    /* background-color: #546CA5; */
     background-color: #941111;
 }
 

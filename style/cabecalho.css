@@ -54,9 +54,8 @@
 
 .cabecalho-nav-link:hover {
     transition: 200ms;
-    color: var(--green1);
+    color: var(--blue2);
 } 
-
 
 @media screen and (max-width: 800px) {
     .cabecalho-container{
