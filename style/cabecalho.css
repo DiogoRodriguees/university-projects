@@ -69,11 +69,11 @@
         width: 100vw;
         margin: 0px;
         padding: 0px;
-        padding-top: 20px;
+        padding-top: 40px;
         flex-direction: column;
         align-items: center;
-        gap: 20px;
-        height: 100px;
+        gap: 10px;
+        height: 120px;
     }
 
     .cabecalho-nav{
@@ -88,6 +88,12 @@
 
     .cabecalho-nav-link {
         display: none;
+    }
+
+    .cabecalho2{
+
+        flex-direction: column;
+        align-items: center;
     }
     
 }
