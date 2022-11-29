@@ -50,7 +50,6 @@ const ativaLightMode = () =>{
     projetos.classList.add('projetos-light')
     
     
-    IdNodeJS.src = 'img/topicos/logo-node-js.png'
     imgGmail.src = 'img/rodape/gmail_black.png'
     imgWhatsapp.src = 'img/rodape/whatsapp_black_slim.png'
     imgLinkedin.src = 'img/rodape/linkedin_black_slim.png'
@@ -88,12 +87,10 @@ const ativaDarkMode = () =>{
 
     rodape.classList.remove("rodape-light")
 
-    IdNodeJS.src = 'img/topicos/nodejsl_branca.png'
     imgGmail.src = 'img/rodape/gmail.png'
     imgWhatsapp.src = 'img/rodape/whatsapp.png'
     imgLinkedin.src = 'img/rodape/linkedin.png'
     imgInstagram.src = 'img/rodape/instagram.png'
-    IdNodeJS.style.width = '80px'
 
     figma.classList.remove('botoes-repositorio-light')
     github.classList.remove('botoes-repositorio-light')
