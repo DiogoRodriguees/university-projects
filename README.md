@@ -33,7 +33,7 @@ Fim - 04/12/22
 - Javascript(ES6)
 
 ## Desegin
-- <a href="https://www.figma.com/file/JA3mYFRQX5w7ekMTf4rrT7/Untitled?node-id=103%3A2&t=HdvLUZGs5k55tbDx-1">FIGMA</a>
+- <a target='_blank' href="https://www.figma.com/file/JA3mYFRQX5w7ekMTf4rrT7/Untitled?node-id=103%3A2&t=HdvLUZGs5k55tbDx-1">FIGMA</a>
 
 ## WEB View - Dark Mode
 <div>
