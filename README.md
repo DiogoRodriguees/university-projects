@@ -9,10 +9,6 @@ Exemplo de Landing Page: <a target="_blank" href="https://wonderfullandingpage.g
 Essa é uma parte crucial da avaliação.
 - Seja criativo!!!!
 
-## Como acessar?
-- Acesse o site: <a target="_blank" href="https://diogorodrigues.com/">diogorodrigues.com</a>
-- Ou clone o repositorio e abra o html com live server.
-
 ## Especificações Para o Processo Seletivo
 O projeto deve:<br>
 - Ser feito em HTML, CSS e Javascript. <br>
@@ -23,16 +19,20 @@ O projeto deve:<br>
 - Comentários apenas quando necessário. <br>
 - (opcional) Posuir darkmode.
 
+## Como acessar?
+- Acesse o site: <a target="_blank" href="https://diogorodrigues.com/">diogorodrigues.com</a>
+- Ou clone o repositorio e abra o html com live server.
+
 ## Prazo
-Inicio - 19/11/22 <br>
-Fim - 04/12/22
+- Inicio - 19/11/22 <br>
+- Fim - 04/12/22
 
 ## Tecnologias
 - HTML5
 - CSS3
 - Javascript(ES6)
 
-## Desegin
+## Design
 - <a href="https://www.figma.com/file/JA3mYFRQX5w7ekMTf4rrT7/Untitled?node-id=103%3A2&t=HdvLUZGs5k55tbDx-1">FIGMA</a>
 
 ## WEB View - Dark Mode
