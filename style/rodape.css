@@ -81,7 +81,7 @@
 .rodape-links-container a:hover{
     cursor: pointer;
     text-decoration: underline;
-    color: var(--green1);
+    color: var(--blue2);
 }
 
 @media screen and (max-width: 800px) {
