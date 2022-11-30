@@ -1,7 +1,7 @@
 const meusprojetos = [
-    {'id' : '4', 'url': './img/slideshow/calculadora_com_react.jpg'},
-    {'id' : '5', 'url': './img/slideshow/img_projetofinancas.png'},
-    {'id' : '6', 'url': './img/slideshow/todolista_com_javascript.png'},
+    {'id' : '4', 'url': './img/MeusProjetos/calculadora_com_react.jpg'},
+    {'id' : '5', 'url': './img/MeusProjetos/img_projetofinancas.png'},
+    {'id' : '6', 'url': './img/MeusProjetos/todolista_com_javascript.png'},
 ]
 
 const conteinerMeusProjetos = document.querySelector('#container')
