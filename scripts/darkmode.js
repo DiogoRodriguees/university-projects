@@ -50,10 +50,10 @@ const ativaLightMode = () =>{
     projetos.classList.add('projetos-light')
     
     
-    imgGmail.src = 'img/rodape/gmail_black.png'
-    imgWhatsapp.src = 'img/rodape/whatsapp_black_slim.png'
-    imgLinkedin.src = 'img/rodape/linkedin_black_slim.png'
-    imgInstagram.src = 'img/rodape/instagram_black_slim.png'
+    imgGmail.src = 'img/Rodape/gmail_black.png'
+    imgWhatsapp.src = 'img/Rodape/whatsapp_black_slim.png'
+    imgLinkedin.src = 'img/Rodape/linkedin_black_slim.png'
+    imgInstagram.src = 'img/Rodape/instagram_black_slim.png'
     
     figma.classList.add('botoes-repositorio-light')
     github.classList.add('botoes-repositorio-light')
@@ -86,10 +86,10 @@ const ativaDarkMode = () =>{
 
     rodape.classList.remove("rodape-light")
 
-    imgGmail.src = 'img/rodape/gmail.png'
-    imgWhatsapp.src = 'img/rodape/whatsapp.png'
-    imgLinkedin.src = 'img/rodape/linkedin.png'
-    imgInstagram.src = 'img/rodape/instagram.png'
+    imgGmail.src = 'img/Rodape/gmail.png'
+    imgWhatsapp.src = 'img/Rodape/whatsapp.png'
+    imgLinkedin.src = 'img/Rodape/linkedin.png'
+    imgInstagram.src = 'img/Rodape/instagram.png'
 
     figma.classList.remove('botoes-repositorio-light')
     github.classList.remove('botoes-repositorio-light')
