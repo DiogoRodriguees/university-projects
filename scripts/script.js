@@ -13,7 +13,7 @@ const  loadImgs = (imgs, conteiner)=>{
         if(img.id === '1'){
             conteiner.innerHTML +=
             `<div class='item'>
-                <p id="textoItem">Confira algumas gimagens do projeto</p>
+                <p id="textoItem">Confira algumas imagens do projeto</p>
                 <img id='slides${img.id}' src='${img.url}'>
             </div>`
         }else{
