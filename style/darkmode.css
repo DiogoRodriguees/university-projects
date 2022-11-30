@@ -73,6 +73,12 @@
     box-shadow: 2px 4px 20px rgba(0, 0, 0, 0.39);
 }
 
+@media screen and (max-width: 1400px) {
+    .btn-darkmode-ativo{
+        height: 35px;
+    }
+}
+
 
 @media screen and (max-width: 800px) {
     .btn-darkmode-ativo{

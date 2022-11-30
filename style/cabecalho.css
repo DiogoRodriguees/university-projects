@@ -64,6 +64,8 @@
     color: var(--blue2);
 } 
 
+
+
 @media screen and (max-width: 800px) {
     .cabecalho-container{
         width: 100vw;

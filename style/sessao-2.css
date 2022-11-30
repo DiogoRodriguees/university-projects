@@ -42,7 +42,7 @@
     
     box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.822);
     background: rgba(30, 30, 30, 0.19);
-    backdrop-filter: blur(2px);
+    backdrop-filter: blur(3px);
 
     border-radius: 20px;
 
@@ -52,6 +52,7 @@
 
 .linguagens-container-topicos:hover{
     border: 1px solid #f7f7f78c;
+    transition: 300ms;
 }
 
 .linguagens-container-topicos img {
@@ -88,8 +89,8 @@
     font-weight: 500;
     
     border-radius: 3px;
+    border: 1px solid #546CA5;
     background-color: #546CA5;
-    /* background-color: var(--green4); */
 }
 
 .linguagens-container-topicos a:hover{
@@ -97,6 +98,7 @@
     border: 1px solid #546CA5;
     background-color: transparent;
 }
+
 
 @media screen and (max-width: 800px) {
     .linguagens{     
