@@ -9,6 +9,8 @@ const btnDarkMode = document.getElementById('darkmode')
 
 const item = document.querySelector(".item")
 const textoitem = document.querySelector("#textoItem")
+const listaDeitem = document.querySelectorAll("[id*=slides]")
+
 const projetos = document.querySelector('#projetos')
 const projetosTitulo = document.querySelector("#projetosTitulo")
 
@@ -57,11 +59,13 @@ const ativaLightMode = () =>{
     github.classList.add('botoes-repositorio-light')
 
     btnDarkMode.innerHTML = 'Dark Mode'
-    previousSlide()
-    listaDeItens.forEach(item => item.parentNode.removeChild(item))
+    textoitem.classList.add('texto-item-light')
+    
+    conteinerItens.innerHTML = ''
+    slideshow.classList.add("slideshow-light")
 
     loadImgs(imgs2, conteinerItens)
-    
+
     return false
 }
 
@@ -91,7 +95,7 @@ const ativaDarkMode = () =>{
     github.classList.remove('botoes-repositorio-light')
     
     darkmode.innerHTML = 'Light Mode'
-    listaDeItens.forEach(item => conteinerItens.removeChild(item))
+    conteinerItens.innerHTML = ''
 
     loadImgs(imgs, conteinerItens)
 
