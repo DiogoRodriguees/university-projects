@@ -1,27 +1,31 @@
 const imgs = [
-    {'id' : '2', 'url': './img/meusprojetos/img3.png'},
-    {'id' : '1', 'url': './img/meusprojetos/img1.png'},
-    {'id' : '3', 'url': './img/meusprojetos/img1.png'},
-    {'id' : '4', 'url': './img/meusprojetos/img2.png'},
+    {'id' : '2.1', 'url': './img/meusprojetos/img3.png'},
+    {'id' : '1.1', 'url': './img/meusprojetos/img1.png'},
+    {'id' : '3.1', 'url': './img/meusprojetos/img1.png'},
+    {'id' : '4.1', 'url': './img/meusprojetos/img2.png'},
 ]
 
 const conteinerItens = document.querySelector('#conteiner')
 
 const  loadImgs = (imgs, conteiner)=>{
-
     imgs.forEach(img => {
-        if(img.id === '1'){
-            conteiner.innerHTML +=
-            `<div class='item'>
-                <p id="textoItem">Confira algumas imagens do projeto</p>
-                <img id='slides${img.id}' src='${img.url}'>
-            </div>`
-        }else{
-            conteiner.innerHTML +=
-            `<div class='item'>
-                <img id='slides${img.id}' src='${img.url}'>
-            </div>`
-        }
+            let div = document.createElement('div');
+            let imagem = document.createElement('img');
+            let paragraf = document.createElement('p')
+
+            paragraf.innerHTML = 'Confira Algumas Imagens do Projeto'
+            imagem.src = `${img.url}`
+            imagem.id = `slides${img.id}` 
+
+            div.classList.add("item")
+            div.id = `divSlides${img.id}`
+
+            conteiner.appendChild(div)
+            if(imagem.id == `slides1`){
+                div.appendChild(paragraf)
+            }
+            div.appendChild(imagem)
+            
     });
 }
 
