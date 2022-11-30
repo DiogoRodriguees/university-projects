@@ -100,14 +100,14 @@
     .rodape-background{
         flex-direction: column;
         height: 90%;
-        width: 90%;
+        width: 100%;
         align-items: center;
     }
 
     .rodape-container{
         width: 60%;
         margin: 0px;
-        align-items: left;
+        align-items: center;
     }
 
     .rodape-titulo{
