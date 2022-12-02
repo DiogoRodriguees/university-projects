@@ -1,11 +1,14 @@
 .btn-darkmode-ativo{
-    border: none;
     height: 40px;
     padding: 5px 8px;
+
+    border: none;
     border-radius: 3px;
+
     font-family: Montserrat;
     font-size: 14px;
     font-weight: 500;
+
     cursor: pointer;
     transition: 300ms;
 }

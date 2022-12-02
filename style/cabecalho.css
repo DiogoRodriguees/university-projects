@@ -93,9 +93,9 @@
     }
 
     .cabecalho2{
-
         flex-direction: column;
         align-items: center;
+        padding-right: 0px;
     }
     
 }
