@@ -1,8 +1,8 @@
 const imgs = [
-    {'id' : '2', 'url': './img/SlideShow/img3.png'},
-    {'id' : '1', 'url': './img/SlideShow/img1.png'},
-    {'id' : '3', 'url': './img/SlideShow/img1.png'},
-    {'id' : '4', 'url': './img/SlideShow/img2.png'},
+    // {'id' : '2', 'url': './img/SlideShow/img3.png'},
+    // {'id' : '1', 'url': './img/SlideShow/img1.png'},
+    // {'id' : '3', 'url': './img/SlideShow/img1.png'},
+    // {'id' : '4', 'url': './img/SlideShow/img2.png'},
 ]
 
 const conteinerItens = document.querySelector('#conteiner')

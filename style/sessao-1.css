@@ -57,7 +57,7 @@
 
 .resumo-texto{
     font-size: 16px;
-    font-weight: 200;
+    font-weight: 400;
     font-family: Poppins;
 
     width: 30vw;
@@ -69,12 +69,18 @@
 }
 
 #figma{
-    background-color: #8B50D5;
+    /* background-color: #8B50D5; */
+    background-color: #0F76A8;
+
     color: var(--white);
+}
+#figma img{
+    height: 40px;
+    width: 40px;
 }
 
 #github{
-    background-color: #38669F;
+    background-color: #0F76A8;
     color: var(--white);
 }
 
