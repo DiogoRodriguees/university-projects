@@ -3,7 +3,11 @@ const imgs = [
     // {'id' : '1', 'url': './img/SlideShow/img1.png'},
     // {'id' : '3', 'url': './img/SlideShow/img1.png'},
     // {'id' : '4', 'url': './img/SlideShow/img2.png'},
-]
+    { id: "4", url: "./img/MeusProjetos/calculadora_com_react.jpg" },
+    { id: "1", url: "./img/MeusProjetos/img_projetofinancas.png" },
+    { id: "5", url: "./img/MeusProjetos/img_projetofinancas.png" },
+    { id: "6", url: "./img/MeusProjetos/todolista_com_javascript.png" },
+];
 
 const conteinerItens = document.querySelector('#conteiner')
 
@@ -13,7 +17,7 @@ const  loadImgs = (imgs, conteiner)=>{
         if(img.id === '1'){
             conteiner.innerHTML +=
             `<div class='item'>
-                <p id="textoItem">Confira algumas imagens do projeto</p>
+                <p id="textoItem">Confira algumas imagens de projetos que fiz</p>
                 <img id='slides${img.id}' src='${img.url}'>
             </div>`
         }else{
