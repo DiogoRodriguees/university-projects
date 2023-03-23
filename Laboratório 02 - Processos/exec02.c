@@ -1,31 +1,34 @@
-#include <stdio.h>     // printf()
-#include <stdlib.h>    // exit()
-#include <unistd.h>    // fork()
-#include <sys/types.h> // pid_t
-#include <sys/wait.h>  // wait
-#include <string.h>
+#include <stdio.h>      // printf()
+#include <stdlib.h>     // exit()
+#include <unistd.h>     // fork()
+#include <sys/types.h>  // pid_t
+#include <sys/wait.h>   // wait
+#include <string.h>     // strcpy(), strcat()
 
+// verificar sintaxes das funçoes wait e exec
 
-/* 
-
-verificar sintaxes das funçoes wait e exec
- */
-
-int main(int argc, char* argv[])
+int main(int argc, char *argv[])
 {
-    /* Comando */
-    char cmd[] = "ls";
-    char com[] = "-l";
-    char x[] = "/bin/";
-    strcat(x, cmd);
-    
+    char comando[10];
+    strcpy(comando, argv[1]);
+
+    // passando os complementos
+    char complemento[50] = "";
+    for (int i = 2; i < argc; i++)
+    {
+        char aux[50];
+        strcpy(aux, argv[i]);
+        strcat(complemento, aux);
+    }
+
+    char enderecoDeExecucao[] = "/bin/"; // onde o comando será executado
+    strcat(enderecoDeExecucao, comando);
+
     /* cria processo pai */
     pid_t pid;
     pid = fork();
 
-
     int status; // variavel que verifica se o filho foi criado com sucesso
-
 
     if (pid)
     {
@@ -37,7 +40,12 @@ int main(int argc, char* argv[])
     else
     {
         printf("Eu Sou o Processo Filho - PID : %d \n", getpid());
-        execl(x, cmd, com, (char *)NULL); // executa os comando no shell
+        printf("argc: %i\n", argc);
+        if(argc > 2){
+            execl(enderecoDeExecucao, comando, complemento, (char *)NULL); // executa os comando no shell
+        }else{
+            execl(enderecoDeExecucao, comando, (char *)NULL); // executa os comando no shell
+        }
     }
 
     exit(0);
