@@ -21,10 +21,11 @@ int main(int argc, char *argv[])
         strcat(complemento, aux);
     }
 
-    char enderecoDeExecucao[] = "/bin/"; // onde o comando será executado
+    // caminho onde será executado o comando
+    char enderecoDeExecucao[] = "/bin/";
     strcat(enderecoDeExecucao, comando);
 
-    /* cria processo pai */
+    // cria processo pai
     pid_t pid;
     pid = fork();
 
@@ -40,7 +41,7 @@ int main(int argc, char *argv[])
     else
     {
         printf("Eu Sou o Processo Filho - PID : %d \n", getpid());
-        printf("argc: %i\n", argc);
+
         if(argc > 2){
             execl(enderecoDeExecucao, comando, complemento, (char *)NULL); // executa os comando no shell
         }else{
