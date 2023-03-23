@@ -5,7 +5,13 @@
 #include <sys/wait.h>  // wait
 #include <string.h>
 
-int main()
+
+/* 
+
+verificar sintaxes das funçoes wait e exec
+ */
+
+int main(int argc, char* argv[])
 {
     /* Comando */
     char cmd[] = "ls";
