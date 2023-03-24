@@ -4,9 +4,14 @@
 #include <sys/types.h> // pid_t
 #include <stdbool.h>
 
-int main()
+int main(int argc, char** argv)
 {
-    int quantidadeProcessos = 3;
+    if(argc <= 1){
+        printf("É necessario informar o numero de processos!\n");
+        return 0;
+    }
+
+    int quantidadeProcessos = atoi(argv[1]);
     int vetor[] = {0, 7, 2, 3, 4, 5, 6, 7, 8, 9};
     int tamanhoVetor = sizeof(vetor) / sizeof(vetor[0]);
     int intervaloProcesso = tamanhoVetor / quantidadeProcessos;
@@ -16,7 +21,7 @@ int main()
     int ultimoPid = 0;                  // guarda o PID do último processo filho que fez a busca
 
     
-    // printf("pstree -c -p %d \n\n", getpid());
+    printf("pstree -c -p %d \n\n", getpid());
     pid_t pid;
     pid = fork();
 
