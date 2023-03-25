@@ -4,6 +4,19 @@
 #include <sys/types.h> // pid_t
 #include <stdbool.h>
 
+/*
+    Descrição:
+        E exercicio tem a proposta de criar processos filhos para
+        que eles busquem um determinado elemento em um vetor.
+
+    Autores:
+        Diogo Rodrigues - 2380252
+        Carolina Yumi Fujii - 2335468
+        Marcos Vinicius de Quadros - 2380560
+    
+    Data de criação: 22/03/2023
+*/
+
 int main(int argc, char** argv)
 {
     if(argc <= 1){

@@ -5,7 +5,18 @@
 #include <sys/wait.h>   // wait
 #include <string.h>     // strcpy(), strcat()
 
-// verificar sintaxes das funçoes wait e exec
+/*
+    Descrição:
+        Esse programa tem como objetivo
+        exxecutar comandos linux recebidos por parametros.
+
+    Autores:
+        Diogo Rodrigues - 2380252
+        Carolina Yumi Fujii - 2335468
+        Marcos Vinicius de Quadros - 2380560
+
+    Data de criação: 22/03/2023
+*/
 
 int main(int argc, char *argv[])
 {
