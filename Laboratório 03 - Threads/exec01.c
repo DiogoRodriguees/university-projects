@@ -1,8 +1,8 @@
 
-#include <pthread.h> //pthread_t, pthread_create, pthread_detach, pthread_exit
-#include <stdio.h>   //fflush
-#include <stdlib.h>  //exit
-#include <unistd.h>  //sleep
+#include <pthread.h> // pthread_t, pthread_create, pthread_detach, pthread_exit
+#include <stdio.h>   // fflush()
+#include <stdlib.h>  // exit()
+#include <unistd.h>  // sleep()
 
 int vetor[] = {0, 1, 7, 3, 4, 5, 6, 7, 8, 9,10,11,12,13,14};           // Vetor que será dividido entre as threads
 int num_pthreads = 3;                                   // Quantidade de threads que desejo criar
@@ -16,8 +16,9 @@ int value = 7;                                          // Valor buscado
 void *search_value(void *arg)
 {
     
-    search_space = size_vector / num_pthreads;
     int i;
+    
+    search_space = size_vector / num_pthreads;
     end_position = *((int *)arg);
 
     for (i = begin_position; i < end_position; i++)
@@ -34,6 +35,7 @@ void *search_value(void *arg)
     printf("\n");
     begin_position += search_space;
     thread++;
+
     return (NULL);
 }
 

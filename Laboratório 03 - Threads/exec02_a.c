@@ -41,11 +41,13 @@ void *thread_cont(void *param)
         soma += dados->vetor_linha[j];
         x++;
     }
+
     media_linha = soma / x;
     printf("Valor por linha: %.2f\t", soma);
     printf("Media por linha: %.2f\n\n", media_linha);
     
     vetor_respostas[dados->num_seq] = media_linha;
+    
     return NULL;
 }
 
