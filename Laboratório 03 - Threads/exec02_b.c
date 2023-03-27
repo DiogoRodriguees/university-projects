@@ -5,22 +5,28 @@
  * uma parte do temultito. Ao final, junta-se as respostas.
  */
 
-#include <stdio.h>
 #include <pthread.h>
+#include <stdlib.h>
 #include <ctype.h>
+#include <stdio.h>
 #include <math.h>
 
 /* especifica o número de threads e partes */
-#define M 6
+#define M 7
 #define N 8
 
 /* estrutura para passar os parâmetros para as threads */
-struct data_chunk
+typedef struct data_chunk
 {
     int num_seq;
     int pos_inicio;
     int *vetor;
-};
+} data_chunk;
+typedef struct elementosDaMAtriz
+{
+    int vetor[(M * N) + 1];
+    int sizeArray;
+}  elementosDaMAtriz;
 
 /* variavel global para armazenar as respostas para N threads */
 /* coluna 0 = total de vogais e coluna 1 = total consoantes */
@@ -30,74 +36,77 @@ double vetor_respostas[N];
    linha da matriz informado como param */
 void *thread_cont(void *param)
 {
-    struct data_chunk *dados = param;
+    data_chunk *dados = param;
 
     double media_geometrica, multi;
     media_geometrica = 0;
     multi = 1;
 
-    printf("Thread id: %ld\n", pthread_self());
+    // printf("Thread id: %ld\n", pthread_self());
 
     int posicao = dados->pos_inicio;
     for (int j = 0; j < M; j++)
     {
-        printf("%d  ", dados->vetor[posicao]);
         multi *= dados->vetor[posicao];
         posicao += (N);
     }
-    printf("\n\n");
-    // media_geometrica = pow(multi, 1.0/M);
-    // printf("Media geométric apor coluna: %.2f\n\n", media_geometrica);
+
+    double aux = 1.0/M;
+    media_geometrica = pow(multi, aux);
+
+    printf("* Media geométrica da coluna %i: %f\n", dados->pos_inicio,media_geometrica);
 
     vetor_respostas[dados->num_seq] = media_geometrica;
     return NULL;
 }
 
-int main()
-{
-    printf("Emultiemplo - Paralelismo de dados com threads\n\n");
+void showMenssages(int opcao){
+    switch (opcao)
+    {
+    case 1:
+        printf("----------------------------------------------\n");
+        printf("* Exemplo - Paralelismo de dados com threads *\n");
+        printf("----------------------------------------------\n");
+        break;
+    
+    default:
+        break;
+    }
+}
 
-    /* lê o arquivo temultito */
+int main(int argc, char **argv)
+{
+
+    showMenssages(1);
+
+    // abrindo o arquivo e fazendo leitura
     FILE *file = fopen("matriz_6por8.in", "r");
     fseek(file, 0, SEEK_END);
+
+    // exibi os tamanho do arquivo lido
     int tamanho = ftell(file);
-    printf("Tamanho do arquivo (bytes): %d\n\n", tamanho);
+    printf("\nTamanho do arquivo (bytes): %d\n", tamanho);
 
     int vetor_total[tamanho + 1]; // conteudo do arquivo
 
-    int num = 0;
     int i = 0;
+    int elementoAtual = 0; // recebe o valor que está sendo lido na posição atual da matriz
     rewind(file);
-    int tamanho_vetor;
-    while (fscanf(file, "%d", &num) != EOF)
+
+    while (fscanf(file, "%d", &elementoAtual) != EOF)
     {
-        printf("%d\n", num);
-        vetor_total[i++] = num;
-        tamanho_vetor = i;
+        vetor_total[i++] = elementoAtual;
     }
-    // vetor_total[i] = 0;
 
-    // int coluna[N]; // N é o número de linhas da matriz
+    int tamanho_vetor = i;
 
-    // for (int linha = 0; linha < N; linha++)
-    // {
-    //     for (i = 0; i < M; i++) // M é o número de colunas da matriz
-    //     {
-    //         fscanf(file, "%d", &num);
-    //         printf("%d ", num);
-    //         vetor_total[i++] = num;
-    //         tamanho_vetor = i;
-    //     }
-    //     printf("\n");
-    // }
-
-    fclose(file);
+    fclose(file); // fechando o arquivo
 
     /* prepara os dados para as threads - divide em partes */
     struct data_chunk dados[N];
     int tam_parte = tamanho_vetor / N;
 
-    printf("TAM_vetor: %d, TAM-Parte: %d\n", tamanho_vetor, tam_parte);
+    printf("TAM_vetor: %d, TAM-Parte: %d\n\n", tamanho_vetor, tam_parte);
     int ini_parte = 0;
     int fim_parte = tam_parte;
     for (int p = 0; p < N; p++)
@@ -124,16 +133,21 @@ int main()
     int total = 0;
 
     FILE *arquivo_respostas;
-    arquivo_respostas = fopen("respostas.tmultit", "w"); // abre o arquivo em modo de escrita binária
+    arquivo_respostas = fopen("respostas.txt", "w"); // abre o arquivo em modo de escrita binária
 
-    printf("Vetor de médias: ");
+    printf("\nVetor de médias: ");
+
     fprintf(arquivo_respostas, "vetor_médias: "); // escreve os dados no arquivo
+
+    // escrevendo as reposta no arquivo de saída 
     for (int i = 0; i < N; i++)
     {
-        fprintf(arquivo_respostas, "%.1f ", vetor_respostas[i]); // escreve os dados no arquivo
-        printf("%.1f ", vetor_respostas[i]);
+        fprintf(arquivo_respostas, "%f ", vetor_respostas[i]); // escreve os dados no arquivo
+        printf("%f ", vetor_respostas[i]);
     }
+
     printf("\n");
+    fclose(arquivo_respostas); // fechando arquivo
 
     return 0;
 }

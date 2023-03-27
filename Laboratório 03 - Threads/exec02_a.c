@@ -69,7 +69,6 @@ int main()
     int tamanho_vetor;
     while (fscanf(file, "%d", &num) != EOF)
     {
-        // printf("%d\n", num);
         vetor_total[i++] = num;
         tamanho_vetor = i;
     }
