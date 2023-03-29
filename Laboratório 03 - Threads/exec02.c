@@ -13,6 +13,9 @@
 #include <math.h>
 #include "matriz.h"
 
+float vetorGlobal[100];
+int pos = 0;
+
 /* estrutura para passar os parâmetros para as threads */
 typedef struct matrizDate
 {
@@ -26,11 +29,16 @@ typedef struct aritmethicDates
 {
     int line;
     int inicio;
+    int mediasAmout;
     int *array;
+    int *arrayMedias;
     matrizDate *dates;
 } aritmethicDates;
 
 float vetor_respostas[99];
+
+/* escreve as respotas no arquivo de saida */
+void writeMediasLineares();
 
 /* cria uma matriz com valores aleatorios */
 int **newMatriz(int, int);
@@ -68,7 +76,7 @@ int main(int argc, char **argv)
     int columns = atoi(argv[2]);      // numero de colunas da matriz
     int threadsAmout = atoi(argv[3]); // quantidade de threads que serão criadas
     int status = 0;                   // variavel que recebe o retorno da função thread_create()
-
+    int *mediasLineares = malloc(threadsAmout * sizeof(int));
     int **matriz = newMatriz(rows, columns);  // iniciando uma matriz vazia
     writeMatrizInFile(matriz, rows, columns); // preenchendo a matriz criada com os valores do arquivo de entrada
 
@@ -80,29 +88,46 @@ int main(int argc, char **argv)
 
     print_matrix(dateMatriz->matriz, dateMatriz->r, dateMatriz->c); // printando a matriz para conferência
 
-    /* criando estrutra e preenchendo os dados */
-    aritmethicDates *datesRecent = malloc(sizeof(aritmethicDates));
-    datesRecent->array = malloc(threadsAmout * sizeof(int));
-    datesRecent->inicio = 0;
-    definePositionCalulate(datesRecent, rows, threadsAmout);
-    datesRecent->dates = dateMatriz;
-
     /* criando as threads para calcular media aritimetica */
     for (int i = 0; i < threadsAmout; i++)
     {
+        aritmethicDates *datesRecent = malloc(sizeof(aritmethicDates));
+        datesRecent->array = malloc(threadsAmout * sizeof(int));
+        definePositionCalulate(datesRecent, rows, threadsAmout);
+        datesRecent->inicio = datesRecent->array[i - 1];
+        datesRecent->dates = dateMatriz;
         datesRecent->line = datesRecent->array[i];
-        datesRecent->inicio = i != 0 ? datesRecent->array[i - 1] : 0;
-        printf("inicio: %i\n", datesRecent->inicio);
-        printf("vetor content: %i\n", datesRecent->array[i]);
+        datesRecent->arrayMedias = mediasLineares;
+        datesRecent->mediasAmout = 0;
+
         /* criação das threads */
-        status = pthread_create(&threadsRows[i], NULL, execThread, datesRecent);
+        status = pthread_create(&threadsRows[i], NULL, aritmethicCalculate, datesRecent);
     }
 
     /* aguarda a finalização das threads */
     for (int i = 0; i < threadsAmout; i++)
         pthread_join(threadsRows[i], NULL);
 
+    // printf("media:");
+    // for (int i = 0; i < threadsAmout; i++)
+    // {
+    //     printf("%f ", vetorGlobal[i]);
+    // }
+
+    writeMediasLineares();
     return 0;
+}
+
+void writeMediasLineares(){
+    FILE* saida = fopen("respostas.txt", "w");
+
+    fprintf(saida, "%s", "medias: ");
+    for (int i = 0; i < pos; i++)
+    {
+        fprintf(saida, "%f  ", vetorGlobal[i]); 
+    }
+
+    fclose(saida);
 }
 
 int **newMatriz(int rows, int columns)
@@ -206,26 +231,28 @@ void *aritmethicCalculate(void *dates)
     float somaRow = 0;
     float medeiLinear = 0;
 
-    printf("local inicio: %i\n", localdates->inicio);
-    printf("local fim: %i\n", localdates->line);
+    // printf("\nlocal inicio: %i\n", localdates->inicio);
+    // printf("local fim: %i\n", localdates->line);
 
     for (int i = localdates->inicio; i < localdates->line; i++)
     {
         for (int j = 0; j < matriz->c; j++)
         {
             somaRow += matriz->matriz[i][j];
-            printf("elemento: %i\n", matriz->matriz[i][j]);
+            // printf("elemento: %i\n", matriz->matriz[i][j]);
         }
 
         printf("somarow: %f\n", somaRow);
         soma += somaRow;
-        somaRow = 0;
+        medeiLinear = soma / matriz->c;
+        vetorGlobal[pos++] = medeiLinear;
 
+        somaRow = 0;
     }
 
-    media = soma / localdates->line;
+    media = soma / matriz->c;
 
-    printf("media: %f\n", media);
+    // printf("media: %f\n", media);
     return NULL;
 }
 
