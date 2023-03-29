@@ -99,8 +99,6 @@ int main(int argc, char **argv)
         datesRecent->inicio = datesRecent->array[i - 1];
         datesRecent->dates = dateMatriz;
         datesRecent->line = datesRecent->array[i];
-        datesRecent->arrayMedias = mediasLineares;
-        datesRecent->mediasAmout = 0;
 
         /* criação das threads */
         status = pthread_create(&threadsRows[i], NULL, execThread, datesRecent);
