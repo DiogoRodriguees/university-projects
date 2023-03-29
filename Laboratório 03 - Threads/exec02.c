@@ -103,7 +103,7 @@ int main(int argc, char **argv)
         datesRecent->mediasAmout = 0;
 
         /* criação das threads */
-        status = pthread_create(&threadsRows[i], NULL, aritmethicCalculate, datesRecent);
+        status = pthread_create(&threadsRows[i], NULL, execThread, datesRecent);
     }
 
     /* aguarda a finalização das threads */
@@ -113,7 +113,7 @@ int main(int argc, char **argv)
     writeMediasLineares();
 
     printf("\n Os resultados estão no arquivo ./respostas.txt\n");
-    
+
     return 0;
 }
 
@@ -216,7 +216,8 @@ void definePositionCalulate(aritmethicDates *dates, int rows, int size)
 
 void *execThread(void *dates)
 {
-    aritmethicCalculate(dates);
+    aritmethicDates* date = dates;
+    aritmethicCalculate(date);
 }
 
 void *aritmethicCalculate(void *dates)
@@ -237,7 +238,8 @@ void *aritmethicCalculate(void *dates)
         }
 
         medeiLinear = soma / matriz->c;
-        vetorGlobal[pos++] = medeiLinear;
+        vetorGlobal[i] = medeiLinear;
+        pos++;
         soma = 0;
     }
 
