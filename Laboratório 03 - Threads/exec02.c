@@ -45,6 +45,8 @@ void copyDatesForMatriz(matrizDate *);
 /* realiza o calculo da media aritimetica da linhas */
 void *aritmethicCalculate(void *);        
 
+bool validateInput(int);
+
 int main(int argc, char **argv)
 {
     if (validateInput(argc))
@@ -90,11 +92,12 @@ int **newMatriz(int rows, int columns)
 
 matrizDate *newMatrizDate(int rows, int columns)
 {
-    matrizDate *newMatriz = malloc(sizeof(matrizDate));
-    newMatriz->r = rows;
+    matrizDate *newMatriz = malloc(sizeof(matrizDate)); // aloca a matriz dinamicamente
+    newMatriz->r = rows; 
     newMatriz->c = columns;
-    newMatriz->matriz = malloc(rows * sizeof(int *));
+    newMatriz->matriz = malloc(rows * sizeof(int *)); // aloca as linhas da matriz da estrutura
 
+    /* alocando as colunas da matriz da estrutura */
     for (int i = 0; i < rows; i++)
     {
         newMatriz->matriz[i] = malloc(columns * sizeof(int));
@@ -116,19 +119,20 @@ void copyDatesForMatriz(matrizDate *dates)
         /* lendo o arquivo */
         fscanf(arqOrigem, "%i", &number);
 
-        /* escreve o valor lido na linha indexada pelo i */
+        /* escreve o valor lido, na linha indexada pelo indice i */
         if (j < dates->c)
         {
             dates->matriz[i][j++] = number;
         }
 
-        /* troca o indexador i quando o numero maximo de colunas é atingido */
+        /* troca o indexador i, quando o numero maximo de colunas é atingido */
         if (j == dates->c)
         {
             j = 0;
             i++;
         }
     }
+
     fclose(arqOrigem); // fecha o arquivo leitura
 }
 
