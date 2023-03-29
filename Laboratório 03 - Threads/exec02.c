@@ -45,12 +45,14 @@ void copyDatesForMatriz(matrizDate *);
 /* realiza o calculo da media aritimetica da linhas */
 void *aritmethicCalculate(void *);        
 
+/* valida a quantidade de entradas */
 bool validateInput(int);
 
 int main(int argc, char **argv)
 {
-    if (validateInput(argc))
-        return 0;
+
+    if (validateInput(argc)) return 0;
+    printf("Tudo ok!\n");
 
     int rows = atoi(argv[1]);         // numero de linhas da matriz
     int columns = atoi(argv[2]);      // numero de colunas da matriz
@@ -67,17 +69,17 @@ int main(int argc, char **argv)
 
     print_matrix(dateMatriz->matriz, rows, columns); // printando a matriz para conferência
 
-    /* criando as threads para calcular media aritimetica */
-    for (int i = 0; i < threadsAmout; i++)
-    {
-        /* criando estrutra e preenchendo os dados */
-        aritmethicDates *dates = malloc(sizeof(aritmethicDates));
-        dates->line = i;
-        dates->dates = dateMatriz;
+    // /* criando as threads para calcular media aritimetica */
+    // for (int i = 0; i < threadsAmout; i++)
+    // {
+    //     /* criando estrutra e preenchendo os dados */
+    //     aritmethicDates *dates = malloc(sizeof(aritmethicDates));
+    //     dates->line = i;
+    //     dates->dates = dateMatriz;
 
-        /* criação das threads */
-        pthread_create(&threadsRows[i], NULL, aritmethicCalculate, dates);
-    }
+    //     /* criação das threads */
+    //     pthread_create(&threadsRows[i], NULL, aritmethicCalculate, dates);
+    // }
 
     return 0;
 }
@@ -183,7 +185,7 @@ bool validateInput(int number)
     if (number < 4)
     {
         printf("É necessário informar o numero de linhas e colunas da matriz, e o numero de threads!\n");
-        return false;
+        return true;
     }
-    return true;
+    return false;
 }
