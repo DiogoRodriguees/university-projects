@@ -26,7 +26,7 @@ float vetor_respostas[N];
 
 /* Thread para contabilizar a média de cada
    linha da matriz informado como param */
-void *thread_cont(void *param)
+void *aritmethicCalculate(void *param)
 {
     struct data_chunk *dados = param;
 
@@ -45,9 +45,9 @@ void *thread_cont(void *param)
     media_linha = soma / x;
     printf("Valor por linha: %.2f\t", soma);
     printf("Media por linha: %.2f\n\n", media_linha);
-    
+
     vetor_respostas[dados->num_seq] = media_linha;
-    
+
     return NULL;
 }
 
@@ -98,7 +98,7 @@ int main()
     pthread_t t[N];
 
     for (int p = 0; p < N; p++)
-        pthread_create(&t[p], NULL, thread_cont, &dados[p]);
+        pthread_create(&t[p], NULL, aritmethicCalculate, &dados[p]);
 
     /* aguarda a finalização das threads */
     for (int p = 0; p < N; p++)
@@ -108,13 +108,13 @@ int main()
     int total = 0;
 
     FILE *arquivo_respostas;
-    arquivo_respostas = fopen("respostas.txt", "w");       // abre o arquivo em modo de escrita binária
+    arquivo_respostas = fopen("respostas.txt", "w"); // abre o arquivo em modo de escrita binária
 
     printf("Vetor de médias: ");
-    fprintf(arquivo_respostas, "vetor_médias: ");   // escreve os dados no arquivo
+    fprintf(arquivo_respostas, "vetor_médias: "); // escreve os dados no arquivo
     for (int i = 0; i < N; i++)
     {
-        fprintf(arquivo_respostas, "%.1f ", vetor_respostas[i]);   // escreve os dados no arquivo
+        fprintf(arquivo_respostas, "%.1f ", vetor_respostas[i]); // escreve os dados no arquivo
         printf("%.1f ", vetor_respostas[i]);
     }
     printf("\n");

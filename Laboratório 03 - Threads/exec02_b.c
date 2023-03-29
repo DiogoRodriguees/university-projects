@@ -26,7 +26,7 @@ typedef struct elementosDaMAtriz
 {
     int vetor[(M * N) + 1];
     int sizeArray;
-}  elementosDaMAtriz;
+} elementosDaMAtriz;
 
 /* variavel global para armazenar as respostas para N threads */
 /* coluna 0 = total de vogais e coluna 1 = total consoantes */
@@ -34,7 +34,7 @@ double vetor_respostas[N];
 
 /* Thread para contabilizar a média de cada
    linha da matriz informado como param */
-void *thread_cont(void *param)
+void *aritmethicCalculate(void *param)
 {
     data_chunk *dados = param;
 
@@ -51,39 +51,32 @@ void *thread_cont(void *param)
         posicao += (N);
     }
 
-    double aux = 1.0/M;
+    double aux = 1.0 / M;
     media_geometrica = pow(multi, aux);
 
-    printf("* Media geométrica da coluna %i: %f\n", dados->pos_inicio,media_geometrica);
+    printf("* Media geométrica da coluna %i: %f\n", dados->pos_inicio, media_geometrica);
 
     vetor_respostas[dados->num_seq] = media_geometrica;
     return NULL;
 }
 
-void showMenssages(int opcao){
-    switch (opcao)
-    {
-    case 1:
-        printf("----------------------------------------------\n");
-        printf("* Exemplo - Paralelismo de dados com threads *\n");
-        printf("----------------------------------------------\n");
-        break;
-    
-    default:
-        break;
-    }
+void initialMenssage()
+{
+    printf("----------------------------------------------\n");
+    printf("* Exemplo - Paralelismo de dados com threads *\n");
+    printf("----------------------------------------------\n");
 }
 
 int main(int argc, char **argv)
 {
 
-    showMenssages(1);
+    initialMenssage();
 
-    // abrindo o arquivo e fazendo leitura
+    /* abrindo o arquivo e fazendo leitura */
     FILE *file = fopen("matriz_6por8.in", "r");
     fseek(file, 0, SEEK_END);
 
-    // exibi os tamanho do arquivo lido
+    /* exibi os tamanho do arquivo lido */
     int tamanho = ftell(file);
     printf("\nTamanho do arquivo (bytes): %d\n", tamanho);
 
@@ -123,7 +116,7 @@ int main(int argc, char **argv)
     pthread_t t[N];
 
     for (int p = 0; p < N; p++)
-        pthread_create(&t[p], NULL, thread_cont, &dados[p]);
+        pthread_create(&t[p], NULL, aritmethicCalculate, &dados[p]);
 
     /* aguarda a finalização das threads */
     for (int p = 0; p < N; p++)
@@ -139,7 +132,7 @@ int main(int argc, char **argv)
 
     fprintf(arquivo_respostas, "vetor_médias: "); // escreve os dados no arquivo
 
-    // escrevendo as reposta no arquivo de saída 
+    // escrevendo as reposta no arquivo de saída
     for (int i = 0; i < N; i++)
     {
         fprintf(arquivo_respostas, "%f ", vetor_respostas[i]); // escreve os dados no arquivo
