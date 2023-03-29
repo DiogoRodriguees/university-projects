@@ -31,19 +31,22 @@ typedef struct aritmethicDates
 float vetor_respostas[99];
 
 /* cria uma matriz com valores aleatorios */
-int **newMatriz(int, int); 
+int **newMatriz(int, int);
 
 /* cria uma estrutura de matrizDate */
-matrizDate *newMatrizDate(int, int); 
+matrizDate *newMatrizDate(int, int);
 
 /* escreve os dados da matriz no arquivo de saida */
-void writeMatrizInFile(int **, int, int); 
+void writeMatrizInFile(int **, int, int);
 
 /* copia os dados de uma entrada para um determinada matriz */
-void copyDatesForMatriz(matrizDate *);    
+void copyDatesForMatriz(matrizDate *);
 
 /* realiza o calculo da media aritimetica da linhas */
-void *aritmethicCalculate(void *);        
+void *aritmethicCalculate(void *);
+
+/* calcula a media geometrica da colunas */
+void *geometricCalculate(void *);
 
 /* valida a quantidade de entradas */
 bool validateInput(int);
@@ -51,12 +54,13 @@ bool validateInput(int);
 int main(int argc, char **argv)
 {
 
-    if (validateInput(argc)) return 0;
-    printf("Tudo ok!\n");
+    if (validateInput(argc))
+        return 0;
 
     int rows = atoi(argv[1]);         // numero de linhas da matriz
     int columns = atoi(argv[2]);      // numero de colunas da matriz
     int threadsAmout = atoi(argv[3]); // quantidade de threads que serão criadas
+    int status = 0;                   // variavel que recebe o retorno da função thread_create()
 
     int **matriz = newMatriz(rows, columns);  // iniciando uma matriz vazia
     writeMatrizInFile(matriz, rows, columns); // preenchendo a matriz criada com os valores do arquivo de entrada
@@ -69,17 +73,22 @@ int main(int argc, char **argv)
 
     print_matrix(dateMatriz->matriz, rows, columns); // printando a matriz para conferência
 
-    // /* criando as threads para calcular media aritimetica */
-    // for (int i = 0; i < threadsAmout; i++)
-    // {
-    //     /* criando estrutra e preenchendo os dados */
-    //     aritmethicDates *dates = malloc(sizeof(aritmethicDates));
-    //     dates->line = i;
-    //     dates->dates = dateMatriz;
+    /* criando as threads para calcular media aritimetica */
+    for (int i = 0; i < threadsAmout; i++)
+    {
+        /* criando estrutra e preenchendo os dados */
+        aritmethicDates *dates = malloc(sizeof(aritmethicDates));
+        dates->line = i;
+        dates->dates = dateMatriz;
 
-    //     /* criação das threads */
-    //     pthread_create(&threadsRows[i], NULL, aritmethicCalculate, dates);
-    // }
+        /* criação das threads */
+        status = pthread_create(&threadsRows[i], NULL, aritmethicCalculate, &dates);
+    }
+
+    /* aguarda a finalização das threads */
+    for (int i = 0; i < threadsAmout; i++)
+        pthread_join(threadsRows[i], NULL);
+
 
     return 0;
 }
@@ -95,7 +104,7 @@ int **newMatriz(int rows, int columns)
 matrizDate *newMatrizDate(int rows, int columns)
 {
     matrizDate *newMatriz = malloc(sizeof(matrizDate)); // aloca a matriz dinamicamente
-    newMatriz->r = rows; 
+    newMatriz->r = rows;
     newMatriz->c = columns;
     newMatriz->matriz = malloc(rows * sizeof(int *)); // aloca as linhas da matriz da estrutura
 
@@ -158,6 +167,7 @@ void writeMatrizInFile(int **matriz, int rows, int columns)
 
 void *aritmethicCalculate(void *dates)
 {
+
     aritmethicDates *localdates = dates;
 
     float media, x, soma;
@@ -177,6 +187,32 @@ void *aritmethicCalculate(void *dates)
     media = soma / localdates->dates->c;
 
     printf("%f", soma);
+    return NULL;
+}
+
+void *geometricCalculate(void *param)
+{
+    // data_chunk *dados = param;
+
+    // double media_geometrica, multi;
+    // media_geometrica = 0;
+    // multi = 1;
+
+    // // printf("Thread id: %ld\n", pthread_self());
+
+    // int posicao = dados->pos_inicio;
+    // for (int j = 0; j < M; j++)
+    // {
+    //     multi *= dados->vetor[posicao];
+    //     posicao += (N);
+    // }
+
+    // double aux = 1.0 / M;
+    // media_geometrica = pow(multi, aux);
+
+    // printf("* Media geométrica da coluna %i: %f\n", dados->pos_inicio, media_geometrica);
+
+    // vetor_respostas[dados->num_seq] = media_geometrica;
     return NULL;
 }
 

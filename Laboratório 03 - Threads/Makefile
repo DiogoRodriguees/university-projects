@@ -9,5 +9,8 @@ DEPS = matriz.h
 matriz: matriz.o exec02.o
 	$(CC) -o main matriz.o exec02.o
 
+codemarcos: matriz.o exec02.o
+	$(CC) -o main matriz.o ex02.o
+
 clean: 
 	rm *.o main
