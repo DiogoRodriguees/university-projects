@@ -86,11 +86,13 @@ int main(int argc, char **argv)
     matrizDate *dateMatriz = newMatrizDate(rows, columns); // iniciando uma estrutura para informações da matriz
     copyDatesForMatriz(dateMatriz);                        // copiando os dados para a nova estrutura
 
+    printf("\n Matriz %ix%i\n", rows, columns);
     print_matrix(dateMatriz->matriz, dateMatriz->r, dateMatriz->c); // printando a matriz para conferência
 
     /* criando as threads para calcular media aritimetica */
     for (int i = 0; i < threadsAmout; i++)
     {
+        /* criand e preenche a estrutura que sera enviada como parametro */
         aritmethicDates *datesRecent = malloc(sizeof(aritmethicDates));
         datesRecent->array = malloc(threadsAmout * sizeof(int));
         definePositionCalulate(datesRecent, rows, threadsAmout);
@@ -108,13 +110,10 @@ int main(int argc, char **argv)
     for (int i = 0; i < threadsAmout; i++)
         pthread_join(threadsRows[i], NULL);
 
-    // printf("media:");
-    // for (int i = 0; i < threadsAmout; i++)
-    // {
-    //     printf("%f ", vetorGlobal[i]);
-    // }
-
     writeMediasLineares();
+
+    printf("\n Os resultados estão no arquivo ./respostas.txt\n");
+    
     return 0;
 }
 
@@ -226,33 +225,22 @@ void *aritmethicCalculate(void *dates)
     aritmethicDates *localdates = dates;
     matrizDate *matriz = localdates->dates;
 
-    float media, x, soma;
-    media = x = soma = 0;
+    float soma = 0;
     float somaRow = 0;
     float medeiLinear = 0;
-
-    // printf("\nlocal inicio: %i\n", localdates->inicio);
-    // printf("local fim: %i\n", localdates->line);
 
     for (int i = localdates->inicio; i < localdates->line; i++)
     {
         for (int j = 0; j < matriz->c; j++)
         {
-            somaRow += matriz->matriz[i][j];
-            // printf("elemento: %i\n", matriz->matriz[i][j]);
+            soma += matriz->matriz[i][j];
         }
 
-        printf("somarow: %f\n", somaRow);
-        soma += somaRow;
         medeiLinear = soma / matriz->c;
         vetorGlobal[pos++] = medeiLinear;
-
-        somaRow = 0;
+        soma = 0;
     }
 
-    media = soma / matriz->c;
-
-    // printf("media: %f\n", media);
     return NULL;
 }
 
