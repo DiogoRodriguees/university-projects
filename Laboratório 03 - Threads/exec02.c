@@ -25,6 +25,8 @@ typedef struct matrizDate
 typedef struct aritmethicDates
 {
     int line;
+    int inicio;
+    int *array;
     matrizDate *dates;
 } aritmethicDates;
 
@@ -51,9 +53,14 @@ void *geometricCalculate(void *);
 /* valida a quantidade de entradas */
 bool validateInput(int);
 
+/* define as posiçoes que cada thread vai calcular */
+void definePositionCalulate(aritmethicDates *, int, int);
+
+/* chamada na função threads_create(), realiza as duas operações pedidas */
+void *execThread(void *dates);
+
 int main(int argc, char **argv)
 {
-
     if (validateInput(argc))
         return 0;
 
@@ -68,27 +75,32 @@ int main(int argc, char **argv)
     pthread_t threadsRows[threadsAmout];    // threads para calcular média aritimetica
     pthread_t threadsColumns[threadsAmout]; // threads para calcular média geometrica
 
-    matrizDate *dateMatriz = newMatrizDate(rows, columns); // iniciando uma estrutura para guardar os dados
+    matrizDate *dateMatriz = newMatrizDate(rows, columns); // iniciando uma estrutura para informações da matriz
     copyDatesForMatriz(dateMatriz);                        // copiando os dados para a nova estrutura
 
-    print_matrix(dateMatriz->matriz, rows, columns); // printando a matriz para conferência
+    print_matrix(dateMatriz->matriz, dateMatriz->r, dateMatriz->c); // printando a matriz para conferência
+
+    /* criando estrutra e preenchendo os dados */
+    aritmethicDates *datesRecent = malloc(sizeof(aritmethicDates));
+    datesRecent->array = malloc(threadsAmout * sizeof(int));
+    datesRecent->inicio = 0;
+    definePositionCalulate(datesRecent, rows, threadsAmout);
+    datesRecent->dates = dateMatriz;
 
     /* criando as threads para calcular media aritimetica */
     for (int i = 0; i < threadsAmout; i++)
     {
-        /* criando estrutra e preenchendo os dados */
-        aritmethicDates *dates = malloc(sizeof(aritmethicDates));
-        dates->line = i;
-        dates->dates = dateMatriz;
-
+        datesRecent->line = datesRecent->array[i];
+        datesRecent->inicio = i != 0 ? datesRecent->array[i - 1] : 0;
+        printf("inicio: %i\n", datesRecent->inicio);
+        printf("vetor content: %i\n", datesRecent->array[i]);
         /* criação das threads */
-        status = pthread_create(&threadsRows[i], NULL, aritmethicCalculate, &dates);
+        status = pthread_create(&threadsRows[i], NULL, execThread, datesRecent);
     }
 
     /* aguarda a finalização das threads */
     for (int i = 0; i < threadsAmout; i++)
         pthread_join(threadsRows[i], NULL);
-
 
     return 0;
 }
@@ -165,28 +177,55 @@ void writeMatrizInFile(int **matriz, int rows, int columns)
     fclose(arqMatriz);
 }
 
+void definePositionCalulate(aritmethicDates *dates, int rows, int size)
+{
+
+    int sizePartition = rows / size;
+
+    for (int i = 0; i < size; i++)
+    {
+        dates->array[i] = sizePartition * (i + 1);
+    }
+
+    dates->array[size - 1] += rows % size;
+}
+
+void *execThread(void *dates)
+{
+    aritmethicCalculate(dates);
+}
+
 void *aritmethicCalculate(void *dates)
 {
 
     aritmethicDates *localdates = dates;
+    matrizDate *matriz = localdates->dates;
 
     float media, x, soma;
     media = x = soma = 0;
+    float somaRow = 0;
+    float medeiLinear = 0;
 
-    for (int i = 0; i <= localdates->dates->r; i++)
+    printf("local inicio: %i\n", localdates->inicio);
+    printf("local fim: %i\n", localdates->line);
+
+    for (int i = localdates->inicio; i < localdates->line; i++)
     {
-        for (int j = 0; j < localdates->dates->c; j++)
+        for (int j = 0; j < matriz->c; j++)
         {
-            if (i == localdates->line)
-            {
-                soma += localdates->dates->matriz[i][j];
-            }
+            somaRow += matriz->matriz[i][j];
+            printf("elemento: %i\n", matriz->matriz[i][j]);
         }
+
+        printf("somarow: %f\n", somaRow);
+        soma += somaRow;
+        somaRow = 0;
+
     }
 
-    media = soma / localdates->dates->c;
+    media = soma / localdates->line;
 
-    printf("%f", soma);
+    printf("media: %f\n", media);
     return NULL;
 }
 
