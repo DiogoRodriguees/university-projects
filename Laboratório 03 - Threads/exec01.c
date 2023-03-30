@@ -1,4 +1,15 @@
+/* 
+    Descrição
+*/
 
+/*
+    Autores:
+        Diogo Rodrigues - 2380252
+        Carolina Yumi Fujii - 2335468
+        Marcos Vinicius de Quadros - 2380560
+
+    Data de criação: 30/03/2023
+*/
 #include <pthread.h> // pthread_t, pthread_create, pthread_detach, pthread_exit
 #include <stdio.h>   // fflush()
 #include <stdlib.h>  // exit()
@@ -27,7 +38,6 @@ void *search_value(void *arg)
         {
             printf("\nThread %d encontrou o valor!\n", thread);
         }
-        printf("%d", vetor[i]);
         fflush(stdout);
         sleep(1);
     }
