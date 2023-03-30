@@ -1,1 +1,3 @@
-medias: 36.500000  76.500000  
+media aritimetica das linhas: 56.500000  47.750000  38.750000  33.250000  
+
+media geometrica das colunas: 3.370136 3.458072 4.042293 3.589443 
