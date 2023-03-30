@@ -24,8 +24,8 @@
 #include <math.h>    // pow()
 #include "matriz.h"  // print_matrix(), create_matrix(), generate_elements()
 
-float linearArray[100];
-float mediaGeometrica[100];
+float linearArray[200];
+float mediaGeometrica[200];
 int pos = 0;
 int geomtricSize = 0;
 
@@ -285,20 +285,20 @@ void *geometricCalculate(void *dates)
     aritmethicDates *localdates = dates;
     matrizDate *matriz = localdates->dates;
 
-    float soma = 0;
+    float soma = 1;
     float media = 0;
 
     for (int j = localdates->initialColumn; j < localdates->finishColumn; j++)
     {
         for (int i = 0; i < matriz->r; i++)
         {
-            soma += matriz->matriz[i][j];
+            soma *= matriz->matriz[i][j];
         }
 
         media = pow(soma, (1.0 / matriz->r));
         mediaGeometrica[j] = media;
         geomtricSize++;
-        soma = 0;
+        soma = 1;
     }
 
     return NULL;
