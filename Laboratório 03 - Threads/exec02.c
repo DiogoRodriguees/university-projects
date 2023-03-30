@@ -25,9 +25,9 @@
 #include "matriz.h"  // print_matrix(), create_matrix(), generate_elements()
 #include <unistd.h>
 
-float linearArray[200];
-float mediaGeometrica[200];
-int pos = 0;
+float aritmethicAvarage[200];
+double geometricAvarage[200];
+int aritimethicSize = 0;
 int geomtricSize = 0;
 
 /* estrutura para passar os parâmetros para as threads */
@@ -146,7 +146,7 @@ int main(int argc, char **argv)
 
     // imprime os resultados do arquivos respostas.txt no teminal
     printf("\n RESPOSTAS\n");
-    execl("/bin/cat", "cat", "respostas.txt", (char*) NULL);
+    execl("/bin/cat", "cat", "respostas.txt", (char *)NULL);
     exit(0);
 }
 
@@ -158,7 +158,7 @@ void writeWrongsGeometric()
     fprintf(saida, "%s", "\n\n * media geometrica das colunas: \n   ");
     for (int i = 0; i < geomtricSize; i++)
     {
-        fprintf(saida, "%f ", mediaGeometrica[i]);
+        fprintf(saida, "%f ", geometricAvarage[i]);
     }
     fprintf(saida, "%s", "\n");
 
@@ -196,9 +196,9 @@ void writeWrongsAritmethic()
     FILE *saida = fopen("respostas.txt", "w");
 
     fprintf(saida, "%s", " * media aritimetica das linhas: \n   ");
-    for (int i = 0; i < pos; i++)
+    for (int i = 0; i < aritimethicSize; i++)
     {
-        fprintf(saida, "%f  ", linearArray[i]);
+        fprintf(saida, "%f  ", aritmethicAvarage[i]);
     }
 
     fclose(saida);
@@ -288,8 +288,8 @@ void *geometricCalculate(void *dates)
     aritmethicDates *localdates = dates;
     matrizDate *matriz = localdates->dates;
 
-    float soma = 1;
-    float media = 0;
+    double soma = 1;
+    double media = 0;
 
     for (int j = localdates->initialColumn; j < localdates->finishColumn; j++)
     {
@@ -299,7 +299,7 @@ void *geometricCalculate(void *dates)
         }
 
         media = pow(soma, (1.0 / matriz->r));
-        mediaGeometrica[j] = media;
+        geometricAvarage[j] = media;
         geomtricSize++;
         soma = 1;
     }
@@ -324,8 +324,8 @@ void *aritmethicCalculate(void *dates)
         }
 
         medeiLinear = soma / matriz->c;
-        linearArray[i] = medeiLinear;
-        pos++;
+        aritmethicAvarage[i] = medeiLinear;
+        aritimethicSize++;
         soma = 0;
     }
 
