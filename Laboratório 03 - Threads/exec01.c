@@ -41,6 +41,7 @@ void *search_value(void *arg)
 
 int main()
 {
+    printf("Tudo ok!\n");
     pthread_t thread;
     int i;
     search_space = size_vector / num_pthreads;
