@@ -7,10 +7,7 @@ DEPS = matriz.h
 	$(CC) -c -o $@ $< $(CFLAGS)
 
 matriz: matriz.o exec02.o
-	$(CC) -o main matriz.o exec02.o
-
-codemarcos: matriz.o exec02.o
-	$(CC) -o main matriz.o ex02.o
+	$(CC) -o main matriz.o exec02.o -lm
 
 clean: 
 	rm *.o main

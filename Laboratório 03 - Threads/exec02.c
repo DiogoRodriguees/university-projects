@@ -1,45 +1,71 @@
 /**
  * Código de emultiemplo para paralelização de dados com pthreads.
- * Problema: Contabilizar o número de consoantes e vogais em um arquivo temultito.
- * Solução paralela: Atribuir a contabilização para threads. Cada thread processa
- * uma parte do temultito. Ao final, junta-se as respostas.
+ * Problema: calcularar média aritimetica das linhas, e média geometrica das colunas.
+
+ * o codigo consiste em escrever uma matriz em um arquivo .in, fazer a leitura e realizar
+  calculos de media aritimetica e geometria. As respotas são escritas no arquivo de saida
+  respostas.txt
  */
 
-#include <pthread.h>
-#include <stdlib.h>
-#include <ctype.h>
-#include <stdio.h>
-#include <stdbool.h>
-#include <math.h>
-#include "matriz.h"
+/*
+    Autores:
+        Diogo Rodrigues - 2380252
+        Carolina Yumi Fujii - 2335468
+        Marcos Vinicius de Quadros - 2380560
+
+    Data de criação: 30/03/2023
+*/
+
+#include <pthread.h> // pThreads_create(), pThreadJoin()
+#include <stdlib.h>  //
+#include <ctype.h>   // pThread_t
+#include <stdio.h>   // printf()
+#include <stdbool.h> // bool
+#include <math.h>    // pow()
+#include "matriz.h"  // print_matrix(), create_matrix(), generate_elements()
+
+float linearArray[200];
+float mediaGeometrica[200];
+int pos = 0;
+int geomtricSize = 0;
 
 /* estrutura para passar os parâmetros para as threads */
 typedef struct matrizDate
 {
-    int r;
-    int c;
+    int r; // linhas da matriz
+    int c; // colunas da matriz
     int **matriz;
 } matrizDate;
 
 /* estrutura que guarda os dados para utilizar no calculo da media aritimetica */
 typedef struct aritmethicDates
 {
-    int line;
-    int inicio;
-    int *array;
-    matrizDate *dates;
+    int finishLine;  // ultima linha que a thread fará o calculo
+    int initialLine; // primeira linha que a thread fará o calculo
+    int *array;      // array com as posições finais que a thread irá calcular
+
+    int initialColumn; // primeiro coluna lida pela threada
+    int finishColumn;  // ultima linha lida pela thread
+    int *arrayColuna;  // array com as posições finais de cada coluna
+
+    matrizDate *dates; // estrutura com os dados da matriz que será lida
 } aritmethicDates;
 
-float vetor_respostas[99];
+/* escreve as respostas no arquivo de saida */
+void writeWrongsAritmethic();
+
+/* escreve as reposta no arquivo de saida */
+void writeWrongsGeometric();
 
 /* cria uma matriz com valores aleatorios */
-int **newMatriz(int, int);
+int **
+newMatriz(int, int);
 
 /* cria uma estrutura de matrizDate */
 matrizDate *newMatrizDate(int, int);
 
 /* escreve os dados da matriz no arquivo de saida */
-void writeMatrizInFile(int **, int, int);
+void writeMatrizInOutput(int **, int, int);
 
 /* copia os dados de uma entrada para um determinada matriz */
 void copyDatesForMatriz(matrizDate *);
@@ -54,10 +80,14 @@ void *geometricCalculate(void *);
 bool validateInput(int);
 
 /* define as posiçoes que cada thread vai calcular */
-void definePositionCalulate(aritmethicDates *, int, int);
+void definePositionLines(aritmethicDates *, int, int);
+
+/* define as posições das colunas que cada thread vai calcular */
+void definePositionColumns(aritmethicDates *, int, int);
 
 /* chamada na função threads_create(), realiza as duas operações pedidas */
-void *execThread(void *dates);
+void *
+execThread(void *dates);
 
 int main(int argc, char **argv)
 {
@@ -69,31 +99,39 @@ int main(int argc, char **argv)
     int threadsAmout = atoi(argv[3]); // quantidade de threads que serão criadas
     int status = 0;                   // variavel que recebe o retorno da função thread_create()
 
-    int **matriz = newMatriz(rows, columns);  // iniciando uma matriz vazia
-    writeMatrizInFile(matriz, rows, columns); // preenchendo a matriz criada com os valores do arquivo de entrada
+    /* inicializando a matriz */
+    int **matriz = newMatriz(rows, columns);    // iniciando uma matriz vazia
+    writeMatrizInOutput(matriz, rows, columns); // preenchendo a matriz criada com os valores do arquivo de entrada
 
     pthread_t threadsRows[threadsAmout];    // threads para calcular média aritimetica
     pthread_t threadsColumns[threadsAmout]; // threads para calcular média geometrica
 
+    /* escrevendo a matriz criada num arquivo de saída */
     matrizDate *dateMatriz = newMatrizDate(rows, columns); // iniciando uma estrutura para informações da matriz
     copyDatesForMatriz(dateMatriz);                        // copiando os dados para a nova estrutura
 
+    /* imprime a matriz gerada */
+    printf("\n Matriz %ix%i\n", rows, columns);
     print_matrix(dateMatriz->matriz, dateMatriz->r, dateMatriz->c); // printando a matriz para conferência
-
-    /* criando estrutra e preenchendo os dados */
-    aritmethicDates *datesRecent = malloc(sizeof(aritmethicDates));
-    datesRecent->array = malloc(threadsAmout * sizeof(int));
-    datesRecent->inicio = 0;
-    definePositionCalulate(datesRecent, rows, threadsAmout);
-    datesRecent->dates = dateMatriz;
 
     /* criando as threads para calcular media aritimetica */
     for (int i = 0; i < threadsAmout; i++)
     {
-        datesRecent->line = datesRecent->array[i];
-        datesRecent->inicio = i != 0 ? datesRecent->array[i - 1] : 0;
-        printf("inicio: %i\n", datesRecent->inicio);
-        printf("vetor content: %i\n", datesRecent->array[i]);
+        /* criand e preenche a estrutura que sera enviada como parametro */
+        aritmethicDates *datesRecent = malloc(sizeof(aritmethicDates));
+        datesRecent->array = malloc(threadsAmout * sizeof(int));
+        definePositionLines(datesRecent, rows, threadsAmout);
+
+        datesRecent->arrayColuna = malloc(threadsAmout * sizeof(int));
+        definePositionColumns(datesRecent, columns, threadsAmout);
+
+        datesRecent->dates = dateMatriz;
+        datesRecent->initialLine = datesRecent->array[i - 1];
+        datesRecent->finishLine = datesRecent->array[i];
+
+        datesRecent->initialColumn = datesRecent->arrayColuna[i - 1];
+        datesRecent->finishColumn = datesRecent->arrayColuna[i];
+
         /* criação das threads */
         status = pthread_create(&threadsRows[i], NULL, execThread, datesRecent);
     }
@@ -102,7 +140,65 @@ int main(int argc, char **argv)
     for (int i = 0; i < threadsAmout; i++)
         pthread_join(threadsRows[i], NULL);
 
+    writeWrongsAritmethic();
+    writeWrongsGeometric();
+
+    printf("\n Os resultados estão no arquivo ./respostas.txt\n");
+
     return 0;
+}
+
+void writeWrongsGeometric()
+{
+
+    FILE *saida = fopen("respostas.txt", "a");
+
+    fprintf(saida, "%s", "\n\nmedia geometrica das colunas: ");
+    for (int i = 0; i < geomtricSize; i++)
+    {
+        fprintf(saida, "%f ", mediaGeometrica[i]);
+    }
+
+    fclose(saida);
+}
+
+void definePositionColumns(aritmethicDates *dates, int columns, int threadsAmout)
+{
+
+    int sizePartition = columns / threadsAmout;
+
+    for (int i = 0; i < threadsAmout; i++)
+    {
+        dates->arrayColuna[i] = sizePartition * (i + 1);
+    }
+
+    dates->arrayColuna[threadsAmout - 1] += columns % threadsAmout;
+}
+
+void definePositionLines(aritmethicDates *dates, int rows, int size)
+{
+
+    int sizePartition = rows / size;
+
+    for (int i = 0; i < size; i++)
+    {
+        dates->array[i] = sizePartition * (i + 1);
+    }
+
+    dates->array[size - 1] += rows % size;
+}
+
+void writeWrongsAritmethic()
+{
+    FILE *saida = fopen("respostas.txt", "w");
+
+    fprintf(saida, "%s", "media aritimetica das linhas: ");
+    for (int i = 0; i < pos; i++)
+    {
+        fprintf(saida, "%f  ", linearArray[i]);
+    }
+
+    fclose(saida);
 }
 
 int **newMatriz(int rows, int columns)
@@ -159,7 +255,7 @@ void copyDatesForMatriz(matrizDate *dates)
     fclose(arqOrigem); // fecha o arquivo leitura
 }
 
-void writeMatrizInFile(int **matriz, int rows, int columns)
+void writeMatrizInOutput(int **matriz, int rows, int columns)
 {
     /* abrindo arquivo para leitura */
     FILE *arqMatriz = fopen("matrizTexto.in", "w");
@@ -177,22 +273,35 @@ void writeMatrizInFile(int **matriz, int rows, int columns)
     fclose(arqMatriz);
 }
 
-void definePositionCalulate(aritmethicDates *dates, int rows, int size)
-{
-
-    int sizePartition = rows / size;
-
-    for (int i = 0; i < size; i++)
-    {
-        dates->array[i] = sizePartition * (i + 1);
-    }
-
-    dates->array[size - 1] += rows % size;
-}
-
 void *execThread(void *dates)
 {
-    aritmethicCalculate(dates);
+    aritmethicDates *date = dates;
+    aritmethicCalculate(date);
+    geometricCalculate(date);
+}
+
+void *geometricCalculate(void *dates)
+{
+    aritmethicDates *localdates = dates;
+    matrizDate *matriz = localdates->dates;
+
+    float soma = 1;
+    float media = 0;
+
+    for (int j = localdates->initialColumn; j < localdates->finishColumn; j++)
+    {
+        for (int i = 0; i < matriz->r; i++)
+        {
+            soma *= matriz->matriz[i][j];
+        }
+
+        media = pow(soma, (1.0 / matriz->r));
+        mediaGeometrica[j] = media;
+        geomtricSize++;
+        soma = 1;
+    }
+
+    return NULL;
 }
 
 void *aritmethicCalculate(void *dates)
@@ -201,57 +310,22 @@ void *aritmethicCalculate(void *dates)
     aritmethicDates *localdates = dates;
     matrizDate *matriz = localdates->dates;
 
-    float media, x, soma;
-    media = x = soma = 0;
-    float somaRow = 0;
+    float soma = 0;
     float medeiLinear = 0;
 
-    printf("local inicio: %i\n", localdates->inicio);
-    printf("local fim: %i\n", localdates->line);
-
-    for (int i = localdates->inicio; i < localdates->line; i++)
+    for (int i = localdates->initialLine; i < localdates->finishLine; i++)
     {
         for (int j = 0; j < matriz->c; j++)
         {
-            somaRow += matriz->matriz[i][j];
-            printf("elemento: %i\n", matriz->matriz[i][j]);
+            soma += matriz->matriz[i][j];
         }
 
-        printf("somarow: %f\n", somaRow);
-        soma += somaRow;
-        somaRow = 0;
-
+        medeiLinear = soma / matriz->c;
+        linearArray[i] = medeiLinear;
+        pos++;
+        soma = 0;
     }
 
-    media = soma / localdates->line;
-
-    printf("media: %f\n", media);
-    return NULL;
-}
-
-void *geometricCalculate(void *param)
-{
-    // data_chunk *dados = param;
-
-    // double media_geometrica, multi;
-    // media_geometrica = 0;
-    // multi = 1;
-
-    // // printf("Thread id: %ld\n", pthread_self());
-
-    // int posicao = dados->pos_inicio;
-    // for (int j = 0; j < M; j++)
-    // {
-    //     multi *= dados->vetor[posicao];
-    //     posicao += (N);
-    // }
-
-    // double aux = 1.0 / M;
-    // media_geometrica = pow(multi, aux);
-
-    // printf("* Media geométrica da coluna %i: %f\n", dados->pos_inicio, media_geometrica);
-
-    // vetor_respostas[dados->num_seq] = media_geometrica;
     return NULL;
 }
 
