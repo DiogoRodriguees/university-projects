@@ -23,6 +23,7 @@
 #include <stdbool.h> // bool
 #include <math.h>    // pow()
 #include "matriz.h"  // print_matrix(), create_matrix(), generate_elements()
+#include <unistd.h>
 
 float linearArray[200];
 float mediaGeometrica[200];
@@ -143,9 +144,10 @@ int main(int argc, char **argv)
     writeWrongsAritmethic();
     writeWrongsGeometric();
 
-    printf("\n Os resultados estão no arquivo ./respostas.txt\n");
-
-    return 0;
+    // imprime os resultados do arquivos respostas.txt no teminal
+    printf("\n RESPOSTAS\n");
+    execl("/bin/cat", "cat", "respostas.txt", (char*) NULL);
+    exit(0);
 }
 
 void writeWrongsGeometric()
@@ -153,11 +155,12 @@ void writeWrongsGeometric()
 
     FILE *saida = fopen("respostas.txt", "a");
 
-    fprintf(saida, "%s", "\n\nmedia geometrica das colunas: ");
+    fprintf(saida, "%s", "\n\n * media geometrica das colunas: \n   ");
     for (int i = 0; i < geomtricSize; i++)
     {
         fprintf(saida, "%f ", mediaGeometrica[i]);
     }
+    fprintf(saida, "%s", "\n");
 
     fclose(saida);
 }
@@ -192,7 +195,7 @@ void writeWrongsAritmethic()
 {
     FILE *saida = fopen("respostas.txt", "w");
 
-    fprintf(saida, "%s", "media aritimetica das linhas: ");
+    fprintf(saida, "%s", " * media aritimetica das linhas: \n   ");
     for (int i = 0; i < pos; i++)
     {
         fprintf(saida, "%f  ", linearArray[i]);
