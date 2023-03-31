@@ -24,6 +24,7 @@
 #include <math.h>    // pow()
 #include "matriz.h"  // print_matrix(), create_matrix(), generate_elements()
 #include <unistd.h>
+#include <string.h>
 
 float aritmethicAvarage[200];
 double geometricAvarage[200];
@@ -59,8 +60,7 @@ void writeWrongsAritmethic();
 void writeWrongsGeometric();
 
 /* cria uma matriz com valores aleatorios */
-int **
-newMatriz(int, int);
+int **newMatriz(int , int , char *, bool );
 
 /* cria uma estrutura de matrizDate */
 matrizDate *newMatrizDate(int, int);
@@ -94,14 +94,29 @@ int main(int argc, char **argv)
 {
     if (validateInput(argc))
         return 0;
-
+    
     int rows = atoi(argv[1]);         // numero de linhas da matriz
     int columns = atoi(argv[2]);      // numero de colunas da matriz
     int threadsAmout = atoi(argv[3]); // quantidade de threads que serão criadas
     int status = 0;                   // variavel que recebe o retorno da função thread_create()
+    char matrizExternal[50];
+    char answer;
+    bool isExternal = false;
 
-    /* inicializando a matriz */
-    int **matriz = newMatriz(rows, columns);    // iniciando uma matriz vazia
+
+    /* define a matriz de leitura */
+    printf("Deseja ler uma matriz especifica? [s/n]\n");
+    scanf("%c", &answer);
+    if(!strcmp(&answer, "s")){
+        printf("informe o nome do arquivo: ");
+        scanf("%s", matrizExternal);
+        printf("teste - arquivo recebido: %s\n", matrizExternal);
+        isExternal = true;
+    }
+    system("cls");
+
+        /* inicializando a matriz */
+        int **matriz = newMatriz(rows, columns, matrizExternal, isExternal); // iniciando uma matriz vazia
     writeMatrizInOutput(matriz, rows, columns); // preenchendo a matriz criada com os valores do arquivo de entrada
 
     pthread_t threadsRows[threadsAmout];    // threads para calcular média aritimetica
@@ -204,10 +219,14 @@ void writeWrongsAritmethic()
     fclose(saida);
 }
 
-int **newMatriz(int rows, int columns)
+int **newMatriz(int rows, int columns, char *externalMatriz, bool isExternal)
 {
     int **matriz = create_matrix(rows, columns);
-    generate_elements(matriz, rows, columns, 99);
+    if(isExternal){
+        matriz = read_matrix_from_file(externalMatriz, &rows, &columns);
+    }else{
+        generate_elements(matriz, rows, columns, 99);
+    }
 
     return matriz;
 }
