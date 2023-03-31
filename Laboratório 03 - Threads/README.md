@@ -1,4 +1,14 @@
 ## Laboratorio 03 - Manipulação de Threads
+Os arquivos deste laboratório estão separados da seguinte maneira:  
+
+    ./exec01.c - contém os arquivos do exercício 1
+    ./exec02.c - contém os arquivos do exercício 2
+
+    ./matrizTexto - arquivo com a matriz que será utilizada caso não seja informado outro aarquivo.
+    ./respostas.txt - contém as resposta do que foi pedido no laboratório
+    
+    ./matriz.c e ./matriz.h - contém as funções auxiliares que foram disponibilizadas pelo professor.
+
 
 ### Como compilar
 no prompt de comando, digite:  
