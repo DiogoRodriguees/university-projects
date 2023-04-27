@@ -8,6 +8,7 @@
 #include <string.h>
 
 #define SERVER_FIFO "/tmp/serverfifo"
+#define N 5
 
 int main()
 {
