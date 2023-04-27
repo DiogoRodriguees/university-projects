@@ -1,0 +1,25 @@
+21478 execve("./teste-fork", ["./teste-fork"], [/* 71 vars */]) = 0
+21478 uname({sysname="Linux", nodename="natsu", ...}) = 0
+21478 brk(NULL)                         = 0x81c000
+21478 brk(0x81d1c0)                     = 0x81d1c0
+21478 arch_prctl(ARCH_SET_FS, 0x81c880) = 0
+21478 readlink("/proc/self/exe", "/home/rodrigo/testes/teste-fork", 4096) = 31
+21478 brk(0x83e1c0)                     = 0x83e1c0
+21478 brk(0x83f000)                     = 0x83f000
+21478 access("/etc/ld.so.nohwcap", F_OK) = -1 ENOENT (No such file or directory)
+21478 clone(child_stack=0, flags=CLONE_CHILD_CLEARTID|CLONE_CHILD_SETTID|SIGCHLD, child_tidptr=0x81cb50) = 21479
+21478 exit_group(0)                     = ?
+21479 exit_group(0)                     = ?
+21478 +++ exited with 0 +++
+21479 +++ exited with 0 +++
+% time     seconds  usecs/call     calls    errors syscall
+------ ----------- ----------- --------- --------- ----------------
+  0.00    0.000000           0         4           brk
+  0.00    0.000000           0         1         1 access
+  0.00    0.000000           0         1           clone
+  0.00    0.000000           0         1           execve
+  0.00    0.000000           0         1           uname
+  0.00    0.000000           0         1           readlink
+  0.00    0.000000           0         1           arch_prctl
+------ ----------- ----------- --------- --------- ----------------
+100.00    0.000000                    10         1 total
