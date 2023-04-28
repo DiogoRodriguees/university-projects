@@ -47,34 +47,27 @@ void convertExpressao(char *buffer, int *numeroUm, int *numeroDois, char *operad
 
     while (buffer[i] != '\0')
     {
-        if (buffer[i] >= operadoresValidos[0] && buffer[i] <= operadoresValidos[1])
-        {
-            *operador = buffer[i++];
+        caracter = buffer[i++];
+        
+        if (caracter >= operadoresValidos[0] && caracter <= operadoresValidos[1]) {
+            *operador = caracter;
             operadorEncontrado = true;
             continue;
         }
-
-        if (operadorEncontrado)
-        {
+        if (operadorEncontrado) {
             *numeroDois *= 10;
-            caracter = buffer[i];
             *numeroDois += atoi(&caracter);
         }
-        else
-        {
+        else {
             *numeroUm *= 10;
-            caracter = buffer[i];
             *numeroUm += atoi(&caracter);
         }
-
-        i++;
     }
 }
 
 int main()
 {
     pid_t pid;
-
     char buffer[40];
     int mypipe[2];
 
