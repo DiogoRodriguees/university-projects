@@ -99,18 +99,21 @@ int main()
     /* processo filho irá executar o calculo */
     else if (pid == (pid_t)0)
     {
-        // receber a expressao em formato string
-        // separar os numeros do operador
-        // realizar o calculo
-        // exibir o resultado no terminal
-
-        close(mypipe[1]);                        // fechando a referencia para escrita
-        read(mypipe[0], buffer, sizeof(buffer)); // fazendo a leitura do buffer
         int numeroUm, numeroDois;
         char operador;
+        
+        close(mypipe[1]);                        // fechando a referencia para escrita
+        read(mypipe[0], buffer, sizeof(buffer)); // fazendo a leitura do buffer
+        
+        /* converte expressao para numero e operador */
         convertExpressao(buffer, &numeroUm, &numeroDois, &operador);
+        
+        /* calcular o resultado */
         int resultado = calcular(numeroUm, numeroDois, operador);
-        std::cout << "FILHO: " << numeroUm << " " << operador << " " << numeroDois << " = " << resultado << std::endl; // imprimindo o conteudo enviado pelo pai
+        
+        /* imprimir expressao original e resultado */
+        std::cout << "FILHO: " << numeroUm << " " << operador << " " << numeroDois << " = " << resultado << std::endl;
+        
         fflush(stdout);
         return EXIT_SUCCESS;
     }
