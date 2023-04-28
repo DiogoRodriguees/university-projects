@@ -33,18 +33,20 @@ int calcular(int numeroUm, int numeroDois, char operador)
 
     return resultado;
 }
-void convertExpressao(char buffer[], int *numeroUm, int *numeroDois, char *operador)
+
+void convertExpressao(char *buffer, int *numeroUm, int *numeroDois, char *operador)
 {
     int i = 0;
-    bool operadorEncontrado = false;
     char caracter;
+    bool operadorEncontrado = false;
     char operadoresValidos[2] = {'*', '/'};
+    
+    /* zera os paramentros de saida */
     *numeroUm = 0;
     *numeroDois = 0;
 
     while (buffer[i] != '\0')
     {
-
         if (buffer[i] >= operadoresValidos[0] && buffer[i] <= operadoresValidos[1])
         {
             *operador = buffer[i++];
@@ -67,10 +69,6 @@ void convertExpressao(char buffer[], int *numeroUm, int *numeroDois, char *opera
 
         i++;
     }
-
-    // std::cout << "numero um: " << *numeroUm << std::endl;
-    // std::cout << "numero dois:" << *numeroDois << std::endl;
-    // std::cout << "operador:" << operador << std::endl;
 }
 
 int main()
@@ -96,8 +94,9 @@ int main()
         std::cerr << "erro ao executar o fork";
         return EXIT_FAILURE;
     }
-    /* processo filho irá executar o calculo */
-    else if (pid == (pid_t)0)
+    
+    /* caso o processo seja filho */
+    if (pid == (pid_t)0)
     {
         int numeroUm, numeroDois;
         char operador;
@@ -117,7 +116,7 @@ int main()
         fflush(stdout);
         return EXIT_SUCCESS;
     }
-    /* processo pai recebe a expressão matematica e enviar para o filho */
+    /* caso o processo seja o pai */
     else
     {
         /* entrou no processo pai */
