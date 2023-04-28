@@ -4,6 +4,74 @@
 #include <iostream>
 #include <unistd.h>
 #include <stdio.h>
+#include <stdbool.h>
+#include <cstdlib>
+#include <string.h>
+
+int calcular(int numeroUm, int numeroDois, char operador)
+{
+    int resultado = 0;
+
+    switch (operador)
+    {
+    case '+':
+        resultado = numeroUm + numeroDois;
+        break;
+
+    case '-':
+        resultado = numeroUm - numeroDois;
+        break;
+
+    case '/':
+        resultado = numeroUm / numeroDois;
+        break;
+
+    case '*':
+        resultado = numeroUm * numeroDois;
+        break;
+    }
+
+    return resultado;
+}
+void convertExpressao(char buffer[], int *numeroUm, int *numeroDois, char *operador)
+{
+    int i = 0;
+    bool operadorEncontrado = false;
+    char caracter;
+    char operadoresValidos[2] = {'*', '/'};
+    *numeroUm = 0;
+    *numeroDois = 0;
+
+    while (buffer[i] != '\0')
+    {
+
+        if (buffer[i] >= operadoresValidos[0] && buffer[i] <= operadoresValidos[1])
+        {
+            *operador = buffer[i++];
+            operadorEncontrado = true;
+            continue;
+        }
+
+        if (operadorEncontrado)
+        {
+            *numeroDois *= 10;
+            caracter = buffer[i];
+            *numeroDois += atoi(&caracter);
+        }
+        else
+        {
+            *numeroUm *= 10;
+            caracter = buffer[i];
+            *numeroUm += atoi(&caracter);
+        }
+
+        i++;
+    }
+
+    // std::cout << "numero um: " << *numeroUm << std::endl;
+    // std::cout << "numero dois:" << *numeroDois << std::endl;
+    // std::cout << "operador:" << operador << std::endl;
+}
 
 int main()
 {
@@ -35,6 +103,16 @@ int main()
         // separar os numeros do operador
         // realizar o calculo
         // exibir o resultado no terminal
+
+        close(mypipe[1]);                        // fechando a referencia para escrita
+        read(mypipe[0], buffer, sizeof(buffer)); // fazendo a leitura do buffer
+        int numeroUm, numeroDois;
+        char operador;
+        convertExpressao(buffer, &numeroUm, &numeroDois, &operador);
+        int resultado = calcular(numeroUm, numeroDois, operador);
+        std::cout << "FILHO: " << numeroUm << " " << operador << " " << numeroDois << " = " << resultado << std::endl; // imprimindo o conteudo enviado pelo pai
+        fflush(stdout);
+        return EXIT_SUCCESS;
     }
     /* processo pai recebe a expressão matematica e enviar para o filho */
     else
@@ -42,7 +120,7 @@ int main()
         /* entrou no processo pai */
         close(mypipe[0]); // fechando a referencia para leitura
 
-        std::cout << "PAI: Digite algo para enviar ao filho: ";
+        std::cout << "PAI: insira uma expressao no formato (22+44): ";
         scanf("%40[^\n]", buffer);
         write(mypipe[1], buffer, sizeof(buffer)); // escrevendo a mensagem no buffer
 
