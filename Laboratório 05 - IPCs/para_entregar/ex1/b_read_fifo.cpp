@@ -1,8 +1,18 @@
 
 /*
-     add_server.c: A server to add numbers received in message.
+    Autores:
+        Diogo Rodrigues dos Santos - 2380232
+        Marcos Vinicius de Quadros - 2380560
 
- */
+    Descrição:
+        O progama é responsavel por ler uma expressão matematica
+        simples(8 * 8), realizar o calcula dessa expressão e
+        exibir o resultado no terminal.
+
+    Data:
+        02 de Maio 2023
+*/
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <error.h>
@@ -14,7 +24,7 @@
 
 #define SERVER_FIFO "/tmp/serverfifo"
 
-int calcular(int numeroUm, int numeroDois, char operador)
+    int calcular(int numeroUm, int numeroDois, char operador)
 {
     int resultado = 0;
 

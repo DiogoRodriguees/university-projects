@@ -1,8 +1,17 @@
 
 /*
-     write messages to FIFO
+    Autores:
+        Diogo Rodrigues dos Santos - 2380232
+        Marcos Vinicius de Quadros - 2380560
 
- */
+    Descrição:
+        O progama é responsavel por escrever no FIFO
+        uma expressão matematica simples(8 * 8).
+        Essa expressão deve ser recebida por parametro.
+
+    Data:
+        02 de Maio 2023
+*/
 #include <stdio.h>
 #include <stdlib.h>
 #include <error.h>
