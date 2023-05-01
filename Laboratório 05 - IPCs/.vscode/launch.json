@@ -8,8 +8,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": false,
-      "cwd": "/home/diogo/Documentos/FACULDADE/4° Período/SO/LABORATORIOS_SO/LAB_04_PIC",
-      "program": "/home/diogo/Documentos/FACULDADE/4° Período/SO/LABORATORIOS_SO/LAB_04_PIC/build/Debug/outDebug",
+      "cwd": "/home/diogo/Documentos/REPOSITORIOS/LABORATORIOS_SO/Laboratório 05 - IPCs/exemplos dos slides",
+      "program": "/home/diogo/Documentos/REPOSITORIOS/LABORATORIOS_SO/Laboratório 05 - IPCs/exemplos dos slides/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [

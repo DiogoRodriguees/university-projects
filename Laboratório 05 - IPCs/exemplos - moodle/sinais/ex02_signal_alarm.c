@@ -9,21 +9,24 @@
 #include <stdlib.h>
 
 /* Flag que controla a terminação do loop. */
-volatile sig_atomic_t keep_going = 1;
+volatile sig_atomic_t programe_executing = 1;
 
 /* Tratador para o sinal SIGALRM. Reseta o flag e se reabilita. */
-void catch_alarm(int sig) {
+void catch_alarm(int sig)
+{
     puts("Alarme!");
-    keep_going = 0;
+    programe_executing = 0;
     signal(sig, catch_alarm);
 }
 
-void do_stuff(void) {
+void do_stuff(void)
+{
     puts("Fazendo alguma coisa enquanto aguarda o alarme.");
     sleep(1);
 }
 
-int main(void) {
+int main(void)
+{
     /* Estabelece um tratador para sinais SIGALRM. */
     signal(SIGALRM, catch_alarm);
 
@@ -32,7 +35,7 @@ int main(void) {
     alarm(10);
 
     /* Fica em loop executando. */
-    while (keep_going)
+    while (programe_executing)
         do_stuff();
 
     puts("Terminou.");
