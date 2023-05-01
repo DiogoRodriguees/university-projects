@@ -1,8 +1,4 @@
-#include <iostream>
 #include <stdio.h>
-#include <stdlib.h>
-#include <errno.h>
-#include <sys/stat.h>
 #include <unistd.h>
 #include <fcntl.h>
 #include <string.h>
@@ -40,5 +36,5 @@ int main(int argc, char **argv)
         return 2;
     }
     
-    exit(0);
+    return 0;
 }

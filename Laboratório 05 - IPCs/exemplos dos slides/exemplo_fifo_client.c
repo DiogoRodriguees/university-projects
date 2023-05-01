@@ -1,4 +1,3 @@
-#include <iostream>
 #include <stdio.h>
 #include <stdlib.h>
 #include <errno.h>
@@ -12,7 +11,7 @@
 int main(int argc, char **argv)
 {
     int fd_server, num_bytes_read; // descritor para o fifo
-    char buf[512];
+    char buf[512] = "mensagem de teste do buffer";
 
     /* cria um FIFO quando ele não exista */
     if ((mkfifo(SERVER_FIFO, 0664) == -1) && (errno != EEXIST))
@@ -32,6 +31,7 @@ int main(int argc, char **argv)
     {
         memset(buf, '\0', sizeof(buf));
         num_bytes_read = read(fd_server, buf, sizeof(buf));
+        
         switch (num_bytes_read)
         {
         case -1:
