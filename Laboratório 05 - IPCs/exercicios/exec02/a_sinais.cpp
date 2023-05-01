@@ -13,8 +13,13 @@ typedef struct Expressao
 Expressao *expressao;
 char *caminho_do_arquivo;
 
+/* Função executado ao receber um sinal SIGHUP */
 void reportar_disconexao_usuario(int);
+
+/* Verifica se os para esperados pelo programa foram recebidos */
 bool verificar_entradas(int);
+
+/* Atribui para as variaveis os atributos lidos no arquivo texto recebido ao executar o programa */
 void preencher_atributos();
 
 int main(int argc, char **argv)
@@ -26,25 +31,25 @@ int main(int argc, char **argv)
     /* Recebe o caminho do arquivo */
     caminho_do_arquivo = argv[1];
 
+    expressao = (Expressao *)malloc(sizeof(Expressao));
+
     /* Tratamento para o sinal SIGHUP */
     signal(SIGHUP, reportar_disconexao_usuario);
 
-    expressao = (Expressao *)malloc(sizeof(Expressao));
-
     /* Atribuindo os valores do arquivo para as variaveis da struct  */
     preencher_atributos();
-    
+
     /* Imprimindo os atributos antes de receber o sinal */
     printf("%i %c %i\n", expressao->numero_um, expressao->operador, expressao->numero_dois);
-    
+
     /* Tempo para o usuario alterar o arquivo */
     printf("Altere o arquivo de entrada %s para visualizar as mudanças em 20 segundos!\n", caminho_do_arquivo);
     puts("Matenha o padrao do arquivo(numero operador numero). Exemplo: 44 + 3");
     sleep(20);
-    
+
     /* O sinal de SIGHUP é recebido */
     raise(SIGHUP);
-    
+
     /* Imprimindo os valores atualizados dos atributos */
     printf("%i %c %i\n", expressao->numero_um, expressao->operador, expressao->numero_dois);
 
@@ -59,7 +64,7 @@ void preencher_atributos()
     char numero_um[20];
     char operador[20];
     char numero_dois[20];
-    
+
     /* lendo o arquivo com os atributos */
     fscanf(arquivo_com_atributos, "%s", numero_um);
     fscanf(arquivo_com_atributos, "%s", operador);
