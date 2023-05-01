@@ -1,3 +1,20 @@
+/*
+    Autores:
+        Diogo Rodrigues dos Santos - 2380232
+        Marcos Vinicius de Quadros - 2380560
+
+    Descrição:
+        O programa deve receber um diretorio para um arquivo txt,
+        esse arquivo será lido a seus dados serão atribuidos para
+        as variaveis internas.
+
+        Um sinal de SIGHUP será disparado e, quando isso acontecer,
+        o programa irá reabrir o arquivo e fazer as atribuições novamente
+
+    Data:
+        02 de Maio 2023
+*/
+
 #include <signal.h> // signal()
 #include <stdio.h>  // printf(), puts()
 #include <stdlib.h> // malloc
@@ -19,38 +36,40 @@ void reportar_disconexao_usuario(int);
 /* Verifica se os para esperados pelo programa foram recebidos */
 bool verificar_entradas(int);
 
-/* Atribui para as variaveis os atributos lidos no arquivo texto recebido ao executar o programa */
+/* Atribui para as variaveis os atributos lidos no
+arquivo texto recebido ao executar o programa */
 void preencher_atributos();
 
 int main(int argc, char **argv)
 {
-    /* Verifica se os parametros esperados foram inseridos */
+    // Verifica se os parametros esperados foram inseridos
     if (verificar_entradas(argc))
         return 0;
 
-    /* Recebe o caminho do arquivo */
+    // Recebe o caminho do arquivo
     caminho_do_arquivo = argv[1];
 
+    // Alocando na memoria
     expressao = (Expressao *)malloc(sizeof(Expressao));
 
-    /* Tratamento para o sinal SIGHUP */
+    // Tratamento para o sinal SIGHUP
     signal(SIGHUP, reportar_disconexao_usuario);
 
-    /* Atribuindo os valores do arquivo para as variaveis da struct  */
+    // Atribuindo os valores do arquivo para as variaveis da struct
     preencher_atributos();
 
-    /* Imprimindo os atributos antes de receber o sinal */
+    // Imprimindo os atributos antes de receber o sinal
     printf("%i %c %i\n", expressao->numero_um, expressao->operador, expressao->numero_dois);
 
-    /* Tempo para o usuario alterar o arquivo */
+    // Tempo para o usuario alterar o arquivo
     printf("Altere o arquivo de entrada %s para visualizar as mudanças em 20 segundos!\n", caminho_do_arquivo);
     puts("Matenha o padrao do arquivo(numero operador numero). Exemplo: 44 + 3");
     sleep(20);
 
-    /* O sinal de SIGHUP é recebido */
+    // O sinal de SIGHUP é recebido
     raise(SIGHUP);
 
-    /* Imprimindo os valores atualizados dos atributos */
+    // Imprimindo os valores atualizados dos atributos
     printf("%i %c %i\n", expressao->numero_um, expressao->operador, expressao->numero_dois);
 
     return 0;
