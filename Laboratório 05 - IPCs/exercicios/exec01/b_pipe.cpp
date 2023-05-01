@@ -17,7 +17,6 @@ int calcular(int numeroUm, int numeroDois, char operador)
     case '+':
         resultado = numeroUm + numeroDois;
         break;
-
     case '-':
         resultado = numeroUm - numeroDois;
         break;
