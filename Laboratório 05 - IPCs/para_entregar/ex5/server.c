@@ -84,7 +84,9 @@ int main(int argc, char *argv[])
             if (fork() == 0)
             {
                 traducao = traduzir_mensagem(buf);
+                // matar o processo filho apos a traduçãogit
             }
+            
             printf("read %u bytes: %.*s\n", rc, rc, traducao);
         }
 
