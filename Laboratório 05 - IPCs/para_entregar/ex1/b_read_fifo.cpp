@@ -24,7 +24,7 @@
 
 #define SERVER_FIFO "/tmp/serverfifo"
 
-    int calcular(int numeroUm, int numeroDois, char operador)
+int calcular(int numeroUm, int numeroDois, char operador)
 {
     int resultado = 0;
 
@@ -63,7 +63,8 @@ void convertExpressao(char *buffer, int *numeroUm, int *numeroDois, char *operad
     while (buffer[i] != '\0')
     {
         caracter = buffer[i++];
-        if(strcmp(&caracter, " ") == 0){
+        if (strcmp(&caracter, " ") == 0)
+        {
             continue;
         }
 
@@ -82,7 +83,7 @@ void convertExpressao(char *buffer, int *numeroUm, int *numeroDois, char *operad
         {
             *numeroUm *= 10;
             *numeroUm += atoi(&caracter);
-        }   
+        }
     }
 }
 
@@ -127,7 +128,7 @@ int main(int argc, char **argv)
 
             /* calcular o resultado */
             int resultado = calcular(numeroUm, numeroDois, operador);
-            
+
             // Imprime o resultado
             printf("Expressao recebida: %s\n", buf);
             printf("Resultado: %i\n", resultado);
