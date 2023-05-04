@@ -38,13 +38,17 @@ int main(int argc, char **argv)
         perror("open: server fifo");
         return 1;
     }
-
+    
+    char string[20];
+    
     int value = 0;
     while (value < N)
     {
         // cria uma mensagem
         value++;
-        sprintf(buf, "8 * 8");
+        printf("Informe a expressao matematica sem espacos (Ex. 2*3): ");
+        scanf("%s", string);
+        sprintf(buf, string);
         printf("Sending: %s\n", buf);
 
         // envia mensagem para o fifo

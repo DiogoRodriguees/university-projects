@@ -19,15 +19,12 @@
 #include <stdio.h>  // printf(), puts()
 #include <stdlib.h> // malloc
 #include <string.h> // strcpy()
+#include <unistd.h>
 
-typedef struct Expressao
-{
-    int numero_um;
-    char operador;
-    int numero_dois;
-} Expressao;
+int executing_programe = 1;
 
-Expressao *expressao;
+char conteudo_arquivo[1024] = "";
+
 char *caminho_do_arquivo;
 
 /* Função executado ao receber um sinal SIGHUP */
@@ -49,28 +46,25 @@ int main(int argc, char **argv)
     // Recebe o caminho do arquivo
     caminho_do_arquivo = argv[1];
 
-    // Alocando na memoria
-    expressao = (Expressao *)malloc(sizeof(Expressao));
-
     // Tratamento para o sinal SIGHUP
     signal(SIGHUP, reportar_disconexao_usuario);
 
     // Atribuindo os valores do arquivo para as variaveis da struct
     preencher_atributos();
+    
+    printf("CONTEUDO ANTES DO SINAL:\n%s\n", conteudo_arquivo);
+    printf("\nFaça uma alteração no arquivo antes de enviar o sinal\n");
+    printf("Digite o comando \"kill -SIGHUP %d\" em outro terminal.\n", getpid());
 
-    // Imprimindo os atributos antes de receber o sinal
-    printf("%i %c %i\n", expressao->numero_um, expressao->operador, expressao->numero_dois);
-
-    // Tempo para o usuario alterar o arquivo
-    printf("Altere o arquivo de entrada %s para visualizar as mudanças em 20 segundos!\n", caminho_do_arquivo);
-    puts("Matenha o padrao do arquivo(numero operador numero). Exemplo: 44 + 3");
-    sleep(20);
-
-    // O sinal de SIGHUP é recebido
-    raise(SIGHUP);
+    // loop infito até receber o sinal SIGHUP
+    while (executing_programe)
+    {
+        sleep(1);
+    }
 
     // Imprimindo os valores atualizados dos atributos
-    printf("%i %c %i\n", expressao->numero_um, expressao->operador, expressao->numero_dois);
+    printf("\nCONTEUDO DEPOIS DO SINAL:\n");
+    printf("%s\n", conteudo_arquivo);
 
     return 0;
 }
@@ -80,19 +74,25 @@ void preencher_atributos()
     /* Abrinfo o aquivo para leitura */
     FILE *arquivo_com_atributos = fopen(caminho_do_arquivo, "r");
 
-    char numero_um[20];
-    char operador[20];
-    char numero_dois[20];
+    char conteudo_lido[1024] = "";
 
-    /* lendo o arquivo com os atributos */
-    fscanf(arquivo_com_atributos, "%s", numero_um);
-    fscanf(arquivo_com_atributos, "%s", operador);
-    fscanf(arquivo_com_atributos, "%s", numero_dois);
+    // Resetando a variavel global
+    strcpy(conteudo_arquivo, "");
 
-    /* Convertendo os atributos lidas */
-    expressao->numero_dois = atoi(numero_dois);
-    expressao->numero_um = atoi(numero_um);
-    expressao->operador = operador[0];
+    // Guarda a quantidade de bits lido (-1 significa final do arquivo)
+    int fim_do_arquivo = 0;
+
+    // Loop para copia dos dados no arquivo
+    do
+    {
+        fim_do_arquivo = fscanf(arquivo_com_atributos, "%s", conteudo_lido);
+        if (fim_do_arquivo != -1)
+        {
+            strcat(conteudo_arquivo, conteudo_lido);
+            strcat(conteudo_arquivo, " ");
+        }
+
+    } while (fim_do_arquivo != -1);
 
     /* Fechando arquivo após leitura */
     fclose(arquivo_com_atributos);
@@ -112,4 +112,5 @@ bool verificar_entradas(int quantidade_parametros_recebidos)
 void reportar_disconexao_usuario(int signal)
 {
     preencher_atributos();
+    executing_programe = 0;
 }

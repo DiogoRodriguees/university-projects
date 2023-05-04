@@ -1,1 +1,1 @@
-12 * 32
+Conteudo do arquivo antes da alteração
