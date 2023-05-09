@@ -11,16 +11,105 @@
 #include <sys/un.h>
 #include <stdlib.h>
 #include <string.h>
+#include <stdbool.h>
 
 // char *socket_path = "./socket";
 char *socket_path = "./hidden";
+executing_programe = 1;
 
-char *traduzir_mensagem(buf)
+]enum PalavrasValidasPT {
+
+    ESTUDAR,
+    SISTEMAS,
+    OPERACIONAIS,
+    DIVERTIDO
+
+} PalavrasValidas;
+
+enum PalavrasValidasEN
 {
-    char *traducao;
-    strcpy(traducao, "dog");
 
-    return traducao;
+    STUDY,
+    SYSTEM,
+    OPERATING,
+    FUN
+
+};
+
+/* Separa as propriedades do modelo de tradução ISO */
+void separar_expressao(char origem_p[], char destino_p[], char palavra_p[], char expressao[])
+{
+    int i = 0;
+    bool origem_identificado = false;
+    bool destino_identificado = false;
+    char origem[10];
+    char destino[10];
+    char palavra[10];
+
+    printf("Expressao %s\n", expressao);
+
+    while (expressao[i] != '\0')
+    {
+        char caracter = expressao[i];
+
+        // printf("caracter: %c\n", caracter);
+
+        if (strcmp(&caracter, "-") == 0)
+        {
+            origem_identificado = true;
+            i++;
+            continue;
+        }
+        if (strcmp(&caracter, ":") == 0)
+        {
+            destino_identificado = true;
+            i++;
+            continue;
+        }
+
+        if (!origem_identificado)
+        {
+            strcat(origem, &caracter);
+        }
+        else if (!destino_identificado)
+        {
+            strcat(destino, &caracter);
+        }
+        else
+        {
+            strcat(palavra, &caracter);
+        }
+
+        i++;
+    }
+}
+
+/* Traduz mensagem recebida no padrão ISO(pt-en:palavra) */
+char *traduzir_mensagem()
+{
+    char *palavra_traduzida = "palavra";
+    char lingua_origem[2];
+    char lingua_destino[2];
+    char palavra[20];
+
+    separar_expressao(lingua_origem, lingua_destino, palavra, "pt-en:palavra");
+    printf("%s\n %s\n %s\n", lingua_origem, lingua_destino, palavra);
+    sleep(5);
+    // variavel para lingua de origem
+    // variavel para lingua de tradução
+    // varival para a palavra a ser traduzida
+
+    // função que traduz a palavra(lingua_origem, lingua_destino, palavra_para_traduzir)
+
+    return palavra_traduzida;
+}
+
+void start_system()
+{
+    while (executing_programe)
+    {
+        
+    }
 }
 
 int main(int argc, char *argv[])
@@ -83,10 +172,10 @@ int main(int argc, char *argv[])
             char *traducao;
             if (fork() == 0)
             {
-                traducao = traduzir_mensagem(buf);
-                // matar o processo filho apos a traduçãogit
+                start_system();
             }
-            
+
+            printf("Traducao: %s\n", traducao);
             printf("read %u bytes: %.*s\n", rc, rc, traducao);
         }
 

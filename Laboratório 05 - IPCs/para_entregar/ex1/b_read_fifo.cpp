@@ -6,7 +6,7 @@
 
     Descrição:
         O progama é responsavel por ler uma expressão matematica
-        simples(8 * 8), realizar o calcula dessa expressão e
+        simples(8 * 8), realizar o calculo dessa expressão e
         exibir o resultado no terminal.
 
     Data:
