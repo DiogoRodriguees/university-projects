@@ -17,7 +17,8 @@
 char *socket_path = "./hidden";
 executing_programe = 1;
 
-]enum PalavrasValidasPT {
+enum PalavrasValidasPT
+{
 
     ESTUDAR,
     SISTEMAS,
@@ -108,12 +109,12 @@ void start_system()
 {
     while (executing_programe)
     {
-        
     }
 }
 
 int main(int argc, char *argv[])
 {
+
     struct sockaddr_un addr;
     char buf[100];
     int fd, // descritor do socket
@@ -157,7 +158,12 @@ int main(int argc, char *argv[])
         exit(-1);
     }
 
-    while (1)
+    /* mensagem de boas-vindas */
+    printf("SERVIÇO DE TRADUÇÃO\n");
+    printf("Insira um código como o exemplo: pt-en:cachorro\n");
+    printf("Palavras disponiveis: estudar, sistemas, operacionais, divertido, etc\n\n");
+
+        while (1)
     {
         /* aguarda conexões dos clientes */
         if ((cl = accept(fd, NULL, NULL)) == -1)
@@ -169,14 +175,8 @@ int main(int argc, char *argv[])
         /* lê dados envidos pelos clientes */
         while ((rc = read(cl, buf, sizeof(buf))) > 0)
         {
-            char *traducao;
-            if (fork() == 0)
-            {
-                start_system();
-            }
-
-            printf("Traducao: %s\n", traducao);
-            printf("read %u bytes: %.*s\n", rc, rc, traducao);
+            write(cl, "Mensagem recebida com sucesso!", 30);
+            printf(" %s\n", buf);
         }
 
         /* trata erros */
