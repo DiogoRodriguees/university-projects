@@ -63,11 +63,11 @@ int main(int argc, char **argv)
     /* Criar monitor */
     initMonitor();
 
-    /* Criar threads escritoras */
-    pthread_create(&escritores, NULL, escritor, NULL);
-
     /* Criar threads leitores */
     pthread_create(&leitores, NULL, leitor, NULL);
+
+    /* Criar threads escritoras */
+    pthread_create(&escritores, NULL, escritor, NULL);
 
     /* Esperar as threas terminarem */
     pthread_join(escritores, NULL);
@@ -86,7 +86,7 @@ void *leitor()
         ativarLeitor();
         printf("LENDO %i\n", buf);
         terminarLeitura();
-        sleep(2);
+        sleep(1);
     }
 }
 
