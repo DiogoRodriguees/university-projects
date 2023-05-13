@@ -23,6 +23,8 @@ pthread_cond_t condicao_escrita = PTHREAD_COND_INITIALIZER;
 int totalDeEscritores = 0;
 int totalDeLeitores = 0;
 
+int buf;
+
 /*
     1° - Realiza a leitura caso o escritor não esteja escrevendo
     2° - Informa que está saindo da operação
@@ -61,11 +63,11 @@ int main(int argc, char **argv)
     /* Criar monitor */
     initMonitor();
 
-    /* Criar threads leitores */
-    pthread_create(&leitores, NULL, leitor, NULL);
-
     /* Criar threads escritoras */
     pthread_create(&escritores, NULL, escritor, NULL);
+
+    /* Criar threads leitores */
+    pthread_create(&leitores, NULL, leitor, NULL);
 
     /* Esperar as threas terminarem */
     pthread_join(escritores, NULL);
@@ -79,18 +81,26 @@ int main(int argc, char **argv)
 
 void *leitor()
 {
-    ativarLeitor();
-    printf("LENDO\n");
-    terminarLeitura();
-
+    for (int i = 0; i < 5; i++)
+    {
+        ativarLeitor();
+        printf("LENDO %i\n", buf);
+        terminarLeitura();
+        sleep(2);
+    }
 }
 
 void *escritor()
 {
-    ativarEscrita();
-    printf("ESCREVENDO\n");
-    terminarEscrita();
+    for (int i = 0; i < 5; i++)
+    {
+        ativarEscrita();
 
+        printf("ESCREVENDO %i\n", i);
+        buf = i;
+        terminarEscrita();
+        sleep(1);
+    }
 }
 
 void ativarLeitor()
@@ -123,6 +133,7 @@ void terminarLeitura()
     {
         pthread_cond_signal(&condicao_escrita);
     }
+
     pthread_mutex_unlock(&mutex);
 }
 
