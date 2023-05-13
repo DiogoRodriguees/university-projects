@@ -63,15 +63,15 @@ int main(int argc, char **argv)
     /* Criar monitor */
     initMonitor();
 
-    /* Criar threads leitores */
-    pthread_create(&leitores, NULL, leitor, NULL);
-
     /* Criar threads escritoras */
     pthread_create(&escritores, NULL, escritor, NULL);
 
+    /* Criar threads leitores */
+    pthread_create(&leitores, NULL, leitor, NULL);
+
     /* Esperar as threas terminarem */
-    pthread_join(escritores, NULL);
     pthread_join(leitores, NULL);
+    pthread_join(escritores, NULL);
 
     /* Destruir monitor */
     destroyMonitor();
@@ -85,6 +85,7 @@ void *leitor()
     {
         ativarLeitor();
         printf("LENDO %i\n", buf);
+        sleep(2);
         terminarLeitura();
         sleep(1);
     }
@@ -98,6 +99,7 @@ void *escritor()
 
         printf("ESCREVENDO %i\n", i);
         buf = i;
+        sleep(4);
         terminarEscrita();
         sleep(1);
     }
@@ -125,7 +127,10 @@ void ativarLeitor()
 
 void terminarLeitura()
 {
+    /* Bloqueando o mutex */
     pthread_mutex_lock(&mutex);
+
+    /* Decrementa para avisar que o leitor ta saindo */
     totalDeLeitores--;
 
     /* Caso a thread seja a ultima a escrever */
@@ -134,27 +139,41 @@ void terminarLeitura()
         pthread_cond_signal(&condicao_escrita);
     }
 
+    /* Desbloqueando o mutex */
     pthread_mutex_unlock(&mutex);
 }
 
 void ativarEscrita()
 {
+    /* Desbloquenado mutex */
     pthread_mutex_lock(&mutex);
+
+    /* Verifica se tem um escritor escrevendo ou leitor lendo */
     while ((totalDeLeitores > 0) || (totalDeEscritores > 0))
     {
         pthread_cond_wait(&condicao_escrita, &mutex);
         sleep(1);
     }
+
+    /* Incrementa para avisar que tem um leitor escrevendo */
     totalDeEscritores++;
 
+    /* Desbloquenado mutex */
     pthread_mutex_unlock(&mutex);
 }
 
 void terminarEscrita()
 {
+    /* Bloqueando o mutex */
     pthread_mutex_lock(&mutex);
+
+    /* Descrementa para avisar que o escritor parou de escrever */
     totalDeEscritores--;
+
+    /* Envia sinal para a fila de escritores e leitores */
     pthread_cond_signal(&condicao_escrita);
     pthread_cond_broadcast(&condicao_leitura);
+
+    /* Desbloqueandoo o Mutex */
     pthread_mutex_unlock(&mutex);
 }
