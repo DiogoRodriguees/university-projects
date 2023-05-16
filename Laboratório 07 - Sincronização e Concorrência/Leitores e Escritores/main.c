@@ -11,7 +11,6 @@
         18 de Maior de 2023
 */
 
-#include "resource_monitor.h" // initMonitor(), destroyMonitor()
 #include <pthread.h>          // pthread
 #include <semaphore.h>        // sem_t
 #include <stdio.h>
@@ -58,23 +57,25 @@ void terminarEscrita();
 
 int main(int argc, char **argv)
 {
-    pthread_t leitores, escritores;
+    pthread_t leitores, leitor2, escritores;
 
     /* Criar monitor */
-    initMonitor();
+    pthread_mutex_init(&mutex, NULL);
 
     /* Criar threads escritoras */
     pthread_create(&escritores, NULL, escritor, NULL);
 
     /* Criar threads leitores */
     pthread_create(&leitores, NULL, leitor, NULL);
+    pthread_create(&leitor2, NULL, leitor, NULL);
 
     /* Esperar as threas terminarem */
     pthread_join(leitores, NULL);
+    pthread_join(leitor2, NULL);
     pthread_join(escritores, NULL);
 
     /* Destruir monitor */
-    destroyMonitor();
+    pthread_mutex_destroy(&mutex); /* Free up the_mutex */
 
     return 0;
 }
@@ -87,7 +88,7 @@ void *leitor()
         printf("LENDO %i\n", buf);
         sleep(2);
         terminarLeitura();
-        sleep(1);
+        sleep(2);
     }
 }
 
