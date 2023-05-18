@@ -1,6 +1,7 @@
 /*
     Autores:
         Diogo Rodrigues dos Santos - 2380242
+        Marcos Vinicius de Quadros - 2380560
 
     Descrição:
         Esse programa tem como objetivo, demostrar

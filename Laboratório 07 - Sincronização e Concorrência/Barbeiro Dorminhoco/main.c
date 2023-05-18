@@ -1,6 +1,6 @@
 /*
     Autores:
-        Diogo Rodrigues dos Santos - 2380232
+        Diogo Rodrigues dos Santos - 2380242
         Marcos Vinicius de Quadros - 2380560
 
     Descrição:
