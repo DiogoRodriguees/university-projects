@@ -7,5 +7,5 @@ all: $(PROGS)
 clean:
 	rm -f $(PROGS)
 
-prod_cons: main.c resource_monitor.c resource_monitor.h
-	$(CC) main.c resource_monitor.c -o prod_cons -lpthread
+prod_cons: main.c
+	$(CC) main.c -o prod_cons -lpthread
