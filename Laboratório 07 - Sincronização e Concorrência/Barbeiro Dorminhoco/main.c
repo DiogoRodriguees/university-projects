@@ -1,3 +1,4 @@
+
 /*
     Autores:
         Diogo Rodrigues dos Santos - 2380232
@@ -23,13 +24,13 @@
 #include <pthread.h>   /* POSIX Threads */
 #include <semaphore.h> /* Semaphore */
 
-#define NUMTHREAD 6
-#define NUMCHAIR 2
+#define NUMTHREAD 4    // Quantidade de clientes
+#define NUMCHAIR 2      // Quantidade de cadeiras de espera
 
-/* semaforo declarado como global */
-sem_t sBarbeiro;   // atua como o barbeiro
-sem_t cadCorte;    // cadeira do corte
-sem_t cortePronto; // informa se o corte está pronto
+/* Semaforos declarados como global */
+sem_t s_barbeiro;   // Atua como o barbeiro
+sem_t cad_corte;    // Cadeira do corte
+sem_t corte_pronto; // Informa se o corte está pronto
 
 int num_clientes = 0;
 int id_cliente = 0;
@@ -49,17 +50,19 @@ int main()
         id[i] = i;
     }
 
-    sem_init(&cadCorte, 0, 1);    /* inicializa cadeiraCorte com 1 */
-    sem_init(&sBarbeiro, 0, 0);   /* inicializa barbeiro com 0 */
-    sem_init(&cortePronto, 0, 0); /* inicializa corte com 0 */
+    sem_init(&cad_corte, 0, 1);    /* inicializa cadeiraCorte com 1 */
+    sem_init(&s_barbeiro, 0, 0);   /* inicializa barbeiro com 0 */
+    sem_init(&corte_pronto, 0, 0); /* inicializa corte com 0 */
 
-    pthread_create(&p_barbeiro, NULL, (void *)&barbeiro, (void *)0);
 
     /* criar as threads */
     for (int i = 0; i < NUMTHREAD; i++)
     {
         pthread_create(&clientes[i], NULL, (void *)&cliente, (void *)&id[i]);
     }
+
+    sleep(NUMTHREAD/2);
+    pthread_create(&p_barbeiro, NULL, (void *)&barbeiro, (void *)0);
 
     for (int i = 0; i < NUMTHREAD; i++)
     {
@@ -69,9 +72,9 @@ int main()
     pthread_join(p_barbeiro, NULL);
     
     /* destroe os semaforos */
-    sem_destroy(&cadCorte);    
-    sem_destroy(&cortePronto); 
-    sem_destroy(&sBarbeiro);   
+    sem_destroy(&cad_corte);    
+    sem_destroy(&corte_pronto); 
+    sem_destroy(&s_barbeiro);   
 
     return 0;
 }
@@ -79,21 +82,22 @@ int main()
 void barbeiro(void *ptr)
 {
     printf("Barbeiro está dormindo\n");
-    sem_wait(&sBarbeiro);       // Espera a sinalização de que tem cliente
+    sem_wait(&s_barbeiro);       // Espera a sinalização de que tem cliente
     printf("Barbeiro acordou\n");
 
     while (1)
     {
-        sleep(1);
         printf("Barbeiro cortou o cabelo do cliente %d\n", id_cliente);
-        sem_post(&cortePronto);    // Sinaliza que o corte foi feito
-        sem_post(&cadCorte);       // Libera a cadeira para o próximo cliente 
+        sleep(2);
+        sem_post(&corte_pronto);    // Sinaliza que o corte foi feito
+        sem_post(&cad_corte);       // Libera a cadeira para o próximo cliente 
         num_clientes--;            
         if (num_clientes == 0)
         {
+            sleep(1);
             break;
         }
-        sem_wait(&sBarbeiro);       // Espera a sinalização de que tem cliente
+        sem_wait(&s_barbeiro);       // Espera a sinalização de que tem cliente
     }
 
     printf("Sem clientes na barbearia\n");
@@ -110,13 +114,13 @@ void cliente(void *cli)
         if (num_clientes == 0)
         {
             num_clientes++;
-            sem_wait(&cadCorte);    // Bloqueia a cadeira do barbeiro  
+            sem_wait(&cad_corte);    // Bloqueia a cadeira do barbeiro  
             printf("Cliente %d sentou na cadeira do barbeiro\n", id);
             
-            sem_post(&sBarbeiro);   // Sinaliza para o barbeiro que tem cliente 
+            sem_post(&s_barbeiro);   // Sinaliza para o barbeiro que tem cliente 
             id_cliente = id;
             
-            sem_wait(&cortePronto); // Espera a sinalização do barbeiro de que o corte foi feito
+            sem_wait(&corte_pronto); // Espera a sinalização do barbeiro de que o corte foi feito
             printf("Cliente %d foi atendido e saiu da barbearia\n", id);
         }
         else
@@ -124,14 +128,14 @@ void cliente(void *cli)
             num_clientes++;
             printf("Cliente %d sentou em uma cadeira de espera\n", id);
 
-            sem_wait(&cadCorte);    // Bloqueia a cadeira do barbeiro  
             sleep(1);
+            sem_wait(&cad_corte);    // Bloqueia a cadeira do barbeiro  
             printf("Cliente %d sentou na cadeira do barbeiro\n", id);
             
-            sem_post(&sBarbeiro);   // Sinaliza para o barbeiro que tem cliente
+            sem_post(&s_barbeiro);   // Sinaliza para o barbeiro que tem cliente
             id_cliente = id;
             
-            sem_wait(&cortePronto); // Espera a sinalização do barbeiro de que o corte foi feito
+            sem_wait(&corte_pronto); // Espera a sinalização do barbeiro de que o corte foi feito
             printf("Cliente %d foi atendido e saiu da barbearia\n", id);
         }
     }
