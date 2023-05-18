@@ -1,0 +1,9 @@
+* Como compilar
+    ~$ make prod_cons
+    
+* Como rodar
+    ~$ ./prod_cons
+
+* Como alterar a quantidade de leitores e escritores
+Para isso mude o valor das variaveis define nomeadas
+como QUANTIDADE_DE_LEITORES e QUANTIDADE_DE_ESCRITORES
