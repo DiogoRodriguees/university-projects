@@ -10,18 +10,6 @@
         08 de Junho de 2023
 */
 
-#include <stdbool.h> // bool
-#include <pthread.h> // pthread_t
-
-/* Variaveis para teste com diferentes numeros de ALUNOS, MONITORES e PROFESSORES */
-#define MAX_ALUNOS_GRUPO 10
-#define MAX_MONITORES_GRUPO 1
-#define MAX_TURMA_ALUNOS 30
-
-/* Variaveis que serão inicializadas pelo monitor */
-int estudantesSala;   // numero de estudantes na sala
-bool grupoTemMonitor; // verifica se o grupo possui um monitor
-
 /*
     Ações dos PROFESSORES
         * abrirSala
@@ -42,6 +30,19 @@ bool grupoTemMonitor; // verifica se o grupo possui um monitor
     OBS:
         Exibir uma mensagem para cada ação executada.
 */
+
+#include <stdbool.h> // bool
+#include <pthread.h> // pthread_t
+
+/* Variaveis para teste com diferentes numeros de ALUNOS, MONITORES e PROFESSORES */
+#define MAX_ALUNOS_GRUPO 10
+#define MAX_MONITORES_GRUPO 1
+#define MAX_TURMA_ALUNOS 30
+
+/* Variaveis que serão inicializadas pelo monitor */
+int estudantesSala;   // numero de estudantes na sala
+bool grupoTemMonitor; // verifica se o grupo possui um monitor
+
 
 int main()
 {
