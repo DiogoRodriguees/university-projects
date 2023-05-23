@@ -1,0 +1,6 @@
+* Ideia inicial
+Criar classes para PROFESSORES, ALUNOS e MONITORES para 
+melhorar o controle da ações que cada um pode realizar.
+
+* O que utilizar?
+A principio utilizar semaforos para controle.
