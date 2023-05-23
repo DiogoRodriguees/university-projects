@@ -2,5 +2,11 @@
 Criar classes para PROFESSORES, ALUNOS e MONITORES para 
 melhorar o controle da ações que cada um pode realizar.
 
+Utilizar sinais(SIGINT, SIGTERM) para que o professor feche a sala. 
+
+Enquanto a sala estiver aberta realizar comportamento de entrada e 
+saida da sala de maneira aleatório.
+
+
 * O que utilizar?
 A principio utilizar semaforos para controle.
