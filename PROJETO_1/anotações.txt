@@ -13,4 +13,4 @@ A principio utilizar semaforos para controle.
 
 * Duvidas
 1. Pode ter mais de um monitor para cada X alunos.
-
+2. O monitor conta para a quantidade de pessoas na sala?
