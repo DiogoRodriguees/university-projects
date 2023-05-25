@@ -10,3 +10,7 @@ saida da sala de maneira aleatório.
 
 * O que utilizar?
 A principio utilizar semaforos para controle.
+
+* Duvidas
+1. Pode ter mais de um monitor para cada X alunos.
+
