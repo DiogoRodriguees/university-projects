@@ -38,7 +38,7 @@
 
 /* Variaveis para teste com diferentes numeros de ALUNOS, MONITORES e PROFESSORES */
 #define ALUNOS_POR_GRUPO 3
-#define LIMITE_ALUNOS_SALA 6
+#define LIMITE_ALUNOS_SALA 8
 #define LIMITE_MONITORES 2
 
 /* Semaforos */
@@ -72,13 +72,13 @@ void avisarEstudantesMonitores()
 void fecharSala()
 {
     /* Tempo que a sala fica aberta */
-    sleep(45);
+    sleep(25);
 
     // sem_destroy(&s_sala);
     printf("O PROFESSOR FECHOU A SALA\n");
 }
 
-void *executarProfessor(void *)
+void *executarProfessor()
 {
     /* Libera os ALUNOS e MONITORES p/ entrar */
     abrirSala();
@@ -173,7 +173,7 @@ void *executarMonitores(void *id)
     m_entrarSala(m_id);
     m_supervisionarAlunos(); // Libera ALUNOS_POR_GRUPO para estudarem
 
-    sleep(10); // Monitor fica 10seg na sala
+    // sleep(10); // Monitor fica 10seg na sala
 
     m_sairSala(m_id);
 }
@@ -182,15 +182,18 @@ int main(int argc, char **argv)
 {
     /* Criar threads para: Alunos, Monitores, Professores */
     pthread_t alunos[LIMITE_ALUNOS_SALA], monitores[LIMITE_MONITORES], professor;
+    
+    //teste 
+    // sem_init(&s_sala, 0, LIMITE_ALUNOS_SALA);
 
     sem_init(&s_alunos, 0, 0);    // Semaforo de ALUNOS iniciando bloqueado
-    sem_init(&s_monitores, 0, 0); // Semaforo de MONITORES iniciando bloqueado
+    sem_init(&s_monitores, 0, 2); // Semaforo de MONITORES iniciando bloqueado
 
     /* Inicializando thread do PROFESSOR */
     pthread_create(&professor, NULL, executarProfessor, NULL);
 
     /* Inicializando threads ALUNOS */
-    for (int i = 0; i < LIMITE_ALUNOS_SALA; i++)
+    for (int i = 0; i < (LIMITE_ALUNOS_SALA - LIMITE_MONITORES); i++)
     {
         pthread_create(&alunos[i], NULL, executarAlunos, &i);
         sleep(1); // proximo aluno chega em 10seg
@@ -200,7 +203,7 @@ int main(int argc, char **argv)
     for (int i = 0; i < LIMITE_MONITORES; i++)
     {
         pthread_create(&monitores[i], NULL, executarMonitores, &i);
-        sleep(10); // Proximo monitor chega em 10seg
+        sleep(5); // Proximo monitor chega em 10seg
     }
 
     for (int i = 0; i < LIMITE_ALUNOS_SALA; i++)
@@ -209,9 +212,7 @@ int main(int argc, char **argv)
     for (int i = 0; i < LIMITE_MONITORES; i++)
         pthread_join(monitores[i], NULL);
 
-    pthread_join(professor, NULL);
-    
-    printf("Tudo ok\n");
+    // pthread_join(professor, NULL);
     
     sem_destroy(&s_alunos);
     sem_destroy(&s_monitores);
