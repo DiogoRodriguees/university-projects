@@ -37,9 +37,9 @@
 #include <unistd.h>
 
 /* Variaveis para teste com diferentes numeros de ALUNOS, MONITORES e PROFESSORES */
-#define ALUNOS_POR_GRUPO 3
-#define LIMITE_ALUNOS_SALA 8
-#define LIMITE_MONITORES 2
+#define ALUNOS_POR_GRUPO 2
+#define LIMITE_ALUNOS_SALA 5
+#define LIMITE_MONITORES 3
 
 /* Semaforos */
 sem_t s_alunos;    // Controle dos alunos estudando
@@ -49,7 +49,7 @@ sem_t s_sala;      // Controle dos estudantes na sala (Alunos e Monitores)
 /* Controle para saida de monitores */
 int total_alunos = 0;
 int monitores_disponiveis = 0;
-
+bool sala_cheia = true;
 /************************************************************************
  *                               PROFESSOR                              *
  ************************************************************************/
@@ -72,13 +72,16 @@ void avisarEstudantesMonitores()
 void fecharSala()
 {
     /* Tempo que a sala fica aberta */
-    sleep(25);
+    // sleep(30);
+    
+    while(sala_cheia)
+        sleep(1);
 
     sem_destroy(&s_sala);
     printf("O PROFESSOR FECHOU A SALA\n");
 }
 
-void *executarProfessor()
+void *executarProfessor(void*)
 {
     /* Libera os ALUNOS e MONITORES p/ entrar */
     abrirSala();
@@ -105,21 +108,23 @@ void a_sairSala(int id)
 
 void a_entrarSala(int id)
 {
-    sem_wait(&s_sala);
+    sem_wait(&s_alunos);
+    total_alunos++;
+    
+    sleep(1); // tempo para verificação no terminal
     printf("ALUNO %i ENTROU NA SALA\n", id);
 }
 
 void a_estudar(int id)
 {
-    sem_wait(&s_alunos);
-    total_alunos++;
+    sem_wait(&s_sala);
     printf("ALUNO %i COMECOU A ESTUDAR\n", id);
 }
 
 void *executarAlunos(void *id)
 {
     int a_id = *((int *)id);
-
+    
     a_entrarSala(a_id);
 
     a_estudar(a_id);
@@ -139,6 +144,8 @@ void m_entrarSala(int id)
     monitores_disponiveis++;
     sem_wait(&s_sala);
     printf("MONITOR %i ENTROU NA SALA\n", id);
+    
+
 }
 
 void m_sairSala(int id)
@@ -148,12 +155,13 @@ void m_sairSala(int id)
     monitores_disponiveis--;
 
     /* Monitor aguarda outro monitor entra na sala ou alguns alunos sairem */
-    // while (((float)total_alunos / monitores_disponiveis) > ALUNOS_POR_GRUPO)
-    //     sleep(1);
+    while (((float)total_alunos / monitores_disponiveis) > ALUNOS_POR_GRUPO)
 
     /* Monitor libera um TOKEN para outra thread entrar na sala */
     sem_post(&s_sala);
     printf("O MONITOR %i SAIU DA SALA\n", id);
+    if (monitores_disponiveis == 0)
+        sala_cheia = false;
 }
 
 void m_supervisionarAlunos()
@@ -183,17 +191,14 @@ int main(int argc, char **argv)
     /* Criar threads para: Alunos, Monitores, Professores */
     pthread_t alunos[LIMITE_ALUNOS_SALA], monitores[LIMITE_MONITORES], professor;
 
-    // teste
-     sem_init(&s_sala, 0, LIMITE_ALUNOS_SALA);
-
     sem_init(&s_alunos, 0, 0);    // Semaforo de ALUNOS iniciando bloqueado
-    sem_init(&s_monitores, 0, 2); // Semaforo de MONITORES iniciando bloqueado
+    sem_init(&s_monitores, 0, 0); // Semaforo de MONITORES iniciando bloqueado
 
     /* Inicializando thread do PROFESSOR */
-    // pthread_create(&professor, NULL, executarProfessor, NULL);
+    pthread_create(&professor, NULL, executarProfessor, NULL);
 
     /* Inicializando threads ALUNOS */
-    for (int i = 0; i < (LIMITE_ALUNOS_SALA - LIMITE_MONITORES); i++)
+    for (int i = 0; i < LIMITE_ALUNOS_SALA; i++)
     {
         pthread_create(&alunos[i], NULL, executarAlunos, &i);
         sleep(1); // proximo aluno chega em 10seg
@@ -206,7 +211,7 @@ int main(int argc, char **argv)
         sleep(5); // Proximo monitor chega em 10seg
     }
 
-    // pthread_join(professor, NULL);
+    pthread_join(professor, NULL);
 
     for (int i = 0; i < LIMITE_ALUNOS_SALA; i++)
         pthread_join(alunos[i], NULL);
@@ -216,7 +221,6 @@ int main(int argc, char **argv)
 
     sem_destroy(&s_alunos);
     sem_destroy(&s_monitores);
-    sem_destroy(&s_sala);
 
     return 0;
 }
