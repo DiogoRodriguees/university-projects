@@ -74,7 +74,7 @@ void fecharSala()
     /* Tempo que a sala fica aberta */
     sleep(25);
 
-    // sem_destroy(&s_sala);
+    sem_destroy(&s_sala);
     printf("O PROFESSOR FECHOU A SALA\n");
 }
 
@@ -182,15 +182,15 @@ int main(int argc, char **argv)
 {
     /* Criar threads para: Alunos, Monitores, Professores */
     pthread_t alunos[LIMITE_ALUNOS_SALA], monitores[LIMITE_MONITORES], professor;
-    
-    //teste 
-    // sem_init(&s_sala, 0, LIMITE_ALUNOS_SALA);
+
+    // teste
+     sem_init(&s_sala, 0, LIMITE_ALUNOS_SALA);
 
     sem_init(&s_alunos, 0, 0);    // Semaforo de ALUNOS iniciando bloqueado
     sem_init(&s_monitores, 0, 2); // Semaforo de MONITORES iniciando bloqueado
 
     /* Inicializando thread do PROFESSOR */
-    pthread_create(&professor, NULL, executarProfessor, NULL);
+    // pthread_create(&professor, NULL, executarProfessor, NULL);
 
     /* Inicializando threads ALUNOS */
     for (int i = 0; i < (LIMITE_ALUNOS_SALA - LIMITE_MONITORES); i++)
@@ -206,14 +206,14 @@ int main(int argc, char **argv)
         sleep(5); // Proximo monitor chega em 10seg
     }
 
+    // pthread_join(professor, NULL);
+
     for (int i = 0; i < LIMITE_ALUNOS_SALA; i++)
         pthread_join(alunos[i], NULL);
 
     for (int i = 0; i < LIMITE_MONITORES; i++)
         pthread_join(monitores[i], NULL);
 
-    // pthread_join(professor, NULL);
-    
     sem_destroy(&s_alunos);
     sem_destroy(&s_monitores);
     sem_destroy(&s_sala);
