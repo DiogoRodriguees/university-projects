@@ -7,10 +7,13 @@ Utilizar sinais(SIGINT, SIGTERM) para que o professor feche a sala.
 Enquanto a sala estiver aberta realizar comportamento de entrada e 
 saida da sala de maneira aleatório.
 
+* Não feito
+1. Verificar se ao sair o monitor mantem a condição 1 proposta pela exercicio
+2. 
 
 * O que utilizar?
 A principio utilizar semaforos para controle.
 
 * Duvidas
 1. Pode ter mais de um monitor para cada X alunos.
-2. O monitor conta para a quantidade de pessoas na sala?
+2. O monitor conta para a quantidade de pessoas na sala?    
