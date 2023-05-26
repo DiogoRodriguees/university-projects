@@ -9,7 +9,10 @@ saida da sala de maneira aleatório.
 
 * Não feito
 1. Verificar se ao sair o monitor mantem a condição 1 proposta pela exercicio
-2. 
+2. Ao entra na sala o monitor deve liberar uma 
+   quantidade de tokens que mantenha a principio 1.
+   Exemplo: Se houver 5 alunos na sala e o limite é 10,
+   quando o novo monitor entrar ele deve liberar apenas mais 5 tokens
 
 * O que utilizar?
 A principio utilizar semaforos para controle.
