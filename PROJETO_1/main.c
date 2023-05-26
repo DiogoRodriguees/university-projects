@@ -50,8 +50,8 @@ sem_t s_sala;      // Controle dos estudantes na sala (Alunos e Monitores)
 int total_alunos = 0;
 int monitores_disponiveis = 0;
 
-/************************************************************************ 
- *                                ALUNOS                                *
+/************************************************************************
+ *                               PROFESSOR                              *
  ************************************************************************/
 void abrirSala()
 {
