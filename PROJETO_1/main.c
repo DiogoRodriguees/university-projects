@@ -4,52 +4,52 @@
         Marcos Vinicios de Quadros - 2380560
 
     Descrição:
+        Ações dos PROFESSORES
+            * abrirSala
+            * fecharSala
+            * avisarAlunos
+            * avisarMonitores
 
+        Ações dos ALUNOS
+            * entraSala
+            * sairSala
+            * estudar
+
+        Ações dos MONITORES
+            * entrarSala
+            * sairSala
+            * supervisionarAlunos
+
+        Para visualização:
+            Exibir uma mensagem para cada ação executada.
 
     Data:
         08 de Junho de 2023
-*/
-/*
-    Ações dos PROFESSORES
-        * abrirSala
-        * fecharSala
-        * avisarAlunos
-        * avisarMonitores
-
-    Ações dos ALUNOS
-        * entraSala
-        * sairSala
-        * estudar
-
-    Ações dos MONITORES
-        * entrarSala
-        * sairSala
-        * supervisionarAlunos
-
-    OBS:
-        Exibir uma mensagem para cada ação executada.
 */
 
 #include <stdbool.h>   // bool
 #include <pthread.h>   // pthread_t
 #include <semaphore.h> // sem_t
-#include <stdio.h>
-#include <unistd.h>
+#include <stdio.h>     // printf()
+#include <unistd.h>    // sleep()
 
 /* Variaveis para teste com diferentes numeros de ALUNOS, MONITORES e PROFESSORES */
 #define ALUNOS_POR_GRUPO 2
-#define LIMITE_ALUNOS_SALA 5
 #define LIMITE_MONITORES 3
+#define LIMITE_ALUNOS_SALA 5
 
 /* Semaforos */
 sem_t s_alunos;    // Controle dos alunos estudando
 sem_t s_monitores; // Controle do limite de monitores
 sem_t s_sala;      // Controle dos estudantes na sala (Alunos e Monitores)
 
-/* Controle para saida de monitores */
+/* Variavel de controle para saída do monitores*/
 int total_alunos = 0;
 int monitores_disponiveis = 0;
+
+/* Variavel de controle para finalizar o programa */
 bool sala_cheia = true;
+
 /************************************************************************
  *                               PROFESSOR                              *
  ************************************************************************/
@@ -64,24 +64,22 @@ void avisarEstudantesMonitores()
 {
     printf("PROFESSOR AVISOU OS MONITORES\n");
 
-    /* Libera LIMITE_MONITORES p/ supervisionarem alunos */
+    /* Libera tokens p/ monitores supervisionarem alunos */
     for (int i = 0; i < LIMITE_MONITORES; i++)
         sem_post(&s_monitores);
 }
 
 void fecharSala()
 {
-    /* Tempo que a sala fica aberta */
-    // sleep(30);
-    
-    while(sala_cheia)
+    /* Aguarda a sala envaziar */
+    while (sala_cheia)
         sleep(1);
 
     sem_destroy(&s_sala);
     printf("O PROFESSOR FECHOU A SALA\n");
 }
 
-void *executarProfessor(void*)
+void *executarProfessor(void *)
 {
     /* Libera os ALUNOS e MONITORES p/ entrar */
     abrirSala();
@@ -108,10 +106,11 @@ void a_sairSala(int id)
 
 void a_entrarSala(int id)
 {
+    sleep(1); // tempo para verificação no prompt
+
     sem_wait(&s_alunos);
     total_alunos++;
-    
-    sleep(1); // tempo para verificação no terminal
+
     printf("ALUNO %i ENTROU NA SALA\n", id);
 }
 
@@ -124,7 +123,7 @@ void a_estudar(int id)
 void *executarAlunos(void *id)
 {
     int a_id = *((int *)id);
-    
+
     a_entrarSala(a_id);
 
     a_estudar(a_id);
@@ -144,8 +143,6 @@ void m_entrarSala(int id)
     monitores_disponiveis++;
     sem_wait(&s_sala);
     printf("MONITOR %i ENTROU NA SALA\n", id);
-    
-
 }
 
 void m_sairSala(int id)
@@ -156,10 +153,13 @@ void m_sairSala(int id)
 
     /* Monitor aguarda outro monitor entra na sala ou alguns alunos sairem */
     while (((float)total_alunos / monitores_disponiveis) > ALUNOS_POR_GRUPO)
-
+    {
+    }
+    
     /* Monitor libera um TOKEN para outra thread entrar na sala */
     sem_post(&s_sala);
     printf("O MONITOR %i SAIU DA SALA\n", id);
+    
     if (monitores_disponiveis == 0)
         sala_cheia = false;
 }
