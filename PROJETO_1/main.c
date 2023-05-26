@@ -55,6 +55,7 @@ int monitores_disponiveis = 0;
  ************************************************************************/
 void abrirSala()
 {
+    /* Libera o semaforo SALA p/ MONITORES e ALUNOS entrarem */
     printf("PROFESSOR ABRIU A SALA\n");
     sem_init(&s_sala, 0, MAX_TURMA_ALUNOS);
 }
@@ -62,25 +63,29 @@ void abrirSala()
 void avisarEstudantesMonitores()
 {
     printf("PROFESSOR AVISOU OS MONITORES\n");
+
+    /* Libera MAX_MONITORES_GRUPO p/ supervisionarem alunos */
     for (int i = 0; i < MAX_MONITORES_GRUPO; i++)
         sem_post(&s_monitores);
-    
 }
 
 void fecharSala()
 {
-    /* A sala fica aberta por 60 seg */
+    /* Tempo que a sala fica aberta */
     sleep(45);
+
     // sem_destroy(&s_sala);
     printf("O PROFESSOR FECHOU A SALA\n");
 }
 
 void *executarProfessor(void *)
 {
+    /* Libera os ALUNOS e MONITORES p/ entrar */
     abrirSala();
 
     /* Avisar os alunos */
 
+    /* Libera o semaforo de MONITORES */
     avisarEstudantesMonitores();
 
     fecharSala();
@@ -91,7 +96,7 @@ void *executarProfessor(void *)
  ************************************************************************/
 void a_sairSala(int id)
 {
-    /* Aluno devolve um token para sair da sala */
+    /* Aluno devolve tokens token para sair da sala */
     printf("ALUNO %i SAIU DA SALA\n", id);
     sem_post(&s_alunos);
     sem_post(&s_sala);
@@ -107,8 +112,8 @@ void a_entrarSala(int id)
 void a_estudar(int id)
 {
     sem_wait(&s_alunos);
-    printf("ALUNO %i COMECOU A ESTUDAR\n", id);
     total_alunos++;
+    printf("ALUNO %i COMECOU A ESTUDAR\n", id);
 }
 
 void *executarAlunos(void *id)
@@ -118,7 +123,8 @@ void *executarAlunos(void *id)
     a_entrarSala(a_id);
 
     a_estudar(a_id);
-    /* Alunos ficam 10seg na sala */
+
+    /* Tempo que os alunos ficam estudando */
     sleep(10);
 
     a_sairSala(a_id);
@@ -137,7 +143,7 @@ void m_entrarSala(int id)
 
 void m_sairSala(int id)
 {
-    /* Monitor libera token para que outro monitor possa entra */
+    /* Monitor libera token p/ que outro monitor possa entrar */
     sem_post(&s_monitores);
     monitores_disponiveis--;
 
@@ -202,9 +208,9 @@ int main(int argc, char **argv)
 
     for (int i = 0; i < MAX_MONITORES_GRUPO; i++)
         pthread_join(monitores[i], NULL);
-        
+
     pthread_join(professor, NULL);
-    
+
     sem_destroy(&s_alunos);
     sem_destroy(&s_monitores);
     sem_destroy(&s_sala);
