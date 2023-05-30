@@ -34,15 +34,16 @@
 #include <unistd.h>    // sleep()
 
 /* Variaveis para teste com diferentes numeros de ALUNOS, MONITORES e PROFESSORES */
-#define ALUNOS_POR_GRUPO 2
+#define ALUNOS_POR_GRUPO 4
 #define LIMITE_MONITORES 3
-#define LIMITE_ALUNOS_SALA 5
+#define LIMITE_ALUNOS_SALA 15
 
 /* Semaforos */
 sem_t s_alunos;    // Controle dos alunos estudando
 sem_t s_monitores; // Controle do limite de monitores
 sem_t s_sala;      // Controle dos estudantes na sala (Alunos e Monitores)
 
+/* Variaveis para controle de permição da entrada de alunos e monitores */
 bool entrada_alunos = true;
 bool entrada_monitores = true;
 
@@ -134,6 +135,10 @@ void *executarAlunos(void *id)
 {
     int a_id = *((int *)id);
 
+    if (!entrada_alunos)
+        return;
+
+    printf("ALUNO %i ESPERANDO MONITOR\n", a_id);
     a_entrarSala(a_id);
 
     a_estudar(a_id);
@@ -149,6 +154,9 @@ void *executarAlunos(void *id)
  ************************************************************************/
 void m_entrarSala(int id)
 {
+    if (!entrada_monitores)
+        return;
+
     sem_wait(&s_monitores);
     monitores_disponiveis++;
     sem_wait(&s_sala);
@@ -176,8 +184,10 @@ void m_sairSala(int id)
 
 void m_supervisionarAlunos()
 {
+    int liberar_tokens = ALUNOS_POR_GRUPO - (total_alunos % ALUNOS_POR_GRUPO);
+
     /* Liberando tokens para o semaforo dos ALUNOS */
-    for (int i = 0; i < (total_alunos % ALUNOS_POR_GRUPO); i++)
+    for (int i = 0; i < liberar_tokens; i++)
     {
         sem_post(&s_alunos);
         sleep(1);
@@ -191,7 +201,7 @@ void *executarMonitores(void *id)
     m_entrarSala(m_id);
     m_supervisionarAlunos(); // Libera ALUNOS_POR_GRUPO para estudarem
 
-    // sleep(10); // Monitor fica 10seg na sala
+    sleep(10); // Monitor fica 10seg na sala
 
     m_sairSala(m_id);
 }
