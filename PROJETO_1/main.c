@@ -34,9 +34,9 @@
 #include <unistd.h>    // sleep()
 
 /* Variaveis para teste com diferentes numeros de ALUNOS, MONITORES e PROFESSORES */
-#define ALUNOS_POR_GRUPO 4
+#define ALUNOS_POR_GRUPO 2
 #define LIMITE_MONITORES 3
-#define LIMITE_ALUNOS_SALA 15
+#define LIMITE_ALUNOS_SALA 6
 
 /* Semaforos */
 sem_t s_alunos;    // Controle dos alunos estudando
@@ -92,7 +92,7 @@ void *executarProfessor(void *)
     abrirSala();
 
     /* Sala fica aberta por 60seg */
-    sleep(60);
+    sleep(10);
 
     /* Monitores não poderão mais entrar na sala*/
     avisarEstudantesMonitores();
@@ -108,21 +108,28 @@ void *executarProfessor(void *)
  ************************************************************************/
 void a_sairSala(int id)
 {
+    int a_id = *((int *)id);
     /* Aluno devolve tokens token para sair da sala */
-    printf("ALUNO %i SAIU DA SALA\n", id);
+    printf("ALUNO %i SAIU DA SALA\n", a_id);
     sem_post(&s_alunos);
     sem_post(&s_sala);
     total_alunos--;
 }
 
-void a_entrarSala(int id)
+bool a_entrarSala(int id)
 {
     sleep(1); // tempo para verificação no prompt
-
     sem_wait(&s_alunos);
+
+    if (!entrada_alunos)
+    {
+        return true;
+    }
     total_alunos++;
 
     printf("ALUNO %i ENTROU NA SALA\n", id);
+
+    return false;
 }
 
 void a_estudar(int id)
@@ -135,12 +142,10 @@ void *executarAlunos(void *id)
 {
     int a_id = *((int *)id);
 
-    if (!entrada_alunos)
-        return;
-
     printf("ALUNO %i ESPERANDO MONITOR\n", a_id);
-    a_entrarSala(a_id);
 
+    if (a_entrarSala(a_id))
+        return;
     a_estudar(a_id);
 
     /* Tempo que os alunos ficam estudando */
@@ -152,33 +157,39 @@ void *executarAlunos(void *id)
 /************************************************************************ /
  *                               MONITORES                              *
  ************************************************************************/
-void m_entrarSala(int id)
+bool m_entrarSala(int id)
 {
-    if (!entrada_monitores)
-        return;
 
     sem_wait(&s_monitores);
-    monitores_disponiveis++;
+
     sem_wait(&s_sala);
+    monitores_disponiveis++;
+
+    if (!entrada_monitores)
+        return true;
     printf("MONITOR %i ENTROU NA SALA\n", id);
+
+    return false;
 }
 
 void m_sairSala(int id)
 {
+    int m_id = *((int *)id);
     /* Monitor libera token p/ que outro monitor possa entrar */
     sem_post(&s_monitores);
-    monitores_disponiveis--;
 
+    monitores_disponiveis--;
+    
     /* Monitor aguarda outro monitor entra na sala ou alguns alunos sairem */
-    while (((float)total_alunos / monitores_disponiveis) > ALUNOS_POR_GRUPO)
-    {
-    }
+    // while (((float)total_alunos / monitores_disponiveis) > ALUNOS_POR_GRUPO)
+    // {
+    // }
 
     /* Monitor libera um TOKEN para outra thread entrar na sala */
     sem_post(&s_sala);
-    printf("O MONITOR %i SAIU DA SALA\n", id);
+    printf("O MONITOR %i SAIU DA SALA\n", m_id);
 
-    if (monitores_disponiveis == 0)
+    if (monitores_disponiveis <= 0)
         sala_cheia = false;
 }
 
@@ -198,7 +209,11 @@ void *executarMonitores(void *id)
 {
     int m_id = *((int *)id);
 
-    m_entrarSala(m_id);
+    if (m_entrarSala(m_id))
+    {
+        m_sairSala(m_id);
+        return;
+    }
     m_supervisionarAlunos(); // Libera ALUNOS_POR_GRUPO para estudarem
 
     sleep(10); // Monitor fica 10seg na sala

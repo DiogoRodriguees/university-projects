@@ -15,13 +15,15 @@ saida da sala de maneira aleatório.
    quando o novo monitor entrar ele deve liberar apenas mais 5 tokens
 3. Garantir que a sala seja fechada corretamente
 
-* O que utilizar?
-A principio utilizar semaforos para controle.
-
 * Duvidas
 1. Pode ter mais de um monitor para cada X alunos.
 2. O monitor conta para a quantidade de pessoas na sala?    
-
-* OBS de Testes
-1. Foi modificado a inicialização do semaforo de
-   monitores para remover as ações dos professor.
+3. Pode haver mais de um monitor na sala?
+4. Pode haver mais mais de uma grupo?
+5. Descrição dever detalhar as ações que ocorrem no sistema?
+   
+* Funcionalidades
+1. Deve haver 1 monitor para cada X alunos.
+2. Os alunos so podem entrar se um monitor estiver na sala.
+3. O monitor so pode sair se a condição 1 for mantida.
+4. Quando a sala é fechada os alunos e monitores não podem entrar.
