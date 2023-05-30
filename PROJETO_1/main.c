@@ -69,7 +69,7 @@ void avisarEstudantesMonitores()
     printf("MONITORES NAO PODEM MAIS ENTRAR\n");
 }
 
-void avisarEstudantesMonitores()
+void avisarAlunos()
 {
     entrada_alunos = false;
     printf("ALUNOS NAO PODEM MAIS ENTRAR\n");
@@ -77,9 +77,9 @@ void avisarEstudantesMonitores()
 
 void fecharSala()
 {
-    /* Teste - Aguarda a sala envaziar */
-    // while (sala_cheia)
-    //     sleep(1);
+    /* Aguarda a sala envaziar */
+    while (sala_cheia)
+        sleep(1);
 
     sem_destroy(&s_sala);
     printf("O PROFESSOR FECHOU A SALA\n");
@@ -90,17 +90,15 @@ void *executarProfessor(void *)
     /* Libera os ALUNOS e MONITORES p/ entrar */
     abrirSala();
 
-    /* Avisar os alunos */
+    /* Sala fica aberta por 60seg */
+    sleep(60);
 
     /* Monitores não poderão mais entrar na sala*/
     avisarEstudantesMonitores();
 
     /* Alunos não poderão mais entrar na sala*/
     avisarAlunos();
-    
-    /* Sala fica aberta por 60seg */
-    sleep(60);
-    
+
     fecharSala();
 }
 
@@ -179,7 +177,7 @@ void m_sairSala(int id)
 void m_supervisionarAlunos()
 {
     /* Liberando tokens para o semaforo dos ALUNOS */
-    for (int i = 0; i < ALUNOS_POR_GRUPO; i++)
+    for (int i = 0; i < (total_alunos % ALUNOS_POR_GRUPO); i++)
     {
         sem_post(&s_alunos);
         sleep(1);
@@ -213,14 +211,14 @@ int main(int argc, char **argv)
     for (int i = 0; i < LIMITE_ALUNOS_SALA; i++)
     {
         pthread_create(&alunos[i], NULL, executarAlunos, &i);
-        sleep(1); // proximo aluno chega em 10seg
+        sleep(1); // proximo aluno chega em 1seg
     }
 
     /* Inicializando threads de MONITORES */
     for (int i = 0; i < LIMITE_MONITORES; i++)
     {
         pthread_create(&monitores[i], NULL, executarMonitores, &i);
-        sleep(5); // Proximo monitor chega em 10seg
+        sleep(8); // Proximo monitor chega em 8seg
     }
 
     pthread_join(professor, NULL);
