@@ -34,9 +34,9 @@
 #include <unistd.h>    // sleep()
 
 /* Variaveis para teste com diferentes numeros de ALUNOS, MONITORES e PROFESSORES */
-#define ALUNOS_POR_GRUPO 4
+#define ALUNOS_POR_GRUPO 2
 #define LIMITE_MONITORES 3
-#define LIMITE_ALUNOS_SALA 15
+#define LIMITE_ALUNOS_SALA 6
 
 /* Semaforos */
 sem_t s_alunos;    // Controle dos alunos estudando
@@ -92,7 +92,7 @@ void *executarProfessor(void *)
     abrirSala();
 
     /* Sala fica aberta por 60seg */
-    sleep(60);
+    sleep(10);
 
     /* Monitores não poderão mais entrar na sala*/
     avisarEstudantesMonitores();
