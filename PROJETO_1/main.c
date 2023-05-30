@@ -43,6 +43,9 @@ sem_t s_alunos;    // Controle dos alunos estudando
 sem_t s_monitores; // Controle do limite de monitores
 sem_t s_sala;      // Controle dos estudantes na sala (Alunos e Monitores)
 
+bool entrada_alunos = true;
+bool entrada_monitores = true;
+
 /* Variavel de controle para saída do monitores*/
 int total_alunos = 0;
 int monitores_disponiveis = 0;
@@ -62,18 +65,21 @@ void abrirSala()
 
 void avisarEstudantesMonitores()
 {
-    printf("PROFESSOR AVISOU OS MONITORES\n");
+    entrada_monitores = false;
+    printf("MONITORES NAO PODEM MAIS ENTRAR\n");
+}
 
-    /* Libera tokens p/ monitores supervisionarem alunos */
-    for (int i = 0; i < LIMITE_MONITORES; i++)
-        sem_post(&s_monitores);
+void avisarEstudantesMonitores()
+{
+    entrada_alunos = false;
+    printf("ALUNOS NAO PODEM MAIS ENTRAR\n");
 }
 
 void fecharSala()
 {
-    /* Aguarda a sala envaziar */
-    while (sala_cheia)
-        sleep(1);
+    /* Teste - Aguarda a sala envaziar */
+    // while (sala_cheia)
+    //     sleep(1);
 
     sem_destroy(&s_sala);
     printf("O PROFESSOR FECHOU A SALA\n");
@@ -86,9 +92,15 @@ void *executarProfessor(void *)
 
     /* Avisar os alunos */
 
-    /* Libera o semaforo de MONITORES */
+    /* Monitores não poderão mais entrar na sala*/
     avisarEstudantesMonitores();
 
+    /* Alunos não poderão mais entrar na sala*/
+    avisarAlunos();
+    
+    /* Sala fica aberta por 60seg */
+    sleep(60);
+    
     fecharSala();
 }
 
@@ -155,11 +167,11 @@ void m_sairSala(int id)
     while (((float)total_alunos / monitores_disponiveis) > ALUNOS_POR_GRUPO)
     {
     }
-    
+
     /* Monitor libera um TOKEN para outra thread entrar na sala */
     sem_post(&s_sala);
     printf("O MONITOR %i SAIU DA SALA\n", id);
-    
+
     if (monitores_disponiveis == 0)
         sala_cheia = false;
 }
@@ -191,8 +203,8 @@ int main(int argc, char **argv)
     /* Criar threads para: Alunos, Monitores, Professores */
     pthread_t alunos[LIMITE_ALUNOS_SALA], monitores[LIMITE_MONITORES], professor;
 
-    sem_init(&s_alunos, 0, 0);    // Semaforo de ALUNOS iniciando bloqueado
-    sem_init(&s_monitores, 0, 0); // Semaforo de MONITORES iniciando bloqueado
+    sem_init(&s_alunos, 0, 0);                   // Semaforo de ALUNOS iniciando bloqueado
+    sem_init(&s_monitores, 0, LIMITE_MONITORES); // Semaforo de MONITORES iniciando bloqueado
 
     /* Inicializando thread do PROFESSOR */
     pthread_create(&professor, NULL, executarProfessor, NULL);
