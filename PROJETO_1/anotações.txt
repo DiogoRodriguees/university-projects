@@ -15,12 +15,20 @@ saida da sala de maneira aleatório.
    quando o novo monitor entrar ele deve liberar apenas mais 5 tokens
 3. Garantir que a sala seja fechada corretamente
 
+*OBS
+1. cuidado com variaveis de leitura e escrita
+2. evitar espera ocupada
+
 * O que utilizar?
 A principio utilizar semaforos para controle.
 
 * Duvidas
 1. Pode ter mais de um monitor para cada X alunos.
 2. O monitor conta para a quantidade de pessoas na sala?    
+3. Pode haver mais de um grupo na sala
+4. A descrição deve detalhar os funcionamento de cada função
+5. Verificar os arquivos makefile
+6. Funcionalidade do -Wall
 
 * OBS de Testes
 1. Foi modificado a inicialização do semaforo de
