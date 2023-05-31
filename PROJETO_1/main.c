@@ -149,19 +149,19 @@ void *executarAlunos(void *id)
 
     /* Sair da sala */
     sem_post(&s_sala);
-    sem_post(&s_alunos);
     printf("ALUNO %i SAIU DA SALA\n", a_id);
 
     sem_wait(&mutex);
     total_alunos--;
-    sem_post(&mutex);
-
     // libera o monitor
     int alunos_por_grupo = ((float)total_alunos / monitores_disponiveis);
     if (alunos_por_grupo < ALUNOS_POR_GRUPO)
     {
+        sem_post(&s_alunos);
         sem_post(&s_saida_monitores);
     }
+    sem_post(&mutex);
+
 }
 
 /************************************************************************ /
