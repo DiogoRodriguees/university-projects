@@ -113,6 +113,8 @@ void *executarAlunos(void *id)
     /* Entrar na sala */
     sem_wait(&s_alunos);
     sem_wait(&s_sala);
+    
+    /* Para o caso da entra de alunos ser bloqueadas */
     if (!entrada_alunos)
     {
         sem_post(&s_sala);
@@ -120,6 +122,7 @@ void *executarAlunos(void *id)
         printf("ALUNO %i NAO PODE MAIS ENTRAR NA SALA\n", a_id);
         return;
     }
+    
     printf("ALUNO %i ENTROU NA SALA E COMECOU A ESTUDAR\n", a_id);
 
     /* Permanecer um tempo na sala */
