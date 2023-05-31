@@ -103,7 +103,7 @@ void *executarProfessor(void *param)
     printf("O PROFESSOR FECHOU A SALA\n");
 }
 
-/************************************************************************ /
+/************************************************************************
  *                                ALUNOS                                *
  ************************************************************************/
 void *executarAlunos(void *id)
@@ -111,9 +111,9 @@ void *executarAlunos(void *id)
     int a_id = *((int *)id);
 
     /* Entrar na sala */
-    sem_wait(&s_alunos);
-    sem_wait(&s_sala);
-    
+    sem_wait(&s_alunos); // Semaforo liberado pelo monitor
+    sem_wait(&s_sala);   // Semaforo p/ controle de alunos na sala
+
     /* Para o caso da entra de alunos ser bloqueadas */
     if (!entrada_alunos)
     {
@@ -122,12 +122,12 @@ void *executarAlunos(void *id)
         printf("ALUNO %i NAO PODE MAIS ENTRAR NA SALA\n", a_id);
         return;
     }
-    
+
     printf("ALUNO %i ENTROU NA SALA E COMECOU A ESTUDAR\n", a_id);
 
     /* Permanecer um tempo na sala */
     sleep(5);
-    
+
     /* Sair da sala */
     sem_post(&s_sala);
     sem_post(&s_alunos);
@@ -144,6 +144,7 @@ void *executarMonitores(void *id)
     /* Entrar na sala */
     sem_wait(&s_sala);
     monitores_disponiveis++;
+
     if (!entrada_alunos)
     {
         monitores_disponiveis--;
@@ -170,13 +171,13 @@ void *executarMonitores(void *id)
     /* Sair da sala */
     monitores_disponiveis--;
     sem_post(&s_sala);
-    
+
     /* Para garantir 1 monitor para X alunos */
     while (((float)total_alunos / monitores_disponiveis) > ALUNOS_POR_GRUPO)
     {
         sleep(1);
     }
-    
+
     /* Ultimo monitor avisa que a sala esta vazia */
     if (monitores_disponiveis == 0)
     {
