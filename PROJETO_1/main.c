@@ -44,7 +44,9 @@ sem_t s_alunos;          // Controle dos alunos estudando
 sem_t s_saida_monitores; // Controle a saida de monitores
 sem_t s_sala;            // Controle dos estudantes na sala (Alunos e Monitores)
 sem_t mutex;
+
 sem_t s_fechar_sala;
+
 /* Variaveis para controle de permição da entrada de alunos e monitores */
 bool entrada_alunos = true;
 bool entrada_monitores = true;
@@ -68,13 +70,17 @@ void abrirSala()
 void avisarEstudantesMonitores()
 {
     // bloqueio de leitura
+    sem_wait(&mutex);
     entrada_monitores = false;
+    sem_post(&mutex);
 }
 
 void avisarAlunos()
 {
     // bloqueio de leitura
+    sem_wait(&mutex);
     entrada_alunos = false;
+    sem_post(&mutex);
 }
 
 void fecharSala()
@@ -82,7 +88,7 @@ void fecharSala()
     /* Aguarda a sala envaziar */
     // debloqueio
     // evitar espera ocupada
-    see_wait(&s_fechar_sala);
+    sem_wait(&s_fechar_sala);
 
     sem_destroy(&s_sala);
 }
@@ -115,12 +121,11 @@ void *executarAlunos(void *id)
 {
     int a_id = *((int *)id);
 
-    /* Entrar na sala */
+    printf("ALUNO %i ESPERANDO MONITOR", a_id);
     sem_wait(&s_alunos); // Semaforo liberado pelo monitor
     sem_wait(&s_sala);   // Semaforo p/ controle de alunos na sala
 
-    // mutex de bloqueio
-    sem_wait(&mutex);
+    sem_wait(&mutex); // mutex de bloqueio p/ variavel total_alunos
     total_alunos++;
 
     /* Para o caso da entra de alunos ser bloqueadas */
@@ -145,12 +150,17 @@ void *executarAlunos(void *id)
     /* Sair da sala */
     sem_post(&s_sala);
     sem_post(&s_alunos);
-    int alunos_por_grupo = ((float)total_alunos / monitores_disponiveis) > ALUNOS_POR_GRUPO;
-    if (alunos_por_grupo < ALUNOS_POR_GRUPO)
+    printf("ALUNO %i SAIU DA SALA\n", a_id);
+
+    sem_wait(&mutex);
+    total_alunos--;
+    sem_post(&mutex);
+
+    int alunos_por_grupo = ((float)total_alunos / monitores_disponiveis);
+    if (total_alunos == 0)
     {
         sem_post(&s_saida_monitores);
     }
-    printf("ALUNO %i SAIU DA SALA\n", a_id);
 }
 
 /************************************************************************ /
@@ -160,18 +170,11 @@ void *executarMonitores(void *id)
 {
     int m_id = *((int *)id);
 
-    /* Entrar na sala */
-    sem_wait(&s_sala);
-    int alunos_por_grupo = ((float)total_alunos / monitores_disponiveis) > ALUNOS_POR_GRUPO;
-    if (alunos_por_grupo < ALUNOS_POR_GRUPO)
-    {
-        sem_post(&s_saida_monitores);
-    }
-    monitores_disponiveis++;
+    // monitor não contar como aluno na sala. Revisar o uso desse semaforo pelo monitores
+    sem_wait(&s_sala); // monitor pega token p/ entrar na sala
 
     if (!entrada_alunos)
     {
-        monitores_disponiveis--;
         sem_post(&s_sala);
         if (monitores_disponiveis == 0)
         {
@@ -180,39 +183,37 @@ void *executarMonitores(void *id)
         printf("MONITOR %i NAO PODE MAIS ENTRAR NA SALA\n", m_id);
         return;
     }
+
+    sem_wait(&mutex); // bloqueio p/ leitura da variavel monitores_disponiveis
+    int alunos_por_grupo = ((float)total_alunos / monitores_disponiveis);
+    if (alunos_por_grupo < ALUNOS_POR_GRUPO)
+    {
+        sem_post(&s_saida_monitores);
+    }
+
+    monitores_disponiveis++;
+    sem_post(&mutex);
+
     printf("MONITOR %i ENTROU NA SALA\n", m_id);
 
-    // esplicar melhor a ideia de
-    /* Supervisionar alunos */
-    int liberar_tokens = ALUNOS_POR_GRUPO - (total_alunos % monitores_disponiveis);
+    // esplicar melhor a ideia do calculo para liberação de tokens
+    /* Libera X alunos para entrarem na sala */
+    int alunos_por_monitor = total_alunos % monitores_disponiveis; // Alunos por monitor
+    int liberar_tokens = ALUNOS_POR_GRUPO - alunos_por_monitor;    //
     for (int i = 0; i < liberar_tokens; i++)
-    {
         sem_post(&s_alunos);
-    }
 
     /* Permanecer um tempo na sala */
     sleep(10);
 
-    /* Sair da sala */
     sem_wait(&s_saida_monitores); // libera o monitor para sair da sala
     monitores_disponiveis--;
     sem_post(&s_sala);
 
-    // problema de espera ocupada
-    /* Para garantir 1 monitor para X alunos */
-    // while (((float)total_alunos / monitores_disponiveis) > ALUNOS_POR_GRUPO)
-    // {
-    //     sleep(1);
-    // }
-
-    /* Ultimo monitor avisa que a sala esta vazia */
-    if (monitores_disponiveis == 0)
-    {
-        // vbloquear mutex
-        sem_post(&s_fechar_sala);
-        // alunos_em_sala = false;
-    }
     printf("MONITOR %i SAIU DA SALA\n", m_id);
+
+    if (monitores_disponiveis == 0)
+        sem_post(&s_fechar_sala); // libera o professor para fechar a sala
 }
 
 int main(int argc, char **argv)
