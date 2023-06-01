@@ -1,4 +1,8 @@
-CC = gcc
+CC = gcc 
+PROGS = main_comp
+
+clean:
+	rm -r $(PROGS)
 
 clean:
 	rm -r main_comp
