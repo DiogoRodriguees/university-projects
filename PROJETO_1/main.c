@@ -27,6 +27,10 @@
             um monitor para que ele saia. Para que o monitor seja libera o aluno deve saber se a quantidade de alunos na sala é menor
             que a quantidade de ((monitores - 1) * alunos por grupo).
 
+        FUNÇÕES EXTRAS:
+            Para simular um tempo entre as chegadas dos monitores, foi criado um variavel(T_CRIACAO_MONITOR) que é
+            utilizada na função sleep antes que o proximo monitor seja criado.
+
     Data:
         08 de Junho de 2023
 */
@@ -38,18 +42,19 @@
 #include <unistd.h>    // sleep()
 
 /* Variaveis para teste com diferentes numeros de ALUNOS, MONITORES e PROFESSORES */
-#define LIMITE_ALUNOS_SALA 20
-#define ALUNOS_POR_GRUPO 6
-#define MONITORES 4
+#define LIMITE_ALUNOS_SALA 17
+#define ALUNOS_POR_GRUPO 4
+#define MONITORES 5
 
-/* Tempo que as threads permanecem em sala */
-#define T_SALA_ABERTA 30
-#define T_MONITOR_SALA 4
-#define T_ALUNO_SALA 5
+/* Tempo que as threads executam sleep */
+#define T_ALUNO_SALA 5      // tempo que o aluno permance na sala
+#define T_MONITOR_SALA 4    // tempo que o monitor permance na sala
+#define T_SALA_ABERTA 30    // tempo que a sala permanece aberta
+#define T_CRIACAO_MONITOR 6 // tempo para simular uma entrada tardia do monitor
 
 /* Semaforos */
 sem_t s_alunos;          // Controle dos alunos estudando
-sem_t s_saida_monitores; // Controle a saida de monitores
+sem_t s_saida_monitores; // Controle da saida de monitores
 sem_t s_sala;            // Controle dos estudantes na sala (Alunos e Monitores)
 sem_t mutex;             // Controle das variaveis compartilhadas
 sem_t s_fechar_sala;     // Libera o professor pra fechar a sala;
@@ -178,7 +183,7 @@ void *executarMonitores(void *id)
         monitor_deseja_sair = true;
         sem_post(&mutex);
 
-        // semaforo liberado pela entrada de X alunos ou de um monitor
+        // semaforo liberado pela saida de X alunos ou entrada de um monitor
         sem_wait(&s_saida_monitores);
 
         // entra na seção critica
@@ -223,8 +228,9 @@ int main(int argc, char **argv)
     /* Inicializando threads de MONITORES */
     for (int i = 0; i < MONITORES; i++)
     {
-        pthread_create(&monitores[i], NULL, executarMonitores, &i);
-        sleep(4); // Proximo monitor chega em 8seg
+        int n_thread = i + 1;
+        pthread_create(&monitores[i], NULL, executarMonitores, &n_thread);
+        sleep(T_CRIACAO_MONITOR); // Proximo monitor chega em T_CRIACAO_MONITOR
     }
 
     pthread_join(professor, NULL);

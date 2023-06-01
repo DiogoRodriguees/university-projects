@@ -1,37 +1,13 @@
-* Ideia inicial
-Criar classes para PROFESSORES, ALUNOS e MONITORES para 
-melhorar o controle da ações que cada um pode realizar.
-
-Utilizar sinais(SIGINT, SIGTERM) para que o professor feche a sala. 
-
-Enquanto a sala estiver aberta realizar comportamento de entrada e 
-saida da sala de maneira aleatório.
-
-* Não feito
-1. Verificar se ao sair o monitor mantem a condição 1 proposta pela exercicio
-2. Ao entra na sala o monitor deve liberar uma 
-   quantidade de tokens que mantenha a principio 1.
-   Exemplo: Se houver 5 alunos na sala e o limite é 10,
-   quando o novo monitor entrar ele deve liberar apenas mais 5 tokens
-3. Garantir que a sala seja fechada corretamente
-
 *OBS
-1. cuidado com variaveis de leitura e escrita
+1. cuidado com variaveis de leitura e escrita(r e w simultaneo)
 2. evitar espera ocupada
 3. revisar caso de post com entrada de monitor;
 
-* O que utilizar?
-A principio utilizar semaforos para controle.
-
 * Duvidas
-1. Pode ter mais de um monitor para cada X alunos.
-2. O monitor conta para a quantidade de pessoas na sala?    
-3. Pode haver mais de um grupo na sala
-4. A descrição deve detalhar os funcionamento de cada função
+1. Pode ter mais de um monitor para cada X alunos. SIM
+2. O monitor conta para a quantidade de pessoas na sala?   NAO 
+3. Pode haver mais de um grupo na sala. SIM
+4. A descrição deve detalhar os funcionamento de cada função. NAO - apenas a ideia de implementação
 5. Verificar os arquivos makefile
-6. Funcionalidade do -Wall
+6. Funcionalidade do -Wall - remover warnigs
 7. Mensagem do "monitor nao pode entrar na sala"  pode acontecer depois de fechar a sala.
-
-* OBS de Testes
-1. Foi modificado a inicialização do semaforo de
-   monitores para remover as ações dos professor.
