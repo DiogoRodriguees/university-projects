@@ -42,9 +42,9 @@
 #include <unistd.h>    // sleep()
 
 /* Variaveis para teste com diferentes numeros de ALUNOS, MONITORES e PROFESSORES */
-#define LIMITE_ALUNOS_SALA 17
-#define ALUNOS_POR_GRUPO 4
-#define MONITORES 5
+#define LIMITE_ALUNOS_SALA 12
+#define ALUNOS_POR_GRUPO 5
+#define MONITORES 3
 
 /* Tempo que as threads executam sleep */
 #define T_ALUNO_SALA 5      // tempo que o aluno permance na sala

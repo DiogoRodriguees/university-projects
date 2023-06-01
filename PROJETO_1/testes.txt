@@ -1,3 +1,0 @@
-LIMITE_ALUNOS_SALA: 10  17  11  21
-ALUNOS POR GRUPOS : 3   4   3   6
-MONITORES.........: 4   5   1   5
