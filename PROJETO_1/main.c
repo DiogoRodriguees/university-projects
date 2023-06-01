@@ -153,75 +153,15 @@ void *executarAlunos(void *id)
 /************************************************************************
  *                               MONITORES                              *
  ************************************************************************/
-<<<<<<< HEAD
-bool m_entrarSala(int id)
-{
-
-    sem_wait(&s_monitores);
-
-    sem_wait(&s_sala);
-    monitores_disponiveis++;
-
-    if (!entrada_monitores)
-        return true;
-    printf("MONITOR %i ENTROU NA SALA\n", id);
-
-    return false;
-}
-
-void m_sairSala(int id)
-{
-    int m_id = *((int *)id);
-    /* Monitor libera token p/ que outro monitor possa entrar */
-    sem_post(&s_monitores);
-
-    monitores_disponiveis--;
-    
-    /* Monitor aguarda outro monitor entra na sala ou alguns alunos sairem */
-    // while (((float)total_alunos / monitores_disponiveis) > ALUNOS_POR_GRUPO)
-    // {
-    // }
-
-    /* Monitor libera um TOKEN para outra thread entrar na sala */
-    sem_post(&s_sala);
-    printf("O MONITOR %i SAIU DA SALA\n", m_id);
-
-    if (monitores_disponiveis <= 0)
-        sala_cheia = false;
-}
-
-void m_supervisionarAlunos()
-{
-    int liberar_tokens = ALUNOS_POR_GRUPO - (total_alunos % ALUNOS_POR_GRUPO);
-
-    /* Liberando tokens para o semaforo dos ALUNOS */
-    for (int i = 0; i < liberar_tokens; i++)
-    {
-        sem_post(&s_alunos);
-        sleep(1);
-    }
-}
-
-=======
->>>>>>> version_2
 void *executarMonitores(void *id)
 {
     int m_id = *((int *)id);
 
-<<<<<<< HEAD
-    if (m_entrarSala(m_id))
-    {
-        m_sairSala(m_id);
-        return;
-    }
-    m_supervisionarAlunos(); // Libera ALUNOS_POR_GRUPO para estudarem
-=======
     // verificar se pode entrar na sala
     sem_wait(&mutex);
     if (entrada_monitores)
     {
         monitores_disponiveis++;
->>>>>>> version_2
 
         // se existe monitor na sala, libera token de saida
         if (monitor_deseja_sair)
