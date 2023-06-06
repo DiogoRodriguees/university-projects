@@ -18,6 +18,7 @@ saida da sala de maneira aleatório.
 *OBS
 1. cuidado com variaveis de leitura e escrita
 2. evitar espera ocupada
+
 3. revisar caso de post com entrada de monitor;
 
 * O que utilizar?

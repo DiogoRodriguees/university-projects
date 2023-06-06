@@ -42,15 +42,15 @@
 #include <unistd.h>    // sleep()
 
 /* Variaveis para teste com diferentes numeros de ALUNOS, MONITORES e PROFESSORES */
-#define LIMITE_ALUNOS_SALA 30
-#define ALUNOS_POR_GRUPO 5
-#define MONITORES 3
+#define LIMITE_ALUNOS_SALA 20
+#define ALUNOS_POR_GRUPO 6
+#define MONITORES 4
 
 /* Tempo que as threads executam sleep */
 #define T_ALUNO_SALA 5      // tempo que o aluno permance na sala
-#define T_MONITOR_SALA 4    // tempo que o monitor permance na sala
-#define T_SALA_ABERTA 40    // tempo que a sala permanece aberta
-#define T_CRIACAO_MONITOR 6 // tempo para simular uma entrada tardia do monitor
+#define T_MONITOR_SALA 5    // tempo que o monitor permance na sala
+#define T_SALA_ABERTA 30    // tempo que a sala permanece aberta
+#define T_CRIACAO_MONITOR 4 // tempo para simular uma entrada tardia do monitor
 
 /* Semaforos */
 sem_t s_alunos;          // Controle dos alunos estudando
@@ -63,6 +63,7 @@ sem_t s_fechar_sala;     // Libera o professor pra fechar a sala;
 bool entrada_alunos = true;       // o valor false é atribuido quando a entrada de alunos não é permitida
 bool entrada_monitores = true;    // o valor false é atribuido quando a entrada de monitores não é permitida
 bool monitor_deseja_sair = false; // valor true é atribuido quando um monitor deseja sair da sala
+bool sala_vazia = true;
 
 /* Controle de alunos e monitores na sala */
 int total_alunos = 0;
@@ -153,11 +154,12 @@ void *executarMonitores(void *id)
 
     // entra na seção critica
     sem_wait(&mutex);
-    sem_post(&s_fechar_sala);
+    // sem_post(&s_fechar_sala);
+
     // verificar se pode entrar na sala
     if (entrada_monitores)
     {
-        sem_wait(&s_fechar_sala);
+        // sem_wait(&s_fechar_sala);
         monitores_disponiveis++;
 
         // libera token se nenhum monitor deseja sair
@@ -201,17 +203,14 @@ void *executarMonitores(void *id)
     }
     else
     {
-        // libera token para os alunos caso a sala seja fechada
-        if (monitor_deseja_sair)
+        if(monitores_disponiveis == 0 && sala_vazia)
         {
-            sem_post(&s_saida_monitores);
-            monitor_deseja_sair = false;
+            sem_post(&s_fechar_sala);
+            sem_post(&s_alunos);
+            sala_vazia = false;
         }
-        else
-        {
-            for (int i = 0; i < ALUNOS_POR_GRUPO; i++)
-                sem_post(&s_alunos);
-        }
+
+        // for (int i = 0; i < ALUNOS_POR_GRUPO; i++)
         printf("MONITOR %i NAO PODE MAIS ENTRAR NA SALA\n", m_id);
         sem_post(&mutex);
     }
@@ -240,8 +239,7 @@ int main(int argc, char **argv)
     /* Inicializando threads de MONITORES */
     for (int i = 0; i < MONITORES; i++)
     {
-        int n_thread = i + 1;
-        pthread_create(&monitores[i], NULL, executarMonitores, &n_thread);
+        pthread_create(&monitores[i], NULL, executarMonitores, &i);
         sleep(T_CRIACAO_MONITOR); // Proximo monitor chega em T_CRIACAO_MONITOR
     }
 
