@@ -42,6 +42,7 @@
 #include <unistd.h>    // sleep()
 
 /* Variaveis para teste com diferentes numeros de ALUNOS, MONITORES e PROFESSORES */
+<<<<<<< HEAD
 #define LIMITE_ALUNOS_SALA 7
 #define ALUNOS_POR_GRUPO 3
 #define MONITORES 1
@@ -51,6 +52,17 @@
 #define T_MONITOR_SALA 2    // tempo que o monitor permance na sala
 #define T_SALA_ABERTA 2     // tempo que a sala permanece aberta
 #define T_CRIACAO_MONITOR 2 // tempo para simular uma entrada tardia do monitor
+=======
+#define LIMITE_ALUNOS_SALA 20
+#define ALUNOS_POR_GRUPO 6
+#define MONITORES 4
+
+/* Tempo que as threads executam sleep */
+#define T_ALUNO_SALA 5      // tempo que o aluno permance na sala
+#define T_MONITOR_SALA 5    // tempo que o monitor permance na sala
+#define T_SALA_ABERTA 30    // tempo que a sala permanece aberta
+#define T_CRIACAO_MONITOR 4 // tempo para simular uma entrada tardia do monitor
+>>>>>>> new_version
 
 /* Semaforos */
 sem_t s_alunos;          // Controle dos alunos estudando
@@ -63,6 +75,7 @@ sem_t s_fechar_sala;     // Libera o professor pra fechar a sala;
 bool entrada_alunos = true;       // o valor false é atribuido quando a entrada de alunos não é permitida
 bool entrada_monitores = true;    // o valor false é atribuido quando a entrada de monitores não é permitida
 bool monitor_deseja_sair = false; // valor true é atribuido quando um monitor deseja sair da sala
+bool sala_vazia = true;
 
 /* Controle de alunos e monitores na sala */
 int total_alunos = 0;
@@ -154,11 +167,19 @@ void *executarMonitores(void *id)
 
     // entra na seção critica
     sem_wait(&mutex);
+<<<<<<< HEAD
     sem_post(&s_fechar_sala);
+=======
+    // sem_post(&s_fechar_sala);
+>>>>>>> new_version
 
     // verificar se pode entrar na sala
     if (entrada_monitores)
     {
+<<<<<<< HEAD
+=======
+        // sem_wait(&s_fechar_sala);
+>>>>>>> new_version
         monitores_disponiveis++;
         sem_wait(&s_fechar_sala);
 
@@ -203,10 +224,21 @@ void *executarMonitores(void *id)
     }
     else
     {
+<<<<<<< HEAD
 
         // libera token para os alunos caso a sala seja fechada
         sem_post(&s_alunos);
 
+=======
+        if(monitores_disponiveis == 0 && sala_vazia)
+        {
+            sem_post(&s_fechar_sala);
+            sem_post(&s_alunos);
+            sala_vazia = false;
+        }
+
+        // for (int i = 0; i < ALUNOS_POR_GRUPO; i++)
+>>>>>>> new_version
         printf("MONITOR %i NAO PODE MAIS ENTRAR NA SALA\n", m_id);
         sem_post(&mutex);
     }

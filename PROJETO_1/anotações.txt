@@ -1,6 +1,7 @@
 *OBS
 1. cuidado com variaveis de leitura e escrita(r e w simultaneo)
 2. evitar espera ocupada
+
 3. revisar caso de post com entrada de monitor;
 
 * Duvidas
