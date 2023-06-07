@@ -42,15 +42,15 @@
 #include <unistd.h>    // sleep()
 
 /* Variaveis para teste com diferentes numeros de ALUNOS, MONITORES e PROFESSORES */
-#define LIMITE_ALUNOS_SALA 10
+#define LIMITE_ALUNOS_SALA 7
 #define ALUNOS_POR_GRUPO 3
-#define MONITORES 3
+#define MONITORES 1
 
 /* Tempo que as threads executam sleep */
-#define T_ALUNO_SALA 5      // tempo que o aluno permance na sala
-#define T_MONITOR_SALA 4    // tempo que o monitor permance na sala
-#define T_SALA_ABERTA 14    // tempo que a sala permanece aberta
-#define T_CRIACAO_MONITOR 6 // tempo para simular uma entrada tardia do monitor
+#define T_ALUNO_SALA 2      // tempo que o aluno permance na sala
+#define T_MONITOR_SALA 2    // tempo que o monitor permance na sala
+#define T_SALA_ABERTA 2     // tempo que a sala permanece aberta
+#define T_CRIACAO_MONITOR 2 // tempo para simular uma entrada tardia do monitor
 
 /* Semaforos */
 sem_t s_alunos;          // Controle dos alunos estudando
@@ -131,7 +131,7 @@ void *executarAlunos(void *id)
 
         // entra na seção critica
         sem_wait(&mutex);
-        
+
         // caso a saida do aluno permita a saida de um monitor
         if (total_alunos <= ((monitores_disponiveis - 1) * ALUNOS_POR_GRUPO))
             sem_post(&s_saida_monitores);
@@ -155,12 +155,12 @@ void *executarMonitores(void *id)
     // entra na seção critica
     sem_wait(&mutex);
     sem_post(&s_fechar_sala);
-    
+
     // verificar se pode entrar na sala
     if (entrada_monitores)
     {
-        sem_wait(&s_fechar_sala);
         monitores_disponiveis++;
+        sem_wait(&s_fechar_sala);
 
         // libera token se nenhum monitor deseja sair
         if (monitor_deseja_sair)
@@ -203,17 +203,10 @@ void *executarMonitores(void *id)
     }
     else
     {
+
         // libera token para os alunos caso a sala seja fechada
-        if (monitor_deseja_sair)
-        {
-            sem_post(&s_saida_monitores);
-            monitor_deseja_sair = false;
-        }
-        else
-        {
-            for (int i = 0; i < ALUNOS_POR_GRUPO; i++)
-                sem_post(&s_alunos);
-        }
+        sem_post(&s_alunos);
+
         printf("MONITOR %i NAO PODE MAIS ENTRAR NA SALA\n", m_id);
         sem_post(&mutex);
     }

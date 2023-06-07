@@ -11,3 +11,8 @@
 5. Verificar os arquivos makefile
 6. Funcionalidade do -Wall - remover warnigs
 7. Mensagem do "monitor nao pode entrar na sala"  pode acontecer depois de fechar a sala.
+
+
+* teste:
+1. ninguem entra na sala
+2. 1 monitor 3 por grupo e cinco alunos, monitor não entra e libera apenas 3 alunos, dois ficam preso no semaforo
