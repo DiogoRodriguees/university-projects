@@ -42,7 +42,7 @@
 #include <unistd.h>    // sleep()
 
 /* Variaveis para teste com diferentes numeros de ALUNOS, MONITORES e PROFESSORES */
-#define LIMITE_ALUNOS_SALA 23
+#define LIMITE_ALUNOS_SALA 21
 #define ALUNOS_POR_GRUPO 3
 #define MONITORES 6
 
@@ -102,6 +102,9 @@ void *executarAlunos(void *id)
     int a_id = *((int *)id);
 
     printf("ALUNO %i ESPERANDO MONITOR\n", a_id);
+    sem_wait(&mutex);
+        total_alunos++;
+    sem_post(&mutex);
 
     sem_wait(&s_alunos); // semaforo liberado pela entrada de um monitor
     sem_wait(&s_sala);
@@ -110,7 +113,6 @@ void *executarAlunos(void *id)
     sem_wait(&mutex);
     if (sala_aberta)
     {
-        total_alunos++;
 
         // liberando seção critica
         sem_post(&mutex);
@@ -134,12 +136,13 @@ void *executarAlunos(void *id)
         // caso a saida do aluno permita a saida de um monitor
         if (total_alunos <= ((monitores_disponiveis - 1) * ALUNOS_POR_GRUPO))
             sem_post(&s_saida_monitores);
-        
+
         sem_post(&mutex);
     }
     else
     {
         printf("ALUNO %i NAO PODE MAIS ENTRAR NA SALA\n", a_id);
+        total_alunos--;
         sem_post(&s_alunos);
         sem_post(&s_sala);
         sem_post(&mutex);
@@ -170,7 +173,7 @@ void *executarMonitores(void *id)
             sem_post(&s_saida_monitores);
             monitor_deseja_sair = false;
         }
-        else
+        else if (total_alunos > 0)
         {
             for (int i = 0; i < ALUNOS_POR_GRUPO; i++)
                 sem_post(&s_alunos);
@@ -216,7 +219,7 @@ void *executarMonitores(void *id)
     else
     {
         // if (monitores_disponiveis > 0)
-            // sem_post(&s_saida_monitores);
+        // sem_post(&s_saida_monitores);
         printf("MONITOR %i NAO PODE MAIS ENTRAR NA SALA\n", m_id);
         sem_post(&mutex);
     }
@@ -235,13 +238,14 @@ int main(int argc, char **argv)
     /* Inicializando thread do PROFESSOR */
     pthread_create(&professor, NULL, executarProfessor, NULL);
 
+
     /* Inicializando threads ALUNOS */
     for (int i = 0; i < LIMITE_ALUNOS_SALA; i++)
     {
         pthread_create(&alunos[i], NULL, executarAlunos, &i);
         sleep(1); // proximo aluno chega em 1seg
     }
-
+    
     /* Inicializando threads de MONITORES */
     for (int i = 0; i < MONITORES; i++)
     {
