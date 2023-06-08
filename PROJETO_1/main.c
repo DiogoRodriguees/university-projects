@@ -42,14 +42,14 @@
 #include <unistd.h>    // sleep()
 
 /* Variaveis para teste com diferentes numeros de ALUNOS, MONITORES e PROFESSORES */
-#define LIMITE_ALUNOS_SALA 10
-#define ALUNOS_POR_GRUPO 3
-#define MONITORES 4
+#define LIMITE_ALUNOS_SALA 17
+#define ALUNOS_POR_GRUPO 4
+#define MONITORES 3
 
 /* Tempo que as threads executam sleep */
-#define T_ALUNO_SALA 4     // tempo que o aluno permance na sala
-#define T_MONITOR_SALA 7    // tempo que o monitor permance na sala
-#define T_SALA_ABERTA 20     // tempo que a sala permanece aberta
+#define T_ALUNO_SALA 5      // tempo que o aluno permance na sala
+#define T_MONITOR_SALA 5    // tempo que o monitor permance na sala
+#define T_SALA_ABERTA 9     // tempo que a sala permanece aberta
 #define T_CRIACAO_MONITOR 4 // tempo para simular uma entrada tardia do monitor
 
 /* Semaforos */
@@ -90,6 +90,7 @@ void *executarProfessor(void *param)
     sem_post(&s_alunos);
     sem_post(&mutex);
 
+    sem_wait(&s_fechar_sala);
     sem_destroy(&s_sala);
     printf("O PROFESSOR FECHOU A SALA\n");
 }
@@ -153,11 +154,14 @@ void *executarMonitores(void *id)
 
     // entra na seção critica
     sem_wait(&mutex);
-    // sem_post(&s_fechar_sala);
 
     // verificar se pode entrar na sala
     if (sala_aberta)
     {
+        if (monitores_disponiveis > 0)
+        {
+            sem_wait(&s_fechar_sala);
+        }
         // sem_wait(&s_fechar_sala);
         monitores_disponiveis++;
         // sem_wait(&s_fechar_sala);
@@ -232,7 +236,7 @@ int main(int argc, char **argv)
 
     sem_init(&mutex, 0, 1);             // controla leitura e escrita da variaveis compartilhadas
     sem_init(&s_alunos, 0, 0);          // controla a quantidade de alunos que podem entrar na sala
-    sem_init(&s_fechar_sala, 0, 0);     // libera o professor p/ fechar a sala
+    sem_init(&s_fechar_sala, 0, 1);     // libera o professor p/ fechar a sala
     sem_init(&s_saida_monitores, 0, 0); // controla se o monitor pode sair
 
     /* Inicializando thread do PROFESSOR */
