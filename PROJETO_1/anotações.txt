@@ -19,4 +19,4 @@
 2. Ninguém entra na sala.
 3. Apenas alunos entram na sala.
 4. Varios monitores entram mas nenhum aluno chega.
-5. Um monitor entra, o tempo de sala aberta acaba, o monitor sai e outro monitor entra.
+5. Um monitor entra, o tempo de sala aberta acaba, o monitor sai e outro monitor entra. 
