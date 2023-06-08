@@ -42,7 +42,7 @@
 #include <unistd.h>    // sleep()
 
 /* Variaveis para teste com diferentes numeros de ALUNOS, MONITORES e PROFESSORES */
-#define LIMITE_ALUNOS_SALA 23
+#define LIMITE_ALUNOS_SALA 21
 #define ALUNOS_POR_GRUPO 3
 #define MONITORES 6
 
