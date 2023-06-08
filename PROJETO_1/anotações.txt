@@ -1,7 +1,7 @@
 *OBS
+0. Refazer a descrição do projeto
 1. cuidado com variaveis de leitura e escrita(r e w simultaneo)
 2. evitar espera ocupada
-
 3. revisar caso de post com entrada de monitor;
 
 * Duvidas
@@ -14,8 +14,9 @@
 7. Mensagem do "monitor nao pode entrar na sala"  pode acontecer depois de fechar a sala.
 
 
-* teste:
-1. ninguem entra na sala
-2. 1 monitor 3 por grupo e cinco alunos, monitor não entra e libera apenas 3 alunos, dois ficam preso no semaforo
-3. n chhega monitor
-4. n chega akuno
+* Testes
+1. Apenas um monitor entra na sala. E nenhum aluno chega.
+2. Ninguém entra na sala.
+3. Apenas alunos entram na sala.
+4. Varios monitores entram mas nenhum aluno chega.
+5.  

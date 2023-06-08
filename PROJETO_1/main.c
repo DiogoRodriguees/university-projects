@@ -8,7 +8,7 @@
             O professor inicia com a abertura da sala, liberando os alunos
             e monitores para entrarem. Após um determindado tempo(T_SALA_ABERTA)
             os professor avisa os alunos e monitores que não é possivel entrar na sala.
-            Esse aviso ocorre atribuindo o valor TRUE para as variaveis: entrada_alunos e entrada_monitores.
+            Esse aviso ocorre atribuindo o valor TRUE para as variaveis: sala_aberta e sala_aberta.
             Em seguida ele aguarda e liberação do semaforo(s_fechar_sala) que é liberado pelo ultimo
             monitor que sair da sala, garantindo que não existe mais nenhum aluno na sala.
 
@@ -42,14 +42,14 @@
 #include <unistd.h>    // sleep()
 
 /* Variaveis para teste com diferentes numeros de ALUNOS, MONITORES e PROFESSORES */
-#define LIMITE_ALUNOS_SALA 20
-#define ALUNOS_POR_GRUPO 6
+#define LIMITE_ALUNOS_SALA 10
+#define ALUNOS_POR_GRUPO 3
 #define MONITORES 4
 
 /* Tempo que as threads executam sleep */
-#define T_ALUNO_SALA 5      // tempo que o aluno permance na sala
-#define T_MONITOR_SALA 5    // tempo que o monitor permance na sala
-#define T_SALA_ABERTA 30    // tempo que a sala permanece aberta
+#define T_ALUNO_SALA 4     // tempo que o aluno permance na sala
+#define T_MONITOR_SALA 7    // tempo que o monitor permance na sala
+#define T_SALA_ABERTA 20     // tempo que a sala permanece aberta
 #define T_CRIACAO_MONITOR 4 // tempo para simular uma entrada tardia do monitor
 
 /* Semaforos */
@@ -60,8 +60,7 @@ sem_t mutex;             // Controle das variaveis compartilhadas
 sem_t s_fechar_sala;     // Libera o professor pra fechar a sala;
 
 /* Variaveis para controle de permição da entrada de alunos e monitores */
-bool entrada_alunos = true;       // o valor false é atribuido quando a entrada de alunos não é permitida
-bool entrada_monitores = true;    // o valor false é atribuido quando a entrada de monitores não é permitida
+bool sala_aberta = true;          // o valor false é atribuido quando a entrada de alunos não é permitida
 bool monitor_deseja_sair = false; // valor true é atribuido quando um monitor deseja sair da sala
 bool sala_vazia = true;
 
@@ -83,16 +82,14 @@ void *executarProfessor(void *param)
 
     /* Monitores não poderão mais entrar na sala*/
     sem_wait(&mutex);
-    entrada_monitores = false;
     printf("MONITORES NAO PODEM MAIS ENTRAR\n");
 
     /* Alunos não poderão mais entrar na sala*/
-    entrada_alunos = false;
-    sem_post(&s_alunos);
+    sala_aberta = false;
     printf("ALUNOS NAO PODEM MAIS ENTRAR\n");
+    sem_post(&s_alunos);
     sem_post(&mutex);
 
-    sem_wait(&s_fechar_sala); // 0 ou 1
     sem_destroy(&s_sala);
     printf("O PROFESSOR FECHOU A SALA\n");
 }
@@ -111,7 +108,7 @@ void *executarAlunos(void *id)
 
     // entra na seção critica
     sem_wait(&mutex);
-    if (entrada_alunos)
+    if (sala_aberta)
     {
         total_alunos++;
 
@@ -159,7 +156,7 @@ void *executarMonitores(void *id)
     // sem_post(&s_fechar_sala);
 
     // verificar se pode entrar na sala
-    if (entrada_monitores)
+    if (sala_aberta)
     {
         // sem_wait(&s_fechar_sala);
         monitores_disponiveis++;
@@ -190,7 +187,16 @@ void *executarMonitores(void *id)
         sem_post(&mutex);
 
         // semaforo liberado pela saida de X alunos ou entrada de um monitor
-        sem_wait(&s_saida_monitores);
+        sem_wait(&mutex);
+        if (total_alunos > ((monitores_disponiveis - 1) * ALUNOS_POR_GRUPO))
+        {
+            sem_post(&mutex);
+            sem_wait(&s_saida_monitores);
+        }
+        else
+        {
+            sem_post(&mutex);
+        }
 
         // entra na seção critica
         sem_wait(&mutex);
@@ -206,7 +212,7 @@ void *executarMonitores(void *id)
     }
     else
     {
-        if(monitores_disponiveis == 0 && sala_vazia)
+        if (monitores_disponiveis == 0 && sala_vazia)
         {
             sem_post(&s_fechar_sala);
             sem_post(&s_alunos);
