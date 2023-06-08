@@ -88,10 +88,11 @@ void *executarProfessor(void *param)
 
     /* Alunos não poderão mais entrar na sala*/
     entrada_alunos = false;
+    sem_post(&s_alunos);
     printf("ALUNOS NAO PODEM MAIS ENTRAR\n");
     sem_post(&mutex);
 
-    sem_wait(&s_fechar_sala);
+    sem_wait(&s_fechar_sala); // 0 ou 1
     sem_destroy(&s_sala);
     printf("O PROFESSOR FECHOU A SALA\n");
 }
@@ -162,7 +163,7 @@ void *executarMonitores(void *id)
     {
         // sem_wait(&s_fechar_sala);
         monitores_disponiveis++;
-        sem_wait(&s_fechar_sala);
+        // sem_wait(&s_fechar_sala);
 
         // libera token se nenhum monitor deseja sair
         if (monitor_deseja_sair)

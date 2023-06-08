@@ -17,3 +17,5 @@
 * teste:
 1. ninguem entra na sala
 2. 1 monitor 3 por grupo e cinco alunos, monitor não entra e libera apenas 3 alunos, dois ficam preso no semaforo
+3. n chhega monitor
+4. n chega akuno
