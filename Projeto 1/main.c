@@ -67,6 +67,7 @@ bool monitor_deseja_sair = false; // valor true é atribuido quando um monitor d
 int total_alunos = 0;
 int monitores_disponiveis = 0;
 
+
 /************************************************************************
  *                               PROFESSOR                              *
  ************************************************************************/
