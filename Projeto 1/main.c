@@ -6,7 +6,7 @@
     Descrição:
         PROFESSOR:
             O professor inicia com a abertura da sala, liberando os alunos
-            e monitores para entrarem. Após um determindado tempo(T_SALA_ABERTA)
+            e monitores para entrarem. . Após um determindado tempo(T_SALA_ABERTA)
             os professor avisa os alunos e monitores que não é possivel entrar na sala.
             Esse aviso ocorre atribuindo o valor TRUE para as variaveis: sala_aberta e sala_aberta.
             Em seguida ele aguarda e liberação do semaforo(s_fechar_sala) que é liberado pelo ultimo
@@ -60,7 +60,7 @@ sem_t mutex;             // Controle das variaveis compartilhadas
 sem_t s_fechar_sala;     // Libera o professor pra fechar a sala;
 
 /* Variaveis para controle de permição da entrada de alunos e monitores */
-bool sala_aberta = true;          // o valor false é atribuido quando a entrada de alunos não é permitida
+bool sala_aberta = false;         // o valor false é atribuido quando a entrada de alunos não é permitida
 bool monitor_deseja_sair = false; // valor true é atribuido quando um monitor deseja sair da sala
 
 /* Controle de alunos e monitores na sala */
@@ -74,6 +74,9 @@ void *executarProfessor(void *param)
 {
     /* Libera os ALUNOS e MONITORES p/ entrar */
     sem_init(&s_sala, 0, LIMITE_ALUNOS_SALA);
+    sem_wait(&mutex);
+    sala_aberta = true;
+    sem_post(&mutex);
     printf("PROFESSOR ABRIU A SALA\n");
 
     /* Sala fica aberta por 60seg */
@@ -103,7 +106,7 @@ void *executarAlunos(void *id)
 
     printf("ALUNO %i ESPERANDO MONITOR\n", a_id);
     sem_wait(&mutex);
-        total_alunos++;
+    total_alunos++;
     sem_post(&mutex);
 
     sem_wait(&s_alunos); // semaforo liberado pela entrada de um monitor
@@ -238,14 +241,13 @@ int main(int argc, char **argv)
     /* Inicializando thread do PROFESSOR */
     pthread_create(&professor, NULL, executarProfessor, NULL);
 
-
     /* Inicializando threads ALUNOS */
     for (int i = 0; i < LIMITE_ALUNOS_SALA; i++)
     {
         pthread_create(&alunos[i], NULL, executarAlunos, &i);
         sleep(1); // proximo aluno chega em 1seg
     }
-    
+
     /* Inicializando threads de MONITORES */
     for (int i = 0; i < MONITORES; i++)
     {
