@@ -251,6 +251,7 @@ int main(int argc, char **argv)
 
     /* Inicializando thread do PROFESSOR */
     pthread_create(&professor, NULL, executarProfessor, NULL);
+    sleep(1);
 
     /* Inicializando threads ALUNOS */
     for (int i = 0; i < LIMITE_ALUNOS_SALA; i++)
