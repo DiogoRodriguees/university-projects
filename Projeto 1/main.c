@@ -6,7 +6,6 @@
     Descrição:
         PROFESSOR:
             O professor inicia com a abertura da sala, liberando os alunos
-
             e monitores para entrarem. Essa liberação ocorre liberando o semaforo "s_sala" e 
             atribuindo TRUE para a variavel sala_aberta. Após um determindado tempo(T_SALA_ABERTA)
             os professor avisa os alunos e monitores que não é possivel entrar na sala.
@@ -39,8 +38,8 @@
         FUNÇÕES EXTRAS:
             Para simular um tempo entre as chegadas dos monitores, foi criado um variavel(T_CRIACAO_MONITOR) que é
             utilizada na função sleep antes que o proximo monitor seja criado.
-            O tempo que o professor, monitor e aluno permanecem na sala e determinado pelas vaariaveis define (T_ALUNO_SALA, T_MONITOR_SALA
-            , T_PROFESSOR_NA SALA) que são passadas como parametro nas funções sleep().
+            O tempo que o professor, monitor e aluno permanecem na sala e determinado pelas vaariaveis define (T_ALUNO_SALA, 
+            T_MONITOR_SALA, T_PROFESSOR_NA SALA) que são passadas como parametro nas funções sleep().
 
     Data:
         08 de Junho de 2023
