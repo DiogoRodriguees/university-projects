@@ -6,9 +6,9 @@
     Descrição:
         PROFESSOR:
             O professor inicia com a abertura da sala, liberando os alunos
-            e monitores para entrarem. . Após um determindado tempo(T_SALA_ABERTA)
-            os professor avisa os alunos e monitores que não é possivel entrar na sala.
-            Esse aviso ocorre atribuindo o valor TRUE para as variaveis: sala_aberta e sala_aberta.
+            e monitores para entrarem. Após um determindado tempo(T_SALA_ABERTA)
+            o professor avisa os alunos e monitores que não é possivel entrar na sala.
+            Esse aviso ocorre atribuindo o valor TRUE para a variável: sala_aberta.
             Em seguida ele aguarda e liberação do semaforo(s_fechar_sala) que é liberado pelo ultimo
             monitor que sair da sala, garantindo que não existe mais nenhum aluno na sala.
 
@@ -24,7 +24,7 @@
             Ao entrar os alunos aguardam até que os monitores liberem tokens para entrada ou algum aluno saia. Essa liberação
             ocorre pelo semaforo "s_alunos". Ao entra o aluno verifica se a entrada de alunos na sala é possivel. Caso seja possivel
             o aluno entra e permance um tempo(T_ALUNO_SALA) antes de sair da sala. Ao sair o aluno verifica se é possivel liberar
-            um monitor para que ele saia. Para que o monitor seja libera o aluno deve saber se a quantidade de alunos na sala é menor
+            um monitor para que ele saia. Para que o monitor seja liberado o aluno deve saber se a quantidade de alunos na sala é menor
             que a quantidade de ((monitores - 1) * alunos por grupo).
 
         FUNÇÕES EXTRAS:
