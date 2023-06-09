@@ -6,10 +6,12 @@
     Descrição:
         PROFESSOR:
             O professor inicia com a abertura da sala, liberando os alunos
+
             e monitores para entrarem. Essa liberação ocorre liberando o semaforo "s_sala" e 
             atribuindo TRUE para a variavel sala_aberta. Após um determindado tempo(T_SALA_ABERTA)
             os professor avisa os alunos e monitores que não é possivel entrar na sala.
             Esse aviso ocorre atribuindo o valor FALSE para a variavel "sala_aberta".
+
             Em seguida ele aguarda e liberação do semaforo(s_fechar_sala) que é liberado pelo ultimo
             monitor que sair da sala, garantindo que não existe mais nenhum aluno na sala.
             O professor ao sair tambem libera um token para os alunos que estão presos no semaforo, uma vez que nenhum 
@@ -32,6 +34,7 @@
             Ao sair o aluno verifica se é possivel liberar um monitor para que ele saia. 
             Para que o monitor seja libera o aluno deve saber se a quantidade de alunos na sala é menor 
             que a quantidade de ((monitores - 1) * alunos por grupo). Essa verificação garante X alunos por monitor.
+
 
         FUNÇÕES EXTRAS:
             Para simular um tempo entre as chegadas dos monitores, foi criado um variavel(T_CRIACAO_MONITOR) que é
@@ -74,6 +77,7 @@ bool monitor_deseja_sair = false; // valor true é atribuido quando um monitor d
 /* Controle de alunos e monitores na sala */
 int total_alunos = 0;
 int monitores_disponiveis = 0;
+
 
 /************************************************************************
  *                               PROFESSOR                              *
