@@ -6,15 +6,15 @@
     Descrição:
         PROFESSOR:
             O professor inicia com a abertura da sala, liberando os alunos
-            e monitores para entrarem. Essa liberação ocorre liberando o semáforo "s_sala" e 
+            e monitores para entrarem. Essa liberação ocorre liberando o semáforo "s_sala" e
             atribuindo TRUE para a variável sala_aberta. Após um determindado tempo(T_SALA_ABERTA)
             o professor avisa os alunos e monitores que não é possível entrar na sala.
             Esse aviso ocorre atribuindo o valor FALSE para a variável "sala_aberta".
 
             Em seguida ele aguarda a liberação do semáforo(s_fechar_sala) que é liberado pelo último
             monitor que sair da sala, garantindo que não existe mais nenhum aluno na sala.
-            O professor ao sair também libera um token para os alunos que estão presos no semáforo, uma vez que nenhum 
-            monitor vai conseguir entrar para liberar esses alunos.
+            O professor ao sair também libera um token para os alunos que estão presos no semáforo, isso ocorre
+            para quando nenhum monitor entrar na sala.
 
         MONITORES:
             Ao executar, o monitor verifica se pode entrar na sala. Caso seja possível, ele verifica se
@@ -23,24 +23,27 @@
             o monitor sinaliza que deseja sair. Essa sinalização ocorre com a atribuição "TRUE" para a variável(monitor_deseja_sair).
             Se o monitor for o último a sair ele libera um token para o semáforo "s_fechar_sala", assim o professor termina sua execução
             fechando a sala. Se ao sair o monitor mantiver a condição de X alunos por monitor, ele sai normalmente, caso contrario,
-            ele tenta pegar um token de saida no semáforo(s_saida_monitores). Esse semáforo recebe post quando um monitor entra ou 
-            quando um aluno sai e a condição(X alunos por monitor) é satisfeita.
+            ele tenta pegar um token de saida no semáforo(s_saida_monitores). Esse semáforo recebe post quando um monitor entra ou
+            quando um aluno sai desde que a condição(X alunos por monitor) é satisfeita.
 
         ALUNOS:
             Ao entrar os alunos aguardam até que os monitores liberem tokens para entrada ou algum aluno saia. Essa liberação
-            ocorre pelo método post no semáforo "s_alunos". Ao entra o aluno verifica se a entrada de alunos na sala é possível. 
-            Caso seja possível o aluno entra e permance um tempo(T_ALUNO_SALA) antes de sair da sala. 
-            Ao sair o aluno verifica se é possível liberar um monitor para que ele saia. 
-            Para que o monitor seja liberado o aluno deve saber se a quantidade de alunos na sala é menor 
+            ocorre pelo método post no semáforo "s_alunos". Ao entra o aluno verifica se a entrada de alunos na sala é possível.
+            Caso seja possível o aluno entra e permance um tempo(T_ALUNO_SALA) antes de sair da sala.
+            Ao sair o aluno verifica se é possível liberar um monitor para que ele saia.
+            Para que o monitor seja liberado o aluno deve saber se a quantidade de alunos na sala é menor
             que a quantidade de ((monitores - 1) * alunos por grupo). Essa verificação garante X alunos por monitor.
 
 
         FUNÇÕES EXTRAS:
             Para simular um tempo entre as chegadas dos monitores, foi criado um variavel(T_CRIACAO_MONITOR) que é
             utilizada na função sleep antes que o proximo monitor seja criado.
-            O tempo que o monitor e aluno permanecem na sala é determinado pelas variáveis define (T_ALUNO_SALA, 
+            O tempo que o monitor e aluno permanecem na sala é determinado pelas variáveis define (T_ALUNO_SALA,
             T_MONITOR_SALA) que são passadas como parâmetro nas funções sleep().
 
+        EXPRESSOES:
+            ((monitores - 1) * alunos por grupo) essa expressão calcula a quantidade de alunos por monitor caso um monitor saia agora.
+            Essa verificação é utilizada para saber se com um monitor a menos a condição(X alunos por monitor) é satisfeita.
     Data:
         08 de Junho de 2023
 */
@@ -51,15 +54,15 @@
 #include <stdio.h>     // printf()
 #include <unistd.h>    // sleep()
 
-/* Variaveis para teste com diferentes numeros de ALUNOS, MONITORES e PROFESSORES */
-#define LIMITE_ALUNOS_SALA 21
+/* Variaveis para teste com diferentes numeros de ALUNOS e MONITORES */
+#define LIMITE_ALUNOS_SALA 20 // limite da sala e quantidade de alunos a ser criado
+#define MONITORES 3           // quantidade de monitores a ser criado
 #define ALUNOS_POR_GRUPO 3
-#define MONITORES 6
 
 /* Tempo que as threads executam sleep */
 #define T_ALUNO_SALA 5      // tempo que o aluno permance na sala
 #define T_MONITOR_SALA 5    // tempo que o monitor permance na sala
-#define T_SALA_ABERTA 35    // tempo que a sala permanece aberta
+#define T_SALA_ABERTA 30    // tempo que a sala permanece aberta
 #define T_CRIACAO_MONITOR 4 // tempo para simular uma entrada tardia do monitor
 
 /* Semaforos */
@@ -76,7 +79,6 @@ bool monitor_deseja_sair = false; // valor true é atribuido quando um monitor d
 /* Controle de alunos e monitores na sala */
 int total_alunos = 0;
 int monitores_disponiveis = 0;
-
 
 /************************************************************************
  *                               PROFESSOR                              *
@@ -120,7 +122,7 @@ void *executarAlunos(void *id)
     total_alunos++;
     sem_post(&mutex);
 
-    sem_wait(&s_alunos); // semaforo liberado pela entrada de um monitor
+    sem_wait(&s_alunos); // semaforo liberado pela entrada de um monitor ou saida de um aluno
     sem_wait(&s_sala);
 
     // entra na seção critica
@@ -176,6 +178,8 @@ void *executarMonitores(void *id)
     // verificar se pode entrar na sala
     if (sala_aberta)
     {
+        // a entrada de um monitor fecha o semaforo "s_fechar_sala"
+        // sendo assim o professor precisa esperar o semaforo ser liberado
         if (monitores_disponiveis == 0)
             sem_wait(&s_fechar_sala);
 
@@ -205,12 +209,13 @@ void *executarMonitores(void *id)
         monitor_deseja_sair = true;
         sem_post(&mutex);
 
-        // semaforo liberado pela saida de X alunos ou entrada de um monitor
         sem_wait(&mutex);
+        // verifica se a saida do monitor é permitida
         if (total_alunos > ((monitores_disponiveis - 1) * ALUNOS_POR_GRUPO))
         {
             monitor_deseja_sair = true;
             sem_post(&mutex);
+            // semaforo liberado pela saida de X alunos ou entrada de um monitor
             sem_wait(&s_saida_monitores);
         }
         else
@@ -232,8 +237,6 @@ void *executarMonitores(void *id)
     }
     else
     {
-        // if (monitores_disponiveis > 0)
-        // sem_post(&s_saida_monitores);
         printf("MONITOR %i NAO PODE MAIS ENTRAR NA SALA\n", m_id);
         sem_post(&mutex);
     }
@@ -246,7 +249,7 @@ int main(int argc, char **argv)
 
     sem_init(&mutex, 0, 1);             // controla leitura e escrita da variaveis compartilhadas
     sem_init(&s_alunos, 0, 0);          // controla a quantidade de alunos que podem entrar na sala
-    sem_init(&s_fechar_sala, 0, 1);     // libera o professor p/ fechar a sala
+    sem_init(&s_fechar_sala, 0, 1);     // libera o professor p/ fechar a sala. inicia com 1 para o caso de ninguem entrar
     sem_init(&s_saida_monitores, 0, 0); // controla se o monitor pode sair
 
     /* Inicializando thread do PROFESSOR */
