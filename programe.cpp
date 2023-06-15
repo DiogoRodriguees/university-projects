@@ -9,21 +9,19 @@
         04 de Julho 2023
 */
 
-typedef struct Data
+typedef struct Pagina
 {
-  int ref_bit = 0;
-  struct Data *nextData;
-  struct Data *previousData;
-} Data;
+    int logicAdress;
+    int refBit;
+    int validationBit;
+    int modificationBit;
+    int pageNumber;
+    int quadroAdress;
 
-typedef struct DataList
-{
-  Data *sentinela;
-  Data *clockPointer;
-} DataList;
+} Pagina;
 
 int main(int argc, char **argv)
 {
 
-  return 0;
+    return 0;
 }
