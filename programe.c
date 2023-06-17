@@ -9,6 +9,11 @@
         04 de Julho 2023
 */
 
+typedef struct ClockPosition {
+    int refPage;
+    
+}ClockPosition;
+
 typedef struct Pagina
 {
     int logicAdress;
