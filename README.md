@@ -2,7 +2,3 @@
 
 Repositório do ultimo projeto da disciplina de Sistemas Operacionais
 
-```bash
-    # coinoi
-    $ comando line
-```
