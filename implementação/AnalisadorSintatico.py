@@ -1,7 +1,7 @@
 from automata.pda.npda import NPDA
 from sys import argv, exit
 
-# verifica se a quantidade de parametros esta certa
+# verifica se a quantidade de parametros esta correta
 if(len(argv) != 2):
         print("Insira uma expressão")
         exit()
@@ -14,7 +14,7 @@ npda = NPDA(
     states={'INITIAL_STATE', 'FINAL_STATE'},
     
     # alfabeto de entrada
-    input_symbols={},
+    input_symbols={'i', 'd', '+', '-', '/', '*', '(', ')', '$', '='},
     
     # transições
     stack_symbols={},
@@ -32,6 +32,7 @@ npda = NPDA(
     acceptance_mode='FINAL_STATE'
     
 )
+
 
 if npda.acceptance_mode(entrada + "$"):
     print(f"Expressao {entrada} : Aceita!")
