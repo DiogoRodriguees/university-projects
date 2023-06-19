@@ -2,40 +2,63 @@ from automata.pda.npda import NPDA
 from sys import argv, exit
 
 # verifica se a quantidade de parametros esta correta
-if(len(argv) != 2):
-        print("Insira uma expressão")
-        exit()
-        
-# recebendo a expressão da entrada        
+if len(argv) != 2:
+    print("Insira uma expressão")
+    exit()
+
+# recebendo a expressão da entrada
 entrada = argv[1]
 
 npda = NPDA(
     # estados
-    states={'INITIAL_STATE', 'FINAL_STATE'},
+    states={"q0","q1", "q2","q3","q4","q5","q6","q7","q8","q9","q10","q11","q12","q13","q14","q15","q16","q17","q18","q19", "q20", "q21","q22","q23","q24","FINAL_STATE","EXPRESSAO_ACEITA"},
     
     # alfabeto de entrada
-    input_symbols={'i', 'd', '+', '-', '/', '*', '(', ')', '$', '='},
+    input_symbols={"i", "d", "n", "u", "m" "+", "-", "/", "*", "(", ")", "$", "="},
     
-    # transições
-    stack_symbols={},
+    # simbolos da pilha
+    stack_symbols={ 'E', 'F', 'S', 'T', 'V', 'i', 'd', 'n', 'u', 'm', '+', '-', '*', '/', '=', '(', ')', '0'},
+    
+    # trantições
+    transitions={
+        'q0':{
+            'i':{
+                '0': {('q0', ('i', '0'))}
+            },
+            'd':{
+                'i': {('q5', ('d', 'i'))}
+            },
+        },
+        'q3':{
+            "$":{
+                "V":{('EXPRESSAO_ACEITA', "")}
+            },
+        },
+        
+        'q5':{
+            "":{
+                'i': {('q5', "i")},
+                'd': {('q3', ("V", "d"))},
+            },
+        }
+    
+    },
     
     # estado inicial
-    initial_state='INITIAL_STATE',
+    initial_state="q0",
     
     # estado inicial da pilha
-    initial_stack_symbol='0',
+    initial_stack_symbol="0",
     
     # estado final
-    final_states={'EXPRESSAO_ACEIT'},
+    final_states={"EXPRESSAO_ACEITA"},
     
     # modulo atingido pelo estado "aceito"
-    acceptance_mode='FINAL_STATE'
-    
+    acceptance_mode="final_state",
 )
 
 
-if npda.acceptance_mode(entrada + "$"):
+if npda.accepts_input(entrada + "$"):
     print(f"Expressao {entrada} : Aceita!")
 else:
     print(f"Expressao {entrada} : Rejeitada!")
-
