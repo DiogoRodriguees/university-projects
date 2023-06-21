@@ -2,9 +2,9 @@ from automata.pda.npda import NPDA
 from sys import argv, exit
 
 # verifica se a quantidade de parametros esta correta
-# if len(argv) != 2:
-#     print("Insira uma expressão")
-#     exit()
+if len(argv) != 2:
+    print("Insira uma expressão")
+    exit()
 
 # recebendo a expressão da entrada
 entrada = argv[1]
