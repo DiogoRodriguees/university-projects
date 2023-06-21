@@ -53,7 +53,27 @@ int main() {
     PageTableEntry* pageTable = (PageTableEntry*)calloc(numPages, sizeof(PageTableEntry));
     Frame* memory = (Frame*)calloc(numFrames, sizeof(Frame));
 
+    int totalPageFaults = 0;
+
+    int op, address;
     
+    while (1) {
+        scanf("%d %x", &op, &address);
+        if(op == 0 && address == 0) break;
+        int pageNumber = address / pageSize;
+        int pageIndex = findPage(pageTable, pageNumber, numPages);
+
+        if (pageIndex == -1) {
+            printf("Page fault for address %x\n", address);
+            totalPageFaults++;
+
+            // Implemente aqui o tratamento da falta de página
+            // Você precisará substituir uma página na RAM e atualizar a tabela de páginas
+        }
+
+        // A página está presente na RAM, faça o acesso normalmente
+        // Implemente aqui o restante do processamento do endereço
+    }
 
     return 0;
 
