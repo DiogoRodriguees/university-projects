@@ -1,0 +1,11 @@
+id=id
+id=num+num
+id=num-num
+id=num*num
+id=num/num
+(num+num)
+(num-num)
+(num/num)
+(num*num)
+(num*num)
+(num*num)+(num/num)
