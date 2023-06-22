@@ -54,8 +54,6 @@ int findPageNumberInMemory(int frameNumber, int memorySize)
             return i;
         }
     }
-    
-    
 }
 
 void fifoAlg(int op, int address)
