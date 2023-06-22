@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 // Estrutura para a tabela de páginas
 typedef struct
@@ -95,10 +96,33 @@ void insertProcessInTablePage(int address)
     }
 }
 
+char *convertToBinary(int number)
+{
+    char *binary = calloc(8, sizeof(char)) ; // Array para armazenar os dígitos binários
+    int i = 0;
+    int m = 128;
+
+    while (i < 8)
+    {
+        if(number >= m){
+                binary[i] = '1';
+                number = number - m;
+        }else{
+            binary[i] = '0';
+        }
+        
+        m = m/2;
+        i++;
+    }
+    
+    return binary;
+}
+
 void acessPageWithAlgoritm(int op, int address, int alg)
 {
-    // encontra pagenumber
-
+    // converter o endereço em binanrio
+    char binaryNumber[8];
+    
     // antes de acessar, colocar o processa na TB
     insertProcessInTablePage(address);
 
