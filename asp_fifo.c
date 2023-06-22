@@ -7,8 +7,11 @@ typedef struct {
     
 }TablePage;
 
+TablePage* tb_glocal;
+
 void extractParams(int address, int *displacement, int *pageNumber)
 {
+    
 }
 
 void acessPage(int pageNumber, int displacement)
@@ -21,8 +24,11 @@ void readPage(int address)
 {
     int displacement;
     int pageNumber;
+    
+    // extrai o numero da pagina e o deslocamento do endereço
     extractParams(address, &displacement, &pageNumber);
 
+    // acessando as paginas com esses os params recebidos
     acessPage(pageNumber, displacement);
 }
 
