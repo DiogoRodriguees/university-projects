@@ -1,3 +1,6 @@
+meu-teste:
+	python AnalisadorSintatico.py ./testes-exp/meu-teste.exp
+
 main:
 	python AnalisadorSintatico.py ./testes-exp/teste-001.exp
 	python AnalisadorSintatico.py ./testes-exp/teste-002.exp
