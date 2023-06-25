@@ -1,14 +1,21 @@
 from automata.pda.npda import NPDA
 from sys import argv, exit
+import os
 
-# verifica se a quantidade de parametros esta correta
+# Verifica se a quantidade de parâmetros está correta
 if len(argv) != 2:
-    print("Insira uma expressão")
+    print("Insira um caminho de arquivo válido")
     exit()
 
-# recebendo a expressão da entrada
-entrada = argv[1]
+# Recebendo o caminho do arquivo da entrada
+caminho_arquivo = argv[1]
 
+# Verifica se a extensão do arquivo é .exp
+nome_arquivo, extensao = os.path.splitext(caminho_arquivo)
+
+if extensao != '.exp':
+    print("O arquivo deve ter a extensão .exp")
+    exit()
 
 npda = NPDA(
     # estados
@@ -109,13 +116,13 @@ npda = NPDA(
         
         'q11':{
             'i':{
-                '+':{('q7', ('i', '+'))}
+                '+':{("q7",("i", '-'))}
             },
             '(':{
-                '+':{('q16', ('(', "+"))}
+                '+':{('q16', ('(', '-'))}
             },
             'n':{
-                '+':{('q8', ('n', "+"))}
+                '+':{('q8', ('n', '-'))}
             }
         },
         
@@ -124,7 +131,7 @@ npda = NPDA(
                 '-':{("q7",("i", '-'))}
             },
             '(':{
-                '-':{('q16', ('(', '-'))}
+                '-':{('q1', ('(', '-'))}
             },
             'n':{
                 '-':{('q8', ('n', '-'))}
@@ -133,25 +140,25 @@ npda = NPDA(
         
         'q13':{
             'i':{
-                '*':{("q7",("i", '*'))}
+                '*':{("q7",("i", '-'))}
             },
             '(':{
-                "*":{('q16', ('(', '*'))}
+                '*':{('q16', ('(', '-'))}
             },
             'n':{
-                '*':{('q8', ('n', '*'))}
+                '*':{('q8', ('n', '-'))}
             }
         },
         
         'q14':{
             'i':{
-                '/':{("q7",("i", "/"))}
+                '/':{("q7",("i", '-'))}
             },
             '(':{
-                "/":{('q16', ('(', "/"))}
+                '/':{('q16', ('(', '-'))}
             },
             'n':{
-                '/':{('q8', ('n', "/"))}
+                '/':{('q8', ('n', '-'))}
             }
         },
         
@@ -160,7 +167,7 @@ npda = NPDA(
                 '=':{("q7",("i", "="))}
             },
             '(':{
-                "=":{('q16', ('(', "="))}
+                "=":{('q1', ('(', "="))}
             },
             'n':{
                 '=':{('q8', ('n', "="))}
@@ -237,8 +244,14 @@ npda = NPDA(
     acceptance_mode="final_state",
 )
 
-
-if npda.accepts_input(entrada + "$"):
-    print(f"Expressao {entrada} : Aceita!")
-else:
-    print(f"Expressao {entrada} : Rejeitada!")
+try:
+    with open(caminho_arquivo, 'r') as arquivo:
+        for linha in arquivo:
+            entrada = linha.strip() + "$"  # Adiciona o marcador de fim de entrada ($)
+            if npda.accepts_input(entrada):
+                print(f"Expressão {linha.strip()}: Aceita!\n")
+            else:
+                print(f"Expressão {linha.strip()}: Rejeitada!\n")
+except FileNotFoundError:
+    print("Arquivo não encontrado. Verifique o caminho do arquivo.")
+    exit()
