@@ -110,7 +110,6 @@ void update_bits(Page **page_table, int quantity_pages)
         if (page_table[i])
         {
             page_table[i]->r_bit = 0;
-            page_table[i]->m_bit = 0;
         }
     }
 }
@@ -254,7 +253,7 @@ int main()
     int ram_size = 0;
     int process_size = 0;
     int algoritmo_substituicao = 2;
-    int refresh_interval = 6;
+    int refresh_interval = 2;
 
     scanf("%d\n", &ram_size);
     scanf("%d\n", &process_size);
@@ -262,9 +261,18 @@ int main()
     scanf("%d\n", &algoritmo_substituicao);
 
     int quantity_frames = ram_size / page_size;
+    if(ram_size % page_size != 0)
+    {
+        quantity_frames++;
+    }
+
     int *RAM = (int *)calloc(quantity_frames, sizeof(int));
 
     int quantity_pages = process_size / page_size;
+    if(process_size % page_size != 0)
+    {
+        quantity_pages++;
+    }
     
     printf("Tamanho da pagina: %d\n", page_size);
     printf("Quantidade de quadros: %d\n", quantity_frames);
@@ -298,8 +306,8 @@ int main()
         printf("Operacao: %d, Endereco: 0x%x\n", op, address);
         // printf("Operacao: %d, Endereco: 0x%d\n", op, address);
         int page_number = address / page_size;
-        int displacement = address % page_size;
-        // printf("Deslocamento p: %d / %d = %d\n", address, page_size, displacement);
+        int offset = address % page_size;
+        // printf("Deslocamento p: %d / %d = %d\n", address, page_size, offset);
 
 
 
@@ -334,9 +342,9 @@ int main()
 
         // page_table[frame_number]->r_bit = 1;
         // Cálcula o endereço físico 
-        int physical_address = frame_number * page_size + (displacement);
-        printf("Endereco Fisico: %d * %d + %d = 0x%x\n", frame_number, page_size, displacement, physical_address);
-        // printf("Endereco Fisico: %d * %d + %d = 0x%d\n", frame_number, page_size, displacement, physical_address);
+        int physical_address = frame_number * page_size + (offset);
+        printf("Endereco Fisico: %d * %d + %d = 0x%x\n", frame_number, page_size, offset, physical_address);
+        // printf("Endereco Fisico: %d * %d + %d = 0x%d\n", frame_number, page_size, offset, physical_address);
         // printf("Endereco Fisico: 0x%x\n", physical_address);
         // printf("Endereco Fisico: 0x%d\n", physical_address);
 
