@@ -256,10 +256,22 @@ int main()
     int algoritmo_substituicao = 2;
     int refresh_interval = 6;
 
-    scanf("%d\n", &ram_size);
-    scanf("%d\n", &page_size);
-    scanf("%d\n", &process_size);
-    scanf("%d\n", &algoritmo_substituicao);
+    printf("Qual o tamanho da RAM: ");
+    scanf("%d", &ram_size);
+
+    printf("Qual o tamanho da PAGINA: ");
+    scanf("%d", &page_size);
+
+    printf("Qual o tamanho do PROCESSO: ");
+    scanf("%d", &process_size);
+
+    printf("Qual o algoritmo de SUB: \n");
+    printf("1. NRU.\n");
+    printf("2. FIFO.\n");
+    printf("3. RELOGIO.\n");
+    scanf("%d", &algoritmo_substituicao);
+
+    printf("\n\nInsira a OP e o ADDRESS\n");
 
     int *RAM = (int *)calloc(ram_size, sizeof(int));
 
