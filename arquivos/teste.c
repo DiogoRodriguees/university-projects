@@ -186,12 +186,11 @@ void nru(Page **page_table, int **RAM, int quantity_pages, int ram_size, int id)
 
         printf("Pagina %d carregada no quadro %d.\n", id, frame);
     }
-
 }
 
 void fifo(Page **page_table, int **RAM, int quantity_pages, int ram_size, Fila **fila, int id)
 {
-    
+
     int frame = -1;
     int victim = -1;
     for (int i = 0; i < ram_size; i++)
@@ -244,7 +243,6 @@ void fifo(Page **page_table, int **RAM, int quantity_pages, int ram_size, Fila *
 
         printf("Pagina %d carregada no quadro %d.\n", id, frame);
     }
-
 }
 
 int main()
@@ -270,10 +268,10 @@ int main()
     printf("3. RELOGIO.\n");
     scanf("%d", &algoritmo_substituicao);
 
-    printf("\n\nInsira a OP e o ADDRESS\n");
-
     int quantity_frames = ram_size / page_size;
-    if(ram_size % page_size != 0)
+
+    // se o numero de frames float, incrementa
+    if (ram_size % page_size != 0)
     {
         quantity_frames++;
     }
@@ -281,15 +279,17 @@ int main()
     int *RAM = (int *)calloc(quantity_frames, sizeof(int));
 
     int quantity_pages = process_size / page_size;
-    if(process_size % page_size != 0)
+    // se a quantidade de paginas for um numero quebrado, incrementa
+    if (process_size % page_size != 0)
     {
         quantity_pages++;
     }
-    
+
     printf("Tamanho da pagina: %d\n", page_size);
     printf("Quantidade de quadros: %d\n", quantity_frames);
     printf("Quantidade de paginas: %d\n", quantity_pages);
 
+    printf("\n\nInsira a OP e o ADDRESS\n");
     Page **page_table = (Page **)malloc(quantity_pages * sizeof(Page *));
 
     for (int i = 0; i < quantity_pages; i++)
@@ -316,17 +316,21 @@ int main()
     while (scanf("%d %x", &op, &address) == 2)
     {
         printf("Operacao: %d, Endereco: 0x%x\n", op, address);
-        // printf("Operacao: %d, Endereco: 0x%d\n", op, address);
+
+        //
         int page_number = address / page_size;
+
+        // calcula posição do endereço fisico
         int offset = address % page_size;
-        // printf("Deslocamento p: %d / %d = %d\n", address, page_size, offset);
-
-
 
         int frame_number = find_page(page_table, page_number, quantity_pages);
+        
 
+        int page_fault = 0;
         if (frame_number == -1)
         {
+            page_fault++;
+
             // Lógica de substituição de página
             switch (algoritmo_substituicao)
             {
@@ -352,11 +356,10 @@ int main()
             return 0;
         }
 
-        // page_table[frame_number]->r_bit = 1;
-        // Cálcula o endereço físico 
+        // Calcula o endereço físico
         int physical_address = frame_number * page_size + (offset);
         printf("Endereco Fisico: %d * %d + %d = 0x%x\n", frame_number, page_size, offset, physical_address);
-        // printf("Endereco Fisico: %d * %d + %d = 0x%d\n", frame_number, page_size, offset, physical_address);
+        // printf("Endeaeco Fisico: %d * %d + %d = 0x%d\n", frame_number, page_size, offset, physical_address);
         // printf("Endereco Fisico: 0x%x\n", physical_address);
         // printf("Endereco Fisico: 0x%d\n", physical_address);
 
