@@ -91,9 +91,9 @@ bool fila_remover(Fila *f)
     return true;
 }
 
-int find_page(Page **page_table, int page_number, int table_size)
+int find_page(Page **page_table, int page_number, int quantity_pages)
 {
-    for (int i = 0; i < table_size; i++)
+    for (int i = 0; i < quantity_pages; i++)
     {
         if (page_table[i]->page_number == page_number)
         {
@@ -103,19 +103,18 @@ int find_page(Page **page_table, int page_number, int table_size)
     return -1;
 }
 
-void update_bits(Page **page_table, int table_size)
+void update_bits(Page **page_table, int quantity_pages)
 {
-    for (int i = 0; i < table_size; i++)
+    for (int i = 0; i < quantity_pages; i++)
     {
         if (page_table[i])
         {
             page_table[i]->r_bit = 0;
-            page_table[i]->m_bit = 0;
         }
     }
 }
 
-void nru(Page **page_table, int **RAM, int table_size, int ram_size, int id)
+void nru(Page **page_table, int **RAM, int quantity_pages, int ram_size, int id)
 {
 
     int frame = -1;
@@ -134,7 +133,7 @@ void nru(Page **page_table, int **RAM, int table_size, int ram_size, int id)
 
     if (frame == -1)
     {
-        for (int i = 0; i < table_size; i++)
+        for (int i = 0; i < quantity_pages; i++)
         {
             if (page_table[i]->r_bit == 0 && page_table[i]->m_bit == 0)
             {
@@ -190,7 +189,7 @@ void nru(Page **page_table, int **RAM, int table_size, int ram_size, int id)
 
 }
 
-void fifo(Page **page_table, int **RAM, int table_size, int ram_size, Fila **fila, int id)
+void fifo(Page **page_table, int **RAM, int quantity_pages, int ram_size, Fila **fila, int id)
 {
     
     int frame = -1;
@@ -208,7 +207,7 @@ void fifo(Page **page_table, int **RAM, int table_size, int ram_size, Fila **fil
 
     if (frame == -1)
     {
-        for (int i = 0; i < table_size; i++)
+        for (int i = 0; i < quantity_pages; i++)
         {
             if (page_table[i]->page_number == (*fila)->inicio->dado)
             {
@@ -254,7 +253,7 @@ int main()
     int ram_size = 0;
     int process_size = 0;
     int algoritmo_substituicao = 2;
-    int refresh_interval = 6;
+    int refresh_interval = 2;
 
     printf("Qual o tamanho da RAM: ");
     scanf("%d", &ram_size);
@@ -273,19 +272,27 @@ int main()
 
     printf("\n\nInsira a OP e o ADDRESS\n");
 
-    int *RAM = (int *)calloc(ram_size, sizeof(int));
-
-    int table_size = process_size / page_size;
-    if (process_size % page_size != 0)
+    int quantity_frames = ram_size / page_size;
+    if(ram_size % page_size != 0)
     {
-        table_size += 1;
+        quantity_frames++;
     }
 
-    printf("Tamanho da Tabela de página: %d\n\n", table_size);
+    int *RAM = (int *)calloc(quantity_frames, sizeof(int));
 
-    Page **page_table = (Page **)malloc(table_size * sizeof(Page *));
+    int quantity_pages = process_size / page_size;
+    if(process_size % page_size != 0)
+    {
+        quantity_pages++;
+    }
+    
+    printf("Tamanho da pagina: %d\n", page_size);
+    printf("Quantidade de quadros: %d\n", quantity_frames);
+    printf("Quantidade de paginas: %d\n", quantity_pages);
 
-    for (int i = 0; i < table_size; i++)
+    Page **page_table = (Page **)malloc(quantity_pages * sizeof(Page *));
+
+    for (int i = 0; i < quantity_pages; i++)
     {
         Page *new_page = (Page *)malloc(sizeof(Page));
         new_page->page_number = i;
@@ -297,7 +304,7 @@ int main()
     }
 
     int op;
-    unsigned int address;
+    int address;
 
     Fila *fila = NULL;
 
@@ -309,11 +316,14 @@ int main()
     while (scanf("%d %x", &op, &address) == 2)
     {
         printf("Operacao: %d, Endereco: 0x%x\n", op, address);
+        // printf("Operacao: %d, Endereco: 0x%d\n", op, address);
         int page_number = address / page_size;
-
         int offset = address % page_size;
+        // printf("Deslocamento p: %d / %d = %d\n", address, page_size, offset);
 
-        int frame_number = find_page(page_table, page_number, table_size);
+
+
+        int frame_number = find_page(page_table, page_number, quantity_pages);
 
         if (frame_number == -1)
         {
@@ -321,19 +331,19 @@ int main()
             switch (algoritmo_substituicao)
             {
             case 1:
-                nru(page_table, &RAM, table_size, ram_size, page_number);
+                nru(page_table, &RAM, quantity_pages, ram_size, page_number);
                 break;
             case 2:
-                fifo(page_table, &RAM, table_size, ram_size, &fila, page_number);
+                fifo(page_table, &RAM, quantity_pages, ram_size, &fila, page_number);
                 break;
             case 3:
-                // Chamar a função 3º algoritmo
+                // Implementar o 3º algoritmo
                 break;
             default:
                 printf("Erro: Algoritmo de substituicao de pagina invalido.\n");
             }
 
-            frame_number = find_page(page_table, page_number, table_size);
+            frame_number = find_page(page_table, page_number, quantity_pages);
         }
 
         if (frame_number == -1)
@@ -343,9 +353,12 @@ int main()
         }
 
         // page_table[frame_number]->r_bit = 1;
-
-        unsigned int physical_address = frame_number * page_size + (address % page_size);
-        printf("Endereco Fisico: 0x%x\n", physical_address);
+        // Cálcula o endereço físico 
+        int physical_address = frame_number * page_size + (offset);
+        printf("Endereco Fisico: %d * %d + %d = 0x%x\n", frame_number, page_size, offset, physical_address);
+        // printf("Endereco Fisico: %d * %d + %d = 0x%d\n", frame_number, page_size, offset, physical_address);
+        // printf("Endereco Fisico: 0x%x\n", physical_address);
+        // printf("Endereco Fisico: 0x%d\n", physical_address);
 
         if (op == 1)
         {
@@ -357,7 +370,7 @@ int main()
         global_time++;
         if (global_time % refresh_interval == 0)
         {
-            update_bits(page_table, table_size);
+            update_bits(page_table, quantity_pages);
         }
 
         printf("\n");
