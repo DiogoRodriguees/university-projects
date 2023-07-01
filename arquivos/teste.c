@@ -288,6 +288,7 @@ char *algoritmoEscohido(int num)
 int main()
 {
     int physical_address;
+    int page_fault = 0;
     system("clear");
     int refresh_interval = 4;
 
@@ -345,8 +346,6 @@ int main()
         // calcula o deslocamento
         int offset = address % PAGE_SIZE;
 
-        int page_fault = 0;
-
         if (op == 1)
         {
             page_table[page_number]->m_bit = 1;
@@ -355,7 +354,7 @@ int main()
         if (!page_table[page_number]->v_bit)
         {
             page_fault++;
-
+            printf("Ocorreu page fault\n");
             // Lógica de substituição de página
             switch (ALGORITMO)
             {
@@ -392,6 +391,7 @@ int main()
         printf("\n");
     }
 
+    printf("Total de page fault: %d", page_fault);
     free(fila);
     free(page_table);
     return 0;
