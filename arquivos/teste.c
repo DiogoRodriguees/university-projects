@@ -12,6 +12,7 @@ typedef struct
     int frame_number;
     int r_bit;
     int m_bit;
+    int v_bit;
     int time_loaded;
 } Page;
 
