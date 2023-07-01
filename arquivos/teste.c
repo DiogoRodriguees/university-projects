@@ -4,10 +4,9 @@
 #include <string.h>
 #include <math.h>
 
-
-#define PAGE_SIZE 50
-#define RAM_SIZE 50
-#define PROCESS_SIZE 130
+#define PAGE_SIZE 1
+#define RAM_SIZE 2
+#define PROCESS_SIZE 8
 #define ALGORITMO 2
 
 int global_time = 0;
@@ -15,7 +14,7 @@ int global_time = 0;
 // representação das paginas
 typedef struct
 {
-    int page_number;
+    // int page_number;
     int frame_number;
     int r_bit;
     int m_bit;
@@ -44,22 +43,6 @@ Fila *fila_criar()
     f->inicio = NULL;
     f->fim = NULL;
     return f;
-}
-
-void fila_destruir(Fila **enderecoFila)
-{
-    Fila *f = *enderecoFila;
-    No *aux;
-
-    while (f->inicio != NULL)
-    {
-        aux = f->inicio;
-        f->inicio = f->inicio->prox;
-        free(aux);
-    }
-
-    free(f);
-    *enderecoFila = NULL;
 }
 
 bool fila_inserir(Fila *f, int page_number)
@@ -100,17 +83,20 @@ bool fila_remover(Fila *f)
     return true;
 }
 
-// verifica se a pagina aponta para memoria. retorna frame number
-int find_page(Page **page_table, int page_number, int quantity_pages)
+void fila_destruir(Fila **enderecoFila)
 {
-    for (int i = 0; i < quantity_pages; i++)
+    Fila *f = *enderecoFila;
+    No *aux;
+
+    while (f->inicio != NULL)
     {
-        if (page_table[i]->page_number == page_number)
-        {
-            return page_table[i]->frame_number;
-        }
+        aux = f->inicio;
+        f->inicio = f->inicio->prox;
+        free(aux);
     }
-    return -1;
+
+    free(f);
+    *enderecoFila = NULL;
 }
 
 // limpa os bits de referencia(r_bit) para 0
@@ -125,7 +111,7 @@ void update_bits(Page **page_table, int quantity_pages)
     }
 }
 
-void nru(Page **page_table, int **RAM, int quantity_pages, int ram_size, int id)
+void nru(Page **page_table, int **ram, int quantity_pages, int ram_size, int id)
 {
     int position_sub_memory = -1; // posição que aponta para a memoria (-1 significa que a memoria possui espaço livre)
     int page_target = -1;         // posição da pagina vitima
@@ -134,10 +120,10 @@ void nru(Page **page_table, int **RAM, int quantity_pages, int ram_size, int id)
     // verifica se tem memoria livre
     for (int i = 0; i < ram_size; i++)
     {
-        if ((*RAM)[i] == 0)
+        if ((*ram)[i] == 0)
         {
             position_sub_memory = i;
-            (*RAM)[position_sub_memory] = 1; // Modifica o valor da RAM
+            (*ram)[position_sub_memory] = 1; // Modifica o valor da RAM
             break;
         }
     }
@@ -148,44 +134,48 @@ void nru(Page **page_table, int **RAM, int quantity_pages, int ram_size, int id)
         // passa pela paginas tabela
         for (int i = 0; i < quantity_pages; i++)
         {
-            // verifica se foi recentemente acessada (classe 0)
-            if (page_table[i]->r_bit == 0 && page_table[i]->m_bit == 0)
+            printf("page: %d, bit R: %d, bit M: %d \n", i, page_table[i]->r_bit, page_table[i]->m_bit);
+            if (page_table[i]->v_bit == 1)
             {
-                page_target = i;
-                class = 0;
-                break;
-            }
-
-            // verifica se classe 1
-            if (page_table[i]->r_bit == 0 && page_table[i]->m_bit == 1)
-            {
-                // verifica se nenhuma class 1 foi encontrada até o memento
-                if (class != 1)
+                // verifica se classe 0
+                if (page_table[i]->r_bit == 0 && page_table[i]->m_bit == 0)
                 {
                     page_target = i;
-                    class = 1;
+                    class = 0;
+                    break;
                 }
-            }
 
-            // verifica se classe 2
-            if (page_table[i]->r_bit == 1 && page_table[i]->m_bit == 0)
-            {
-                // verifica se essa é a menor classe até o memento
-                if (class > 2)
+                // verifica se classe 1
+                if (page_table[i]->r_bit == 0 && page_table[i]->m_bit == 1)
                 {
-                    page_target = i;
-                    class = 2;
+                    // verifica se nenhuma class 1 foi encontrada até o memento
+                    if (class != 1)
+                    {
+                        page_target = i;
+                        class = 1;
+                    }
                 }
-            }
 
-            // verifica se classe 3
-            if (page_table[i]->r_bit == 1 && page_table[i]->m_bit == 1)
-            {
-                // verifica se nenhuma classe menor foi encontrada
-                if (class == -1 && class != 3)
+                // verifica se classe 2
+                if (page_table[i]->r_bit == 1 && page_table[i]->m_bit == 0)
                 {
-                    page_target = i;
-                    class = 3;
+                    // verifica se essa é a menor classe até o memento
+                    if (class > 2)
+                    {
+                        page_target = i;
+                        class = 2;
+                    }
+                }
+
+                // verifica se classe 3
+                if (page_table[i]->r_bit == 1 && page_table[i]->m_bit == 1)
+                {
+                    // verifica se nenhuma classe menor foi encontrada
+                    if (class == -1 && class != 3)
+                    {
+                        page_target = i;
+                        class = 3;
+                    }
                 }
             }
         }
@@ -196,12 +186,13 @@ void nru(Page **page_table, int **RAM, int quantity_pages, int ram_size, int id)
         printf("Pagina %d substituida.\n", page_target);
 
         // tira a referenciade memoria da pagina vitima
-        page_table[page_target]->frame_number = -1;
-        page_table[page_target]->r_bit = 0;
+        page_table[page_target]->v_bit = 0;
+        // page_table[page_target]->r_bit = 0;
 
         // referencia na memoria a pagina desejada
         page_table[id]->frame_number = position_sub_memory;
-        page_table[id]->r_bit = 1;
+        page_table[id]->v_bit = 1;
+        // page_table[id]->r_bit = 1;
         page_table[id]->time_loaded = global_time;
 
         printf("Pagina %d carregada no quadro %d.\n", id, position_sub_memory);
@@ -211,7 +202,8 @@ void nru(Page **page_table, int **RAM, int quantity_pages, int ram_size, int id)
     {
         // referencia a pagina na memoria
         page_table[id]->frame_number = position_sub_memory;
-        page_table[id]->r_bit = 1;
+        page_table[id]->v_bit = 1;
+        // page_table[id]->r_bit = 1;
         page_table[id]->time_loaded = global_time;
 
         printf("Pagina %d carregada no quadro %d.\n", id, position_sub_memory);
@@ -220,7 +212,6 @@ void nru(Page **page_table, int **RAM, int quantity_pages, int ram_size, int id)
 
 void fifo(Page **page_table, int **ram, int quantity_pages, int ram_size, Fila **fila, int id)
 {
-
     int position_sub_memory = -1; // posição que aponta para a memoria (-1 significa que a memoria possui espaço livre)
     int page_target = -1;         // numero da pagina vitima
 
@@ -230,8 +221,8 @@ void fifo(Page **page_table, int **ram, int quantity_pages, int ram_size, Fila *
         if ((*ram)[i] == 0)
         {
             position_sub_memory = i;
-            fila_inserir(*fila, id);
             (*ram)[position_sub_memory] = 1; // Modifica o valor da RAM
+            fila_inserir(*fila, id);
             break;
         }
     }
@@ -239,36 +230,23 @@ void fifo(Page **page_table, int **ram, int quantity_pages, int ram_size, Fila *
     // se não existe posição livre, substitui
     if (position_sub_memory == -1)
     {
+            
+        page_target = (*fila)->inicio->dado;
+        position_sub_memory = page_table[page_target]->frame_number;
 
-        for (int i = 0; i < quantity_pages; i++)
-        {
-            // procura o processo mais antigo na tabela
-            if (page_table[i]->page_number == (*fila)->inicio->dado)
-            {
-                position_sub_memory = page_table[i]->frame_number;
-                page_target = i;
-                break;
-            }
-        }
+        // remove a página mais antiga
+        fila_remover(*fila);
+        fila_inserir(*fila, id);
 
-        if (fila_remover(*fila))
-        {
-            fila_inserir(*fila, id);
-        }
-        else
-        {
-            printf("ERRO\n");
-        }
 
         printf("Pagina %d substituida.\n", page_target);
 
         // pagina vitima deixa de apontar para memoria
-        page_table[page_target]->frame_number = -1;
-        page_table[page_target]->r_bit = 0;
+        page_table[page_target]->v_bit = 0;
 
         // acessando pagina que deseja acessar memoria
         page_table[id]->frame_number = position_sub_memory;
-        page_table[id]->r_bit = 1;
+        page_table[id]->v_bit = 1;
         page_table[id]->time_loaded = global_time;
 
         printf("Pagina %d carregada no quadro %d.\n", id, position_sub_memory);
@@ -278,6 +256,7 @@ void fifo(Page **page_table, int **ram, int quantity_pages, int ram_size, Fila *
     {
         // referencia a pagina desejada na memoria
         page_table[id]->frame_number = position_sub_memory;
+        page_table[id]->v_bit = 1;
         page_table[id]->r_bit = 1;
         page_table[id]->time_loaded = global_time;
 
@@ -285,7 +264,8 @@ void fifo(Page **page_table, int **ram, int quantity_pages, int ram_size, Fila *
     }
 }
 
-char* algoritmoEscohido(int num){
+char *algoritmoEscohido(int num)
+{
     switch (num)
     {
     case 1:
@@ -297,46 +277,27 @@ char* algoritmoEscohido(int num){
     case 3:
         return "OUTRO";
         break;
-    
+
     default:
         break;
     }
-    
+
     return "NENHUM";
 }
 
 int main()
 {
+    int physical_address;
     system("clear");
-    int refresh_interval = 2;
-
-    // printf("Qual o tamanho da RAM: ");
-    // scanf("%d", &ram_size);
-
-    // printf("Qual o tamanho da PAGINA: ");
-    // scanf("%d", &PAGE_SIZE);
-
-    // printf("Qual o tamanho do PROCESSO: ");
-    // scanf("%d", &process_size);
-
-    // printf("Qual o algoritmo de SUB: \n");
-    // printf("1. NRU.\n");
-    // printf("2. FIFO.\n");
-    // printf("3. RELOGIO.\n");
-    // scanf("%d", &ALGORITMO);
+    int refresh_interval = 4;
 
     int quantity_frames = RAM_SIZE / PAGE_SIZE;
     printf("\n%i\n", quantity_frames);
 
-    // se o numero de frames float, incrementa
-    // if (RAM_SIZE % PAGE_SIZE != 0)
-    // {
-    //     quantity_frames++;
-    // }
-
     int *RAM = (int *)calloc(quantity_frames, sizeof(int));
 
     int quantity_pages = PROCESS_SIZE / PAGE_SIZE;
+
     // se a quantidade de paginas for um numero quebrado, incrementa
     if (PROCESS_SIZE % PAGE_SIZE != 0)
     {
@@ -356,7 +317,7 @@ int main()
     for (int i = 0; i < quantity_pages; i++)
     {
         Page *new_page = (Page *)malloc(sizeof(Page));
-        new_page->page_number = i;
+        // new_page->page_number = i;
         new_page->frame_number = -1;
         new_page->r_bit = 0;
         new_page->m_bit = 0;
@@ -381,14 +342,17 @@ int main()
 
         int page_number = address / PAGE_SIZE;
 
-        // calcula posição do endereço fisico
+        // calcula o deslocamento
         int offset = address % PAGE_SIZE;
 
-        int frame_number = find_page(page_table, page_number, quantity_pages);
-        // int frame_number = page_table[page_number]->frame_number;
-
         int page_fault = 0;
-        if (frame_number == -1)
+
+        if (op == 1)
+        {
+            page_table[page_number]->m_bit = 1;
+        }
+
+        if (!page_table[page_number]->v_bit)
         {
             page_fault++;
 
@@ -408,29 +372,13 @@ int main()
                 printf("Erro: Algoritmo de substituicao de pagina invalido.\n");
             }
 
-            frame_number = find_page(page_table, page_number, quantity_pages);
+            // Cálcula o endereço físico
+            physical_address = page_table[page_number]->frame_number * PAGE_SIZE + (offset);
+            printf("Endereco Fisico: %d * %d + %x = 0x%x\n", page_table[page_number]->frame_number, PAGE_SIZE, offset, physical_address);
         }
         else
         {
-            printf("Pagina %i ja esta no quadro %i.\n", page_number, frame_number);
-        }
-
-        if (frame_number == -1)
-        {
-            printf("Erro: Pagina nao encontrada na memoria.\n");
-            return 0;
-        }
-
-        // Cálcula o endereço físico
-        int physical_address = frame_number * PAGE_SIZE + (offset);
-        printf("Endereco Fisico: %d * %d + %x = 0x%x\n", frame_number, PAGE_SIZE, offset, physical_address);
-        // printf("Endereco Fisico: %d * %d + %d = 0x%d\n", frame_number, page_size, offset, physical_address);
-        // printf("Endereco Fisico: 0x%x\n", physical_address);
-        // printf("Endereco Fisico: 0x%d\n", physical_address);
-
-        if (op == 1)
-        {
-            page_table[page_number]->m_bit = 1;
+            printf("Pagina %i ja esta no quadro %i.\n", page_number, page_table[page_number]->frame_number);
         }
 
         // intervalo de tempo que atribui 0 aos bits de referencia
@@ -444,6 +392,7 @@ int main()
         printf("\n");
     }
 
+    free(fila);
     free(page_table);
     return 0;
 }
