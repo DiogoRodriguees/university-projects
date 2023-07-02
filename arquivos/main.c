@@ -15,11 +15,6 @@
 #include <string.h>
 #include <math.h>
 
-#define PAGE_SIZE 20
-#define RAM_SIZE 40
-#define PROCESS_SIZE 130
-#define ALGORITMO 3
-
 int global_time = 0; // variavel que funciona como o clock do sistema
 
 /*****************************************************************************************
@@ -258,14 +253,14 @@ void fila_destruir(Fila **enderecoFila)
 /*****************************************************************************************
  *                           Algoritmo NRU - Not Recently Used                           *
  *****************************************************************************************/
-void nru(Page **page_table, int **ram, int quantity_pages, int ram_size, int id)
+void nru(Page **page_table, int **ram, int quantity_pages, int size_ram, int id)
 {
     int position_memory_free = -1; // posição livre na memória (-1 indica: sem espaço)
     int page_target = -1;          // posição da página vitima
     int class = -1;                // menor classe encontrada (-1 valor de inicialização)
 
     // verifica se tem memoria livre
-    for (int i = 0; i < ram_size; i++)
+    for (int i = 0; i < size_ram; i++)
     {
         if ((*ram)[i] == 0)
         {
@@ -361,13 +356,13 @@ void nru(Page **page_table, int **ram, int quantity_pages, int ram_size, int id)
 /*****************************************************************************************
  *                                    Algoritmo FIFO                                     *
  *****************************************************************************************/
-void fifo(Page **page_table, int **ram, int quantity_pages, int ram_size, Fila **fila, int id)
+void fifo(Page **page_table, int **ram, int quantity_pages, int size_ram, Fila **fila, int id)
 {
     int position_free_memory = -1; // posição livre na memória (-1 indica: sem memória livre)
     int page_target = -1;          // página vitima
 
     // inseri na memoria ram enquanto tiver posição livre
-    for (int i = 0; i < ram_size; i++)
+    for (int i = 0; i < size_ram; i++)
     {
         if ((*ram)[i] == 0)
         {
@@ -436,12 +431,12 @@ int find_old_page(List *l, Page **table)
     return inicio;
 }
 
-void second_chance(Page **page_table, int *ram, int quantity_pages, int ram_size, List *list, int id)
+void second_chance(Page **page_table, int *ram, int quantity_pages, int size_ram, List *list, int id)
 {
     int position_free_memory = -1; // -1 indica que não existe quadros livres na memoria
 
     // verifica se tem memória livre (inseri a pegina no quadro caso esteja livre)
-    for (int i = 0; i < ram_size; i++)
+    for (int i = 0; i < size_ram; i++)
     {
         if (ram[i] == 0)
         {
@@ -567,30 +562,44 @@ int main(int argc, char **argv)
     int page_fault = 0;       // total de substituições
     int refresh_interval = 4; // tempo para zerar os bits R
 
+    int page_size;
+    int size_ram;
+    int size_process;
+    int algoritmo;
+
     // verifica se um arquivo de entrada foi recebido
     if (argc != 2)
     {
         printf("Insira uma entrada de teste.\n");
         return 0;
     }
+    
+    char string_discart[50];
+    
+    FILE *entrada = fopen(argv[1], "r");
+    fscanf(entrada, "%[^=]=%d\n",string_discart, &page_size);
+    fscanf(entrada, "%[^=]=%d\n",string_discart, &size_ram);
+    fscanf(entrada, "%[^=]=%d\n",string_discart, &size_process);
+    fscanf(entrada, "%[^=]=%d\n",string_discart, &algoritmo);
 
-    int quantity_pages = PROCESS_SIZE / PAGE_SIZE; // calculo do total de paginas
-    int quantity_frames = RAM_SIZE / PAGE_SIZE;    // calculo do total de frames
+    int quantity_pages = size_process / page_size; // calculo do total de paginas
+    int quantity_frames = size_ram / page_size;    // calculo do total de frames
     int *RAM = (int *)calloc(quantity_frames, sizeof(int));
 
     // se a quantidade de paginas for um numero quebrado, incrementa
-    if (PROCESS_SIZE % PAGE_SIZE != 0)
+    if (size_process % page_size != 0)
     {
         quantity_pages++;
     }
 
-    printf("Tamanho do processo: %d\n", PROCESS_SIZE);
-    printf("Tamanho da pagina: %d\n", PAGE_SIZE);
-    printf("Tamanho da ram: %d\n", RAM_SIZE);
-    printf("Algoritmo: %s\n", algoritmoEscohido(ALGORITMO));
-    printf("Quantidade de paginas: %d\n", quantity_pages);
-    printf("Quantidade de quadros: %d\n", quantity_frames);
+    printf("Tamanho da Pagina: %d\n", page_size);
+    printf("Tamanho da Mem RAM: %d\n", size_ram);
+    printf("Tamanho do Processo: %d\n\n", size_process);
+    
+    printf("Quantidade de Paginas: %d\n", quantity_pages);
+    printf("Quantidade de Quadros: %d\n\n", quantity_frames);
 
+    printf("Algoritmo: %s\n", algoritmoEscohido(algoritmo));
     printf("\n\nInsira a OP e o ADDRESS\n");
     Page **page_table = (Page **)malloc(quantity_pages * sizeof(Page *));
 
@@ -611,26 +620,25 @@ int main(int argc, char **argv)
     Fila *fila = NULL;
 
     // cria uma fila para uso do algoritmo 2(FIFO)
-    if (ALGORITMO == 2)
+    if (algoritmo == 2)
     {
         fila = fila_criar();
     }
 
     List *list;
     // cria uma lista para uso do algoritmo 3(NRU - Not Recently Used)
-    if (ALGORITMO == 3)
+    if (algoritmo == 3)
     {
         list = create_list(quantity_frames);
     }
 
     // arquivo de entrada com as OPs e ADDRESS
-    FILE *entrada = fopen(argv[1], "r");
-    while (fscanf(entrada, "%d %x", &op, &address) != EOF)
+    while (fscanf(entrada, "%[^=]=%d %[^=]=%x",string_discart ,&op,string_discart, &address) != EOF)
     {
         printf("Operacao: %d, Endereco Logico: 0x%x\n", op, address);
 
-        int page_number = address / PAGE_SIZE; // calculo do page number
-        int offset = address % PAGE_SIZE;      // calculo do deslocamento
+        int page_number = address / page_size; // calculo do page number
+        int offset = address % page_size;      // calculo do deslocamento
 
         if (op == 1)
         {
@@ -644,7 +652,7 @@ int main(int argc, char **argv)
             page_fault++;
 
             // Lógica de substituição de página
-            switch (ALGORITMO)
+            switch (algoritmo)
             {
             case 1:
                 nru(page_table, &RAM, quantity_pages, quantity_frames, page_number);
@@ -660,8 +668,8 @@ int main(int argc, char **argv)
             }
 
             // Cálcula o endereço físico
-            physical_address = page_table[page_number]->frame_number * PAGE_SIZE + (offset);
-            printf("Endereco Fisico: %d * %d + %x = 0x%x\n", page_table[page_number]->frame_number, PAGE_SIZE, offset, physical_address);
+            physical_address = page_table[page_number]->frame_number * page_size + (offset);
+            printf("Endereco Fisico: %d * %d + %x = 0x%x\n", page_table[page_number]->frame_number, page_size, offset, physical_address);
         }
         else
         {
