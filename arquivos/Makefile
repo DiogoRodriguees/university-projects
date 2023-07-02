@@ -1,4 +1,5 @@
 CC = gcc
+<<<<<<< HEAD
 PROGS = main.o
 
 clean:
@@ -6,3 +7,9 @@ clean:
 
 main:
 	$(CC) main.c -o main.o
+=======
+
+main:
+	$(CC) main.c -o main.exe
+	
+>>>>>>> marcos/algoritmo-nru
