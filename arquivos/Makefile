@@ -1,5 +1,5 @@
 CC = gcc
 
-teste:
-	$(CC) teste.c -o teste.exe
+main:
+	$(CC) main.c -o main.exe
 	

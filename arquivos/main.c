@@ -461,7 +461,7 @@ void second_chance(Page **page_table, int *ram, int quantity_pages, int ram_size
         printf("POS FREE MEMORY: %i\n", page_table[page_old]->frame_number);
 
         // verifica se a pagina ja esta na lista
-        int pos_in_list = page_in_lst(list, id);
+        int pos_in_list = page_in_lst(list, page_old);
         if (pos_in_list == -1)
         {
             insert_list(list, id, list->elements_amout);
