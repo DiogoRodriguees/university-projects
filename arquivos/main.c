@@ -538,12 +538,17 @@ void print_table_page(Page **table, int size)
     printf("---------------------------------------------------\n");
 }
 
-int main()
+int main(int argc, char** argv)
 {
     system("clear");
     int physical_address;
     int page_fault = 0;
     int refresh_interval = 4;
+    
+    if(argc != 2){
+        printf("Insira uma entrada de teste.\n");
+        return 0;
+    }
 
     int quantity_frames = RAM_SIZE / PAGE_SIZE;
     int *RAM = (int *)calloc(quantity_frames, sizeof(int));
@@ -593,8 +598,9 @@ int main()
     {
         list = create_list(quantity_frames);
     }
-
-    while (scanf("%d %x", &op, &address) == 2)
+    
+    FILE* entrada = fopen(argv[1], "r");
+    while (fscanf(entrada, "%d %x", &op, &address) != EOF)
     {
         printf("Operacao: %d, Endereco Logico: 0x%x\n", op, address);
 
