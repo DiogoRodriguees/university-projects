@@ -180,6 +180,7 @@ typedef struct no
     int dado;
     struct no *prox;
 } No;
+
 typedef struct fila
 {
     No *inicio;
@@ -187,7 +188,7 @@ typedef struct fila
     int qtde;
 } Fila;
 
-Fila *fila_criar()
+Fila *create_queue()
 {
     Fila *f = (Fila *)malloc(sizeof(Fila));
     f->qtde = 0;
@@ -196,7 +197,7 @@ Fila *fila_criar()
     return f;
 }
 
-bool fila_inserir(Fila *f, int page_number)
+bool insert_queue(Fila *f, int page_number)
 {
     if (f == NULL)
         return false;
@@ -218,7 +219,7 @@ bool fila_inserir(Fila *f, int page_number)
     f->qtde++;
 }
 
-bool fila_remover(Fila *f)
+bool remove_queue(Fila *f)
 {
     if (f == NULL)
         return false;
@@ -232,22 +233,6 @@ bool fila_remover(Fila *f)
     aux = NULL;
 
     return true;
-}
-
-void fila_destruir(Fila **enderecoFila)
-{
-    Fila *f = *enderecoFila;
-    No *aux;
-
-    while (f->inicio != NULL)
-    {
-        aux = f->inicio;
-        f->inicio = f->inicio->prox;
-        free(aux);
-    }
-
-    free(f);
-    *enderecoFila = NULL;
 }
 
 /*****************************************************************************************
@@ -368,7 +353,7 @@ void fifo(Page **page_table, int **ram, int quantity_pages, int size_ram, Fila *
         {
             position_free_memory = i;
             (*ram)[position_free_memory] = 1; // Modifica o valor da RAM
-            fila_inserir(*fila, id);
+            insert_queue(*fila, id);
             break;
         }
     }
@@ -380,8 +365,8 @@ void fifo(Page **page_table, int **ram, int quantity_pages, int size_ram, Fila *
         position_free_memory = page_table[page_target]->frame_number;
 
         // remove a página mais antiga
-        fila_remover(*fila);
-        fila_inserir(*fila, id);
+        remove_queue(*fila);
+        insert_queue(*fila, id);
 
         printf("Pagina %d substituida.\n", page_target);
 
@@ -573,14 +558,14 @@ int main(int argc, char **argv)
         printf("Insira uma entrada de teste.\n");
         return 0;
     }
-    
+
     char string_discart[50];
-    
+
     FILE *entrada = fopen(argv[1], "r");
-    fscanf(entrada, "%[^=]=%d\n",string_discart, &page_size);
-    fscanf(entrada, "%[^=]=%d\n",string_discart, &size_ram);
-    fscanf(entrada, "%[^=]=%d\n",string_discart, &size_process);
-    fscanf(entrada, "%[^=]=%d\n",string_discart, &algoritmo);
+    fscanf(entrada, "%[^=]=%d\n", string_discart, &page_size);
+    fscanf(entrada, "%[^=]=%d\n", string_discart, &size_ram);
+    fscanf(entrada, "%[^=]=%d\n", string_discart, &size_process);
+    fscanf(entrada, "%[^=]=%d\n", string_discart, &algoritmo);
 
     int quantity_pages = size_process / page_size; // calculo do total de paginas
     int quantity_frames = size_ram / page_size;    // calculo do total de frames
@@ -595,7 +580,7 @@ int main(int argc, char **argv)
     printf("Tamanho da Pagina: %d\n", page_size);
     printf("Tamanho da Mem RAM: %d\n", size_ram);
     printf("Tamanho do Processo: %d\n\n", size_process);
-    
+
     printf("Quantidade de Paginas: %d\n", quantity_pages);
     printf("Quantidade de Quadros: %d\n\n", quantity_frames);
 
@@ -622,7 +607,7 @@ int main(int argc, char **argv)
     // cria uma fila para uso do algoritmo 2(FIFO)
     if (algoritmo == 2)
     {
-        fila = fila_criar();
+        fila = create_queue();
     }
 
     List *list;
@@ -633,9 +618,10 @@ int main(int argc, char **argv)
     }
 
     // arquivo de entrada com as OPs e ADDRESS
-    while (fscanf(entrada, "%[^=]=%d %[^=]=%x",string_discart ,&op,string_discart, &address) != EOF)
+    while (fscanf(entrada, "%[^=]=%d %[^=]=%x", string_discart, &op, string_discart, &address) != EOF)
     {
         printf("Operacao: %d, Endereco Logico: 0x%x\n", op, address);
+        printf("Operacao: %d, Endereco Logico: 0x%i\n", op, address);
 
         int page_number = address / page_size; // calculo do page number
         int offset = address % page_size;      // calculo do deslocamento
@@ -676,15 +662,17 @@ int main(int argc, char **argv)
             printf("Pagina %i ja esta no quadro %i.\n", page_number, page_table[page_number]->frame_number);
         }
 
-        print_list(list, page_table);
-        print_table_page(page_table, quantity_pages);
-
-        global_time++;
-
-        // zera os bits Rs se global_time for multiplo do refresh interval
-        if (global_time % refresh_interval == 0)
+        if (algoritmo == 1)
         {
-            update_bits(page_table, quantity_pages);
+            print_table_page(page_table, quantity_pages);
+
+            global_time++;
+
+            // zera os bits Rs se global_time for multiplo do refresh interval
+            if (global_time % refresh_interval == 0)
+            {
+                update_bits(page_table, quantity_pages);
+            }
         }
 
         printf("\n");
