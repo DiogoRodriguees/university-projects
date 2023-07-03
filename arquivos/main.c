@@ -633,10 +633,10 @@ int main(int argc, char **argv)
     }
 
     // arquivo de entrada com as OPs e ADDRESS
-    while (fscanf(entrada, "%[^=]=%d %[^=]=%x",string_discart ,&op,string_discart, &address) != EOF)
+    while (fscanf(entrada, "%[^=]=%d %[^=]=%x\n",string_discart ,&op,string_discart, &address) != EOF)
     {
         printf("Operacao: %d, Endereco Logico: 0x%x\n", op, address);
-
+ 
         int page_number = address / page_size; // calculo do page number
         int offset = address % page_size;      // calculo do deslocamento
 
