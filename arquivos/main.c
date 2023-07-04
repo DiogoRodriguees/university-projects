@@ -40,13 +40,13 @@
 
             O próximo passo é verificar se existe algum quadro livre, caso exista, a pagina é
             referenciada para esse quadro. Caso não exista(memory_position == -1) será feita a substituição.
-            
-            O proximo passo é encontra na lista a pagina mais antiga na referenciada. 
-            Em seguida é feito a atribuição do numero do frame da pagina vitima para a variavel memory_position. 
-            
-            Encontrada a pagina vitima, a nova pagina e inserida na lista. Caso ela ja esteja na lista, é removida e inserida 
-            novamente, sendo tratada como uma nova pagina. 
-            
+
+            O proximo passo é encontra na lista a pagina mais antiga na referenciada.
+            Em seguida é feito a atribuição do numero do frame da pagina vitima para a variavel memory_position.
+
+            Encontrada a pagina vitima, a nova pagina e inserida na lista. Caso ela ja esteja na lista, é removida e inserida
+            novamente, sendo tratada como uma nova pagina.
+
             Por fim os bits da nova pagina são atualizados e ela é referenciada na memoria.
 
     Data:
@@ -348,7 +348,7 @@ void nru(Page **page_table, int *ram, int quantity_pages, int size_ram, int id, 
                 }
             }
         }
-        
+
         // busca frame number da pagina vitima
         memory_position = page_table[page_target]->frame_number;
         printf("Pagina %d substituida.\n", page_target);
@@ -361,7 +361,7 @@ void nru(Page **page_table, int *ram, int quantity_pages, int size_ram, int id, 
         // referencia na memoria a pagina desejada
         page_table[id]->frame_number = memory_position;
         page_table[id]->v_bit = 1;
-        
+
         if (op == 1)
         {
             page_table[id]->m_bit = 1;
@@ -480,8 +480,8 @@ void second_chance(Page **page_table, int *ram, int quantity_pages, int size_ram
         if (ram[i] == 0)
         {
             memory_position = i;
-            insert_list(list, id, list->elements_amout);// inseri a página acessada na memória
-            ram[memory_position] = 1; // marca a posição na memória como ocupada
+            insert_list(list, id, list->elements_amout); // inseri a página acessada na memória
+            ram[memory_position] = 1;                    // marca a posição na memória como ocupada
             break;
         }
     }
@@ -678,7 +678,12 @@ int main(int argc, char **argv)
 
         int page_number = address / page_size; // calculo do page number
         int offset = address % page_size;      // calculo do deslocamento
-        
+
+        if (op == 1)
+        {
+            page_table[page_number]->m_bit = 1;
+        }
+
         // verifica se a pagina esta na memória (v_bit == 1, indica: está na memória)
         if (!page_table[page_number]->v_bit)
         {
@@ -717,7 +722,7 @@ int main(int argc, char **argv)
                 page_table[page_number]->r_bit = 1;
             }
             printf("Pagina %i ja esta no quadro %i.\n", page_number, page_table[page_number]->frame_number);
-            
+
             physical_address = page_table[page_number]->frame_number * page_size + (offset);
             printf("Endereco Fisico: %d * %d + %x = 0x%x\n", page_table[page_number]->frame_number, page_size, offset, physical_address);
         }
