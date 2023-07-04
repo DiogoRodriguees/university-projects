@@ -512,6 +512,7 @@ void second_chance(Page **page_table, int *ram, int quantity_pages, int size_ram
         // remove a referencia da pagina vitima
         page_table[page_old]->v_bit = 0;
         page_table[page_old]->r_bit = 0;
+        page_table[page_old]->m_bit = 0;
         page_table[page_old]->frame_number = -1;
 
         // referencia na memoria a nova pagina
@@ -712,15 +713,10 @@ int main(int argc, char **argv)
         }
         else
         {
-            if (algoritmo == 1 && op == 1)
-            {
+            page_table[page_number]->r_bit = 1;
+            if (op == 1)
                 page_table[page_number]->m_bit = 1;
-                page_table[page_number]->r_bit = 1;
-            }
-            else if (algoritmo == 1 && op != 1)
-            {
-                page_table[page_number]->r_bit = 1;
-            }
+
             printf("Pagina %i ja esta no quadro %i.\n", page_number, page_table[page_number]->frame_number);
 
             physical_address = page_table[page_number]->frame_number * page_size + (offset);
