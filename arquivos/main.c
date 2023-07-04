@@ -599,7 +599,7 @@ int main(int argc, char **argv)
     system("clear");
     int physical_address;     // endereço físico
     int page_fault = 0;       // total de substituições
-    int refresh_interval = 2; // tempo para zerar os bits R
+    int refresh_interval = 4; // tempo para zerar os bits R
 
     int page_size;
     int size_ram;
