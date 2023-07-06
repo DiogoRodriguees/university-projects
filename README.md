@@ -1,3 +1,3 @@
-# <center>Algoritmos de Substituição de Páginas<center>
+# <center>Algoritmos de Substituição de Páginas</center>
 
 
