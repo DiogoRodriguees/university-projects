@@ -31,3 +31,7 @@ Muito parecido com o FIFO, o algoritmo da segunda chance utiliza uma lista de p�
   # execução
   $ ./main.exe entrada1.conf
 ```
+## Autores
+
+| [<img src="https://avatars.githubusercontent.com/diogorodriguees" width=115><br><sub>Diogo Rodrigues</sub>](https://github.com/diogorodriguees) |  [<img src="https://avatars.githubusercontent.com/MarcosQuadross" width=115><br><sub>Marcos Vinicius de Quadros</sub>](https://github.com/MarcosQuadross) | 
+| :---: | :---: | 
