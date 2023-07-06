@@ -66,10 +66,10 @@ int global_time = 0; // variavel que funciona como o clock do sistema
  *****************************************************************************************/
 typedef struct
 {
-    int frame_number;
-    int r_bit;
-    int m_bit;
-    int v_bit;
+    int frame_number; // numero do quadro que a pagina esta referenciada
+    int r_bit;        // indica se a página foi referenciada recentemente
+    int m_bit;        // indica se a página foi modificada recentemente
+    int v_bit;        // indica se a pagina está na memória
 } Page;
 
 /*****************************************************************************************
@@ -578,14 +578,14 @@ void print_list(List *l, Page **table)
 // imprimi a tabela de paginas
 void print_table_page(Page **table, int size)
 {
-    printf("___________________________________________________\n");
+    printf("______________________________________________\n");
     printf("   PAGE        FRAME       R      M      V   \n");
-    printf("---------------------------------------------------\n");
+    printf("----------------------------------------------\n");
     for (int i = 0; i < size; i++)
     {
         printf("    %i           %0*d         %i      %i      %i   \n", i, 2, table[i]->frame_number, table[i]->r_bit, table[i]->m_bit, table[i]->v_bit);
     }
-    printf("---------------------------------------------------\n");
+    printf("----------------------------------------------\n");
 }
 
 // limpa os bits de referencia(r_bit) para 0
@@ -678,7 +678,7 @@ int main(int argc, char **argv)
     }
 
     // arquivo de entrada com as OPs e ADDRESS
-    while (fscanf(entrada, "%[^=]=%d %[^=]=%x", string_discart, &op, string_discart, &address) != EOF)
+    while (fscanf(entrada, "%d %x", &op, &address) != EOF)
     {
         printf("Operacao: %d, Endereco Logico: 0x%x\n", op, address);
 
