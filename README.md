@@ -22,7 +22,7 @@ O projeto deve:<br>
 - Ser escrito em português ou inglês. <br>
 - Indentação Padronizada. <br>
 - Comentários apenas quando necessário. <br>
-- (opcional) Posuir darkmode.
+- (opcional) Possuir darkmode.
 
 ## Prazo
 - Inicio - 19/11/22 <br>
