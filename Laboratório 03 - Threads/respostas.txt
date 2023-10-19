@@ -1,0 +1,5 @@
+ * media aritimetica das linhas: 
+   50.000000  47.799999  42.200001  47.799999  
+
+ * media geometrica das colunas: 
+   25.643005 45.653413 31.330996 58.420173 22.538506 
