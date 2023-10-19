@@ -1,0 +1,314 @@
+
+:root{
+    --green1 :#45C09C;
+    --green2 :#0CC08B;
+    --green3 :#328B71;
+    --green4 :#077454;
+    --green5 :#04412F;
+
+    --blue  :#000424;
+    --blue1 :#546CA5;
+    --blue2 :#869ED7;
+    --blue3 :#B4C7F0;
+
+    --white:#f2f2f7;   
+}
+
+.container-resumo-slides {
+    display: flex;
+    flex-direction: row;
+
+    color: var(--white);
+    width: 100%;
+    height: 90vh;
+    padding: 60px 40px;
+}
+
+/* resumo e botoes para repositorio */
+.resumo{
+    display: flex;
+    flex-direction: column;
+
+    text-align: left;
+    font-family: Montserrat;
+    
+    width: 50%;
+    height: 100vh;
+    padding: 18px 40px;
+}
+
+.resumo p{
+    font-family: Montserrat;
+    font-size: 18px;
+    font-weight: 400;
+    margin-top: 20px;
+}
+
+.resumo-titulo{
+    font-size: 28px;
+    font-weight: 400;
+}
+
+.resumo-botoes{
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+}
+
+.resumo-texto{
+    font-size: 16px;
+    font-weight: 400;
+    font-family: Poppins;
+
+    width: 30vw;
+    height: 150px;
+
+    padding: 20px 0px;
+    margin-bottom: 20px;
+    line-height: 25px;
+}
+
+#figma{
+    /* background-color: #8B50D5; */
+    background-color: #0F76A8;
+
+    color: var(--white);
+}
+#figma img{
+    height: 40px;
+    width: 40px;
+}
+
+#github{
+    background-color: #0F76A8;
+    color: var(--white);
+}
+
+.resumo-botao-repositorio{
+    width: 12vw;
+    height: 50px;
+
+    margin: 15px 20px 0px 0px;
+    padding: 4px;
+
+    display: flex;
+    flex-direction: row;
+    align-items:center ;
+
+    border-radius: 3px;
+    box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.521);
+
+    font-size: 18px;
+    font-weight: 500;
+    font-family: Montserrat;
+    
+    transition: 400ms;
+}
+
+.resumo-botao-repositorio:hover{
+    color: var(--white);
+    scale: 1.1;
+    background: transparent;
+    transition: 300ms;
+}
+
+.resumo-botao-repositorio img{
+    width: 30px;
+    height: 30px;
+}
+
+
+.resumo-botao-repositorio h2{
+    margin: auto;   
+    font-size: 18px;
+    text-align: center;
+    font-weight: 500;
+}
+
+/* Slide Show */
+.slides{
+    width: 50%;
+    height: 100vh;
+
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+
+    padding: 20px 0px 0px 0px;
+}
+
+.container-slide{
+    width: 40vw;
+    height: 45vh;
+
+    display: flex;
+    justify-content: space-between;
+
+    box-shadow: 0 20px 30px black;
+    border-radius: 5px;
+}
+
+.container-itens {
+    width: 40vw;
+    height: 45vh;
+
+    display: flex;
+    position: absolute;
+    overflow: hidden;
+}
+
+.item {
+    width: 40vw;
+    height: 45vh;
+    transition: all 1s;
+}
+.item p{
+    width: 40vw;
+    height: 45vh;  
+
+    color: var(--white);
+    padding: 15vh 80px 0px 80px;
+    position: absolute;
+    text-align: center; 
+
+    font-size: 30px;
+    font-weight: 800;
+    font-family: Montserrat;
+
+    border-radius: 5px;
+    background-color: #00000079;
+}
+
+.item:first-child{
+    margin-left: -100%;
+}
+
+.item img {
+    width: 40vw;
+    height: 45vh;
+    border-radius: 5px;
+}
+
+.botao-mover{
+    width: 50px;
+
+    font: bold 30px sans-serif;
+    color: #f7f7f78a;
+    align-items: center;
+
+    display: flex;
+    justify-content: center;
+
+    z-index: 1;
+    user-select: none;
+}
+
+.botao-mover:hover {
+    color: rgba(255, 255, 255, 0.815);
+    cursor: pointer;
+    transition:  200ms;
+
+    border-radius: 5px;
+    background-color: #f2f2f28c;
+}
+
+#previous{
+    border-radius: 5px 0px 0px 5px;
+}
+#next{
+    border-radius: 0px 5px 5px 0px;
+}
+
+@media screen and (max-width: 1400px) {
+    .resumo-botao-repositorio{
+        height: 40px;
+    }
+}
+
+@media screen and (max-width: 1050px) {
+
+    .resumo {
+        width: 100%;
+        padding: 0px 0px;
+        align-items: center;
+    }
+    
+    .resumo-texto {
+        width: 70%;
+    }
+
+    .resumo-botoes{
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .resumo-botao-repositorio{
+        width: 200px;
+        margin: 20px 20px 0px 0px;
+    }
+    
+    .slides{
+        display: none;
+    }
+}
+
+@media screen and (max-width: 800px) {
+    .container-resumo-slides{
+        width: 100%;
+        height: 500px;
+
+        align-items: center;
+        flex-direction: column;
+        
+        padding: 25px 0px 0px 0px;
+    }
+
+    .resumo{
+        width: 100%;
+        height: 65%;
+
+        padding: 10px 0px;
+        align-items: center;
+    }
+
+    .resumo p{
+        width: 90%;
+        text-align: center;
+    }
+
+    .resumo-titulo{
+        font-size: 25px;
+        text-align: center;
+    }
+
+    .resumo-texto{
+        width: 90%;
+        height: 60%;
+
+        font-size: 15px;
+        text-align: center;
+    }
+
+    .resumo-botao-repositorio{
+        width: 150px;
+        margin: 20px 0px 20px 0px;
+    }
+
+    .resumo-botao-repositorio h2{
+        margin: auto;
+    }
+
+    .resumo-botoes{
+        display: flex;
+        align-items: center;
+        flex-direction: row;
+
+        gap: 15px;
+        margin: 0;
+    }
+
+    .slides{
+        display: none;
+    } 
+}
+

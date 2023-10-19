@@ -1,0 +1,148 @@
+.linguagens {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: space-evenly;  
+
+    width: 90%;
+    height: 100vh;
+    margin: auto;
+
+    border-radius: 30px;
+
+    font-family: Montserrat;
+}
+
+.linguagens h2 {
+    font-size: 40px;
+    font-weight: 400;
+
+    color: var(--white);
+    text-align: center;
+}
+
+.linguagens-container {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+
+    width: 100%;
+    padding: 0px 40px;
+}
+
+.linguagens-container-topicos {
+    display: flex;
+    text-align: center;
+    align-items: center;
+    flex-direction: column;
+    
+    width: 300px;
+    height: 400px;
+    margin: auto;
+    
+    box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.822);
+    background: rgba(30, 30, 30, 0.205);
+    backdrop-filter: blur(5px);
+
+    border-radius: 20px;
+
+    transition: transform 0.3s ;
+    border: 1px solid #55555563;
+}
+
+.linguagens-container-topicos:hover{
+    border: 1px solid #f7f7f78c;
+    transition: 300ms;
+}
+
+.linguagens-container-topicos img {
+    width: 100px;
+    height: 100px;
+    margin: 20px;
+    margin-top: 20px;
+}
+
+.linguagens-container-topicos h2 {
+    font-size: 25px;
+    font-weight: 400;
+    
+    color: var(--white);
+    text-decoration: none;
+
+    width: 100%;
+    margin-top: 20px;
+    margin-bottom: 0px;
+}
+
+.linguagens-container-topicos p{
+    width: 80%;
+    height: 30%;
+    margin-top: 20px;
+    color: var(--white);
+}
+
+.linguagens-container-topicos a{
+    padding: 10px 15px;
+    
+    color: var(--white);
+    font-size: 18px;
+    font-weight: 500;
+    
+    border-radius: 3px;
+    border: 1px solid #546CA5;
+    background-color: #546CA5;
+}
+
+.linguagens-container-topicos a:hover{
+    color: #546CA5;
+    border: 1px solid #546CA5;
+    background-color: transparent;
+}
+
+
+@media screen and (max-width: 800px) {
+    .linguagens{     
+        height: auto;
+        padding-bottom: 30px;
+        background-color: transparent;
+    }
+
+    .linguagens h2{     
+        color: var(--white);
+        margin-top: 30px;
+        margin-bottom: 30px;
+    }
+
+    .linguagens-container{
+        gap: 20px;
+        width: 100%;
+        padding: 0px;
+
+        flex-direction: column;
+    }
+
+    .linguagens-container-topicos{
+        width: 90%;
+        height: 450px;
+
+        padding: 20px 0px;
+    }
+
+    .linguagens-container-topicos:hover{
+        scale: 1;
+    }
+
+    .linguagens-container-topicos p{
+        height: 20%;
+        margin-top: 0px;
+        margin-bottom: 20px;
+    }
+
+    .linguagens-container-topicos img {
+        margin-top: 30px;
+    }
+
+    .linguagens-container-topicos h2 {
+        color: var(--white);
+    }
+}

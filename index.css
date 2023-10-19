@@ -1,0 +1,30 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&family=Roboto+Slab:wght@100;200;300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600;700&family=Poppins:wght@100;200;300;400;500;600;700;800;900&family=Roboto:wght@100;300;400;500;700&display=swap');
+
+*{
+    text-decoration: none;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    background: url(./img/BackgroundBody/ondulado.jpeg) no-repeat center center fixed;
+    background-size: cover;
+}
+
+:root{
+    --green1 :#45C09C;
+    --green2 :#0CC08B;
+    --green3 :#328B71;
+    --green4 :#077454;
+    --green5 :#04412F;
+
+    --blue  :#000424;
+    --blue1 :#546CA5;
+    --blue2 :#869ED7;
+    --blue3 :#B4C7F0;
+
+    --white:#f2f2f7;   
+}
